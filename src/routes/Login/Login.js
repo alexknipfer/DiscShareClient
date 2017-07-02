@@ -1,10 +1,14 @@
 import { Button, Card, Form, Grid } from 'semantic-ui-react'
 import React, { Component } from 'react'
 
+import { RestClient } from '../../lib/clients/RestClient'
+
 class Login extends Component {
   handleSubmit() {
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
+
+    RestClient.post('/users', { username, password })
   }
 
   render() {
