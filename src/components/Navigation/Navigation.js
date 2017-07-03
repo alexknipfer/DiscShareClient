@@ -9,8 +9,8 @@ const Navigation = () => {
         <Link to="/">
           <Menu.Item link>Home</Menu.Item>
         </Link>
-        <Link to="/login">
-          <Menu.Item link>Login</Menu.Item>
+        <Link to="/register">
+          <Menu.Item link>Register</Menu.Item>
         </Link>
       </Menu>
     </div>
