@@ -1,15 +1,16 @@
 import { Button, Card, Form, Grid } from 'semantic-ui-react'
 import React, { Component } from 'react'
 
-import { RestClient } from '../../lib/clients/RestClient'
+import { AccountApi } from '../../lib/apis/AccountApi'
 
 class Login extends Component {
   handleSubmit() {
+    const name = document.getElementById('name').value
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
 
-    RestClient.post('/api/users/register', { username, password }).then(res =>
-      console.log('RESULT ', res)
+    AccountApi.createAccount({ name, username, password }).then(result =>
+      console.log('RESULT ', result)
     )
   }
 
@@ -24,7 +25,7 @@ class Login extends Component {
                 <Form onSubmit={this.handleSubmit}>
                   <Form.Field>
                     <label>Name</label>
-                    <input placeholder="Username" id="username" />
+                    <input placeholder="Username" id="name" />
                   </Form.Field>
                   <Form.Field>
                     <label>Username</label>
@@ -36,7 +37,7 @@ class Login extends Component {
                   </Form.Field>
                   <Form.Field>
                     <label>Confirm Password</label>
-                    <input placeholder="Username" id="password" />
+                    <input placeholder="Username" />
                   </Form.Field>
                   <Button type="submit">Register</Button>
                 </Form>
