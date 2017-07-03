@@ -3,7 +3,7 @@ import '../sass/root.css'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Home from './Home'
-import Login from './Login'
+import Login from './Register'
 import React from 'react'
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Login} />
       </Switch>
     </BrowserRouter>
   )

@@ -8,7 +8,7 @@ class Login extends Component {
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
 
-    RestClient.post('/api/users', { username, password })
+    RestClient.post('/api/users/register', { username, password })
   }
 
   render() {
@@ -18,8 +18,12 @@ class Login extends Component {
           <Grid.Row>
             <Grid.Column>
               <Card style={{ padding: 30 }}>
-                <Card.Content header="Login" />
+                <Card.Content header="Register" />
                 <Form onSubmit={this.handleSubmit}>
+                  <Form.Field>
+                    <label>Name</label>
+                    <input placeholder="Username" id="username" />
+                  </Form.Field>
                   <Form.Field>
                     <label>Username</label>
                     <input placeholder="Username" id="username" />
@@ -28,7 +32,11 @@ class Login extends Component {
                     <label>Password</label>
                     <input placeholder="Username" id="password" />
                   </Form.Field>
-                  <Button type="submit">Submit</Button>
+                  <Form.Field>
+                    <label>Confirm Password</label>
+                    <input placeholder="Username" id="password" />
+                  </Form.Field>
+                  <Button type="submit">Register</Button>
                 </Form>
               </Card>
             </Grid.Column>
