@@ -8,7 +8,9 @@ class Login extends Component {
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
 
-    RestClient.post('/api/users/register', { username, password })
+    RestClient.post('/api/users/register', { username, password }).then(res =>
+      console.log('RESULT ', res)
+    )
   }
 
   render() {
