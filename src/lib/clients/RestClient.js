@@ -10,8 +10,8 @@ export class RestClient {
           resolve(result.data)
         })
         .catch(error => {
-          //console.log(error)
-          reject(error)
+          //console.log(error.response.data)
+          reject(error.response.data)
         })
     })
   }
