@@ -1,17 +1,38 @@
-import { Button, Card, Form, Grid } from 'semantic-ui-react'
+import { Button, Card, Form, Grid, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
 
 import { AccountApi } from '../../lib/apis/AccountApi'
 
 class Login extends Component {
-  handleSubmit() {
+  state = {
+    errorMessageVisible: false,
+    errorMessage: null
+  }
+
+  displayErrMessage = err => {
+    this.setState({
+      errorMessageVisible: !this.state.errorMessageVisible,
+      errorMessage: err
+    })
+  }
+
+  handleSubmit = () => {
     const name = document.getElementById('name').value
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
+    const confirmPass = document.getElementById('confirm-password').value
+    const triggerError = this
 
-    AccountApi.createAccount({ name, username, password }).then(result =>
-      console.log('RESULT ', result)
-    )
+    if (password !== confirmPass) {
+      this.displayErrMessage('Passwords do not match.')
+    } else {
+      AccountApi.createAccount({ name, username, password })
+        .then(result => console.log('RESULT ', result))
+        .catch(err => {
+          triggerError.displayErrMessage(err)
+          //console.log(err)
+        })
+    }
   }
 
   render() {
@@ -20,25 +41,29 @@ class Login extends Component {
         <Grid>
           <Grid.Row>
             <Grid.Column>
-              <Card style={{ padding: 30 }}>
+              <Card style={{ padding: 30, width: '350px' }}>
                 <Card.Content header="Register" />
-                <Form onSubmit={this.handleSubmit}>
+                <Form
+                  onSubmit={this.handleSubmit}
+                  error={this.state.errorMessageVisible}
+                >
                   <Form.Field>
                     <label>Name</label>
-                    <input placeholder="Username" id="name" />
+                    <input type="text" id="name" required />
                   </Form.Field>
                   <Form.Field>
                     <label>Username</label>
-                    <input placeholder="Username" id="username" />
+                    <input type="text" id="username" required />
                   </Form.Field>
                   <Form.Field>
                     <label>Password</label>
-                    <input placeholder="Username" id="password" />
+                    <input type="password" id="password" required />
                   </Form.Field>
                   <Form.Field>
                     <label>Confirm Password</label>
-                    <input placeholder="Username" />
+                    <input type="password" id="confirm-password" required />
                   </Form.Field>
+                  <Message error content={this.state.errorMessage} />
                   <Button type="submit">Register</Button>
                 </Form>
               </Card>
