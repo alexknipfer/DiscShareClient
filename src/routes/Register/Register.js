@@ -2,6 +2,7 @@ import { Button, Card, Form, Grid, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
 
 import { AccountApi } from '../../lib/apis/AccountApi'
+import { LocalStorage } from '../../utils/LocalStorage'
 
 class Login extends Component {
   state = {
@@ -27,10 +28,12 @@ class Login extends Component {
       this.displayErrMessage('Passwords do not match.')
     } else {
       AccountApi.createAccount({ name, username, password })
-        .then(result => console.log('RESULT ', result))
+        .then(result => {
+          const { token } = result
+          LocalStorage.saveToken(token, { path: '/', expires: 7 })
+        })
         .catch(err => {
           triggerError.displayErrMessage(err)
-          //console.log(err)
         })
     }
   }
