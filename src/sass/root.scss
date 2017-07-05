@@ -1,5 +1,7 @@
+@import './partials/base';
+@import './components/base';
+
 body {
+  background-color: $light2;
   margin: 50px 10px 0px 10px;
 }
-
-@import './partials/base';
