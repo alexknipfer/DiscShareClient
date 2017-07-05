@@ -6,7 +6,7 @@ export class RestClient {
       const result = await axios.post(url, data)
       return result.data
     } catch (error) {
-      return error.response.data
+      throw new Error(error.response.data)
     }
   }
 }

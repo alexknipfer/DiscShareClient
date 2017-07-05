@@ -36,7 +36,7 @@ class Login extends Component {
         const { token } = result
         LocalStorage.saveToken(token, { path: '/', expires: 7 })
       } catch (error) {
-        triggerError.displayErrMessage(error)
+        triggerError.displayErrMessage(error.message)
       }
     }
   }
