@@ -17,7 +17,7 @@ class Login extends Component {
     })
   }
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const name = document.getElementById('name').value
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
@@ -27,14 +27,17 @@ class Login extends Component {
     if (password !== confirmPass) {
       this.displayErrMessage('Passwords do not match.')
     } else {
-      AccountApi.createAccount({ name, username, password })
-        .then(result => {
-          const { token } = result
-          LocalStorage.saveToken(token, { path: '/', expires: 7 })
+      try {
+        const result = await AccountApi.createAccount({
+          name,
+          username,
+          password
         })
-        .catch(err => {
-          triggerError.displayErrMessage(err)
-        })
+        const { token } = result
+        LocalStorage.saveToken(token, { path: '/', expires: 7 })
+      } catch (error) {
+        triggerError.displayErrMessage(error)
+      }
     }
   }
 
