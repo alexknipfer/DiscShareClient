@@ -5,12 +5,16 @@ import React from 'react'
 const Navigation = () => {
   return (
     <div>
-      <Menu pointing fixed="top">
+      <Menu pointing inverted fixed="top" className="nav-main">
         <Link to="/">
-          <Menu.Item link>Home</Menu.Item>
+          <Menu.Item link className="nav-links">
+            Home
+          </Menu.Item>
         </Link>
         <Link to="/register">
-          <Menu.Item link>Register</Menu.Item>
+          <Menu.Item link className="nav-links">
+            Register
+          </Menu.Item>
         </Link>
       </Menu>
     </div>
