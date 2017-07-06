@@ -8,9 +8,9 @@ export class LocalStorage {
       Cookies.set('accesstoken', token, options)
     }
   }
-  static get loadToken() {
+  static loadToken() {
     if (typeof Storage !== 'undefined') {
-      localStorage.getItem('accesstoken')
+      return localStorage.getItem('accesstoken')
     } else {
       return Cookies.get('accesstoken')
     }
