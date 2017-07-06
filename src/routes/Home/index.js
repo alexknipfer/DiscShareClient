@@ -1,4 +1,11 @@
 import Home from './Home'
-import withDefaultLayout from '../../hocs/withDefaultLayout'
+import React from 'react'
+import { pageWithDefaultLayout } from '../../hocs/page'
 
-export default withDefaultLayout(Home)
+export default pageWithDefaultLayout(({ auth }) => {
+  if (auth) {
+    return <Home />
+  } else {
+    return <h3>You are not authorized to view this page</h3>
+  }
+})
