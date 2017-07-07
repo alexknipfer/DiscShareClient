@@ -16,6 +16,11 @@ const Navigation = () => {
             Register
           </Menu.Item>
         </Link>
+        <Link to="/login">
+          <Menu.Item link className="nav-links">
+            Login
+          </Menu.Item>
+        </Link>
       </Menu>
     </div>
   )
