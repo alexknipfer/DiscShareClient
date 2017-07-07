@@ -22,7 +22,6 @@ class Login extends Component {
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
     const confirmPass = document.getElementById('confirm-password').value
-    const triggerError = this
 
     if (password !== confirmPass) {
       this.displayErrMessage('Passwords do not match.')
@@ -36,7 +35,7 @@ class Login extends Component {
         const { token } = result
         LocalStorage.saveToken(token, { path: '/', expires: 7 })
       } catch (error) {
-        triggerError.displayErrMessage(error.message)
+        this.displayErrMessage(error.message)
       }
     }
   }
