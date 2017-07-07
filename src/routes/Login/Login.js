@@ -16,16 +16,8 @@ class Login extends Component {
                     <input type="text" id="email" required />
                   </Form.Field>
                   <Form.Field>
-                    <label>Username</label>
-                    <input type="text" id="username" required />
-                  </Form.Field>
-                  <Form.Field>
                     <label>Password</label>
                     <input type="password" id="password" required />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Confirm Password</label>
-                    <input type="password" id="confirm-password" required />
                   </Form.Field>
                   <Button type="submit">Register</Button>
                 </Form>
