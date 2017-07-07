@@ -6,4 +6,8 @@ export class AccountApi {
   static createAccount(accountFields) {
     return post('register', accountFields)
   }
+
+  static loginWithUsername(loginFields) {
+    return post('loginWithUsername', loginFields)
+  }
 }
