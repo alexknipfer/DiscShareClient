@@ -18,7 +18,7 @@ class Login extends Component {
   }
 
   handleSubmit = async () => {
-    const name = document.getElementById('name').value
+    const email = document.getElementById('email').value
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
     const confirmPass = document.getElementById('confirm-password').value
@@ -29,7 +29,7 @@ class Login extends Component {
     } else {
       try {
         const result = await AccountApi.createAccount({
-          name,
+          email,
           username,
           password
         })
@@ -54,8 +54,8 @@ class Login extends Component {
                   error={this.state.errorMessageVisible}
                 >
                   <Form.Field>
-                    <label>Name</label>
-                    <input type="text" id="name" required />
+                    <label>Email</label>
+                    <input type="text" id="email" required />
                   </Form.Field>
                   <Form.Field>
                     <label>Username</label>
