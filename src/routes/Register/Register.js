@@ -3,11 +3,13 @@ import React, { Component } from 'react'
 
 import { AccountApi } from '../../lib/apis/AccountApi'
 import { LocalStorage } from '../../utils/LocalStorage'
+import { Redirect } from 'react-router'
 
 class Login extends Component {
   state = {
     errorMessageVisible: false,
-    errorMessage: null
+    errorMessage: null,
+    toggleRedirect: false
   }
 
   displayErrMessage = err => {
@@ -34,6 +36,9 @@ class Login extends Component {
         })
         const { token } = result
         LocalStorage.saveToken(token, { path: '/', expires: 7 })
+        this.setState({
+          toggleRedirect: !this.state.toggleRedirect
+        })
       } catch (error) {
         this.displayErrMessage(error.message)
       }
@@ -75,6 +80,7 @@ class Login extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
+        {this.state.toggleRedirect && <Redirect path to="/" />}
       </div>
     )
   }
