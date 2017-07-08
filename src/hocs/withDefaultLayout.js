@@ -7,8 +7,8 @@ export default ComposedComponent => {
     render() {
       return (
         <div>
-          <Navigation />
-          <ComposedComponent />
+          <Navigation auth={this.props.auth} />
+          <ComposedComponent {...this.props} />
         </div>
       )
     }
