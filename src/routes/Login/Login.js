@@ -36,10 +36,10 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <Grid>
-          <Grid.Column mobile={16} computer={16} className="center-horizontal">
-            <Card className="card-padding-account">
-              <Card.Content header="Login" />
+        <Grid className="center-horizontal">
+          <Grid.Column mobile={16} computer={5}>
+            <Card fluid className="card-padding">
+              <h3>Login</h3>
               <Form
                 onSubmit={this.handleSubmit}
                 error={this.state.errorMessageVisible}

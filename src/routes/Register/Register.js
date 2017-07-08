@@ -47,38 +47,36 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="center-horizontal">
-        <Grid>
-          <Grid.Row>
-            <Grid.Column>
-              <Card fluid className="card-padding">
-                <Card.Content header="Register" />
-                <Form
-                  onSubmit={this.handleSubmit}
-                  error={this.state.errorMessageVisible}
-                >
-                  <Form.Field>
-                    <label>Email</label>
-                    <input type="text" id="email" required />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Username</label>
-                    <input type="text" id="username" required />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Password</label>
-                    <input type="password" id="password" required />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Confirm Password</label>
-                    <input type="password" id="confirm-password" required />
-                  </Form.Field>
-                  <Message error content={this.state.errorMessage} />
-                  <Button type="submit">Register</Button>
-                </Form>
-              </Card>
-            </Grid.Column>
-          </Grid.Row>
+      <div>
+        <Grid className="center-horizontal">
+          <Grid.Column mobile={16} computer={5}>
+            <Card fluid className="card-padding">
+              <h3>Register</h3>
+              <Form
+                onSubmit={this.handleSubmit}
+                error={this.state.errorMessageVisible}
+              >
+                <Form.Field>
+                  <label>Email</label>
+                  <input type="text" id="email" required />
+                </Form.Field>
+                <Form.Field>
+                  <label>Username</label>
+                  <input type="text" id="username" required />
+                </Form.Field>
+                <Form.Field>
+                  <label>Password</label>
+                  <input type="password" id="password" required />
+                </Form.Field>
+                <Form.Field>
+                  <label>Confirm Password</label>
+                  <input type="password" id="confirm-password" required />
+                </Form.Field>
+                <Message error content={this.state.errorMessage} />
+                <Button type="submit">Register</Button>
+              </Form>
+            </Card>
+          </Grid.Column>
         </Grid>
         {this.state.toggleRedirect && <Redirect path to="/" />}
       </div>
