@@ -25,38 +25,41 @@ class EditAccount extends Component {
                     </Grid.Column>
                     <Grid.Column mobile={16} computer={8}>
                       <Form.Field>
-                        <label>First Name</label>
-                        <input type="text" id="firstName" />
+                        <Form.Input label="First Name" id="firstName" />
                       </Form.Field>
                     </Grid.Column>
                     <Grid.Column mobile={16} computer={8}>
                       <Form.Field>
-                        <label>Location</label>
-                        <input type="text" id="location" />
+                        <Form.Input label="Location" id="location" />
                       </Form.Field>
                     </Grid.Column>
                     <Grid.Column mobile={16} computer={8}>
                       <Form.Field>
-                        <label>Username</label>
-                        <Form.Input placeholder={user.username} disabled />
+                        <Form.Input
+                          label="Username"
+                          placeholder={user.username}
+                          disabled
+                        />
                       </Form.Field>
                     </Grid.Column>
                     <Grid.Column mobile={16} computer={8}>
                       <Form.Field>
-                        <label>Email</label>
-                        <Form.Input placeholder={user.email} id="email" />
+                        <Form.Input
+                          label="Email"
+                          placeholder={user.email}
+                          id="email"
+                          required
+                        />
                       </Form.Field>
                     </Grid.Column>
                     <Grid.Column mobile={16} computer={8}>
                       <Form.Field>
-                        <label>Test Field</label>
-                        <input type="password" id="password" />
+                        <Form.Input label="Test Field" />
                       </Form.Field>
                     </Grid.Column>
                     <Grid.Column mobile={16} computer={8}>
                       <Form.Field>
-                        <label>Test Field</label>
-                        <input type="password" id="confirm-password" />
+                        <Form.Input label="Test Field" />
                       </Form.Field>
                     </Grid.Column>
                     <Grid.Column>

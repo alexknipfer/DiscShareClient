@@ -57,20 +57,20 @@ class Login extends Component {
                 error={this.state.errorMessageVisible}
               >
                 <Form.Field>
-                  <label>Email</label>
-                  <input type="text" id="email" required />
+                  <Form.Input label="Email" id="email" required />
                 </Form.Field>
                 <Form.Field>
-                  <label>Username</label>
-                  <input type="text" id="username" required />
+                  <Form.Input label="Username" id="username" required />
                 </Form.Field>
                 <Form.Field>
-                  <label>Password</label>
-                  <input type="password" id="password" required />
+                  <Form.Input label="Password" id="password" required />
                 </Form.Field>
                 <Form.Field>
-                  <label>Confirm Password</label>
-                  <input type="password" id="confirm-password" required />
+                  <Form.Input
+                    label="Confirm Password"
+                    id="confirm-password"
+                    required
+                  />
                 </Form.Field>
                 <Message error content={this.state.errorMessage} />
                 <Button type="submit">Register</Button>
