@@ -39,7 +39,7 @@ class Login extends Component {
         <Grid>
           <Grid.Row>
             <Grid.Column>
-              <Card style={{ padding: 30, width: '350px' }}>
+              <Card className="card-padding-account">
                 <Card.Content header="Login" />
                 <Form
                   onSubmit={this.handleSubmit}
