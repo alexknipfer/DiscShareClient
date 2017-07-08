@@ -52,6 +52,11 @@ class Navigation extends Component {
               Home
             </Menu.Item>
           </Link>
+          <Link to="/editAccount">
+            <Menu.Item link className="nav-links">
+              Edit Account
+            </Menu.Item>
+          </Link>
           <Menu.Item link className="nav-links" onClick={this.logout}>
             Logout
           </Menu.Item>
