@@ -14,7 +14,6 @@ export default ComposedComponent => {
     }
 
     render() {
-      //console.log(auth.loggedIn)
       return <ComposedComponent auth={auth.loggedIn} />
     }
   }

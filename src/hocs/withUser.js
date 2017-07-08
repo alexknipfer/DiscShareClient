@@ -9,7 +9,7 @@ export default ComposedComponent => {
       user: {}
     }
 
-    async componentDidMount() {
+    async componentWillMount() {
       const token = LocalStorage.loadToken()
       if (token !== undefined) {
         const user = await AccountApi.getUserData({ token })
@@ -21,11 +21,7 @@ export default ComposedComponent => {
 
     render() {
       const { user } = this.state.user
-      if (this.state.user === undefined) {
-        return <h3>Loading</h3>
-      } else {
-        return <ComposedComponent user={user} {...this.props} />
-      }
+      return <ComposedComponent user={user} {...this.props} />
     }
   }
 }
