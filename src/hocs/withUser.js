@@ -21,7 +21,11 @@ export default ComposedComponent => {
 
     render() {
       const { user } = this.state.user
-      return <ComposedComponent user={user} {...this.props} />
+      if (this.state.user === undefined) {
+        return <h3>Loading</h3>
+      } else {
+        return <ComposedComponent user={user} {...this.props} />
+      }
     }
   }
 }
