@@ -15,4 +15,11 @@ export class LocalStorage {
       return Cookies.get('accesstoken')
     }
   }
+  static deleteToken() {
+    if (typeof Storage !== 'undefined') {
+      return localStorage.removeItem('accesstoken')
+    } else {
+      return Cookies.remove('accesstoken')
+    }
+  }
 }
