@@ -9,7 +9,6 @@ export default ComposedComponent => {
     componentWillMount() {
       const token = LocalStorage.loadToken()
       if (token !== null) {
-        console.log('IM HERE')
         auth.loggedIn = true
       }
     }
