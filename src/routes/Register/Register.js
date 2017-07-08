@@ -51,7 +51,7 @@ class Login extends Component {
         <Grid>
           <Grid.Row>
             <Grid.Column>
-              <Card className="card-padding-account">
+              <Card fluid className="card-padding">
                 <Card.Content header="Register" />
                 <Form
                   onSubmit={this.handleSubmit}

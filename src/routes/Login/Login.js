@@ -35,30 +35,28 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="center-horizontal">
+      <div>
         <Grid>
-          <Grid.Row>
-            <Grid.Column>
-              <Card className="card-padding-account">
-                <Card.Content header="Login" />
-                <Form
-                  onSubmit={this.handleSubmit}
-                  error={this.state.errorMessageVisible}
-                >
-                  <Form.Field>
-                    <label>Username</label>
-                    <input type="text" id="username" required />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Password</label>
-                    <input type="password" id="password" required />
-                  </Form.Field>
-                  <Message error content={this.state.errorMessage} />
-                  <Button type="submit">Login</Button>
-                </Form>
-              </Card>
-            </Grid.Column>
-          </Grid.Row>
+          <Grid.Column mobile={16} computer={16} className="center-horizontal">
+            <Card className="card-padding-account">
+              <Card.Content header="Login" />
+              <Form
+                onSubmit={this.handleSubmit}
+                error={this.state.errorMessageVisible}
+              >
+                <Form.Field>
+                  <label>Username</label>
+                  <input type="text" id="username" required />
+                </Form.Field>
+                <Form.Field>
+                  <label>Password</label>
+                  <input type="password" id="password" required />
+                </Form.Field>
+                <Message error content={this.state.errorMessage} />
+                <Button type="submit">Login</Button>
+              </Form>
+            </Card>
+          </Grid.Column>
         </Grid>
         {this.state.toggleRedirect && <Redirect to="/" />}
       </div>
