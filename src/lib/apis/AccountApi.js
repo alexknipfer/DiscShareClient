@@ -14,4 +14,8 @@ export class AccountApi {
   static getUserData(data) {
     return post('getUserData', data)
   }
+
+  static editAccount(data) {
+    return post('editAccount', data)
+  }
 }
