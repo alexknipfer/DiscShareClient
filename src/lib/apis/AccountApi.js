@@ -3,11 +3,15 @@ import { RestClient } from '../clients/RestClient'
 const post = (cmd, data) => RestClient.post(`/api/account/${cmd}`, data)
 
 export class AccountApi {
-  static createAccount(accountFields) {
-    return post('register', accountFields)
+  static createAccount(data) {
+    return post('register', data)
   }
 
-  static loginWithUsername(loginFields) {
-    return post('loginWithUsername', loginFields)
+  static loginWithUsername(data) {
+    return post('loginWithUsername', data)
+  }
+
+  static getUserData(data) {
+    return post('getUserData', data)
   }
 }
