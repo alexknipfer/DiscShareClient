@@ -1,4 +1,4 @@
-import { Button, Card, Form, Grid, Message } from 'semantic-ui-react'
+import { Button, Card, Form, Grid, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
 
 import { AccountApi } from '../../lib/apis/AccountApi'
@@ -57,20 +57,20 @@ class Login extends Component {
                 error={this.state.errorMessageVisible}
               >
                 <Form.Field>
-                  <Form.Input label="Email" id="email" required />
+                  <label>Email</label>
+                  <Input id="email" required />
                 </Form.Field>
                 <Form.Field>
-                  <Form.Input label="Username" id="username" required />
+                  <label>Username</label>
+                  <Input id="username" required />
                 </Form.Field>
                 <Form.Field>
-                  <Form.Input label="Password" id="password" required />
+                  <label>Password</label>
+                  <Input id="password" required />
                 </Form.Field>
                 <Form.Field>
-                  <Form.Input
-                    label="Confirm Password"
-                    id="confirm-password"
-                    required
-                  />
+                  <label>Confirm Password</label>
+                  <Input id="confirm-password" required />
                 </Form.Field>
                 <Message error content={this.state.errorMessage} />
                 <Button type="submit">Register</Button>
