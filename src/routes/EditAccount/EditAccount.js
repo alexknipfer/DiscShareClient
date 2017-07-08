@@ -9,7 +9,7 @@ class EditAccount extends Component {
         <Grid className="center-horizontal">
           <Grid.Row>
             <Grid.Column mobile={16} computer={10}>
-              <Card fluid style={{ padding: '30px' }}>
+              <Card fluid className="card-padding">
                 <Form>
                   <Grid>
                     <Grid.Column mobile={16} computer={16}>
