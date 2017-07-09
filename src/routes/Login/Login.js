@@ -50,7 +50,7 @@ class Login extends Component {
                 </Form.Field>
                 <Form.Field>
                   <label>Password</label>
-                  <Input id="password" required />
+                  <Input id="password" type="password" required />
                 </Form.Field>
                 <Message error content={this.state.errorMessage} />
                 <Button type="submit">Login</Button>
