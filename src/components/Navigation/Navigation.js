@@ -3,16 +3,11 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { LocalStorage } from '../../utils/LocalStorage'
 import { Menu } from 'semantic-ui-react'
-import { Redirect } from 'react-router'
 
 class Navigation extends Component {
-  state = {
-    toggleRedirect: false
-  }
-
   logout = () => {
     LocalStorage.deleteToken()
-    this.setState({ toggleRedirect: !this.state.toggleRedirect })
+    this.props.history.push('/login')
   }
 
   render() {
@@ -61,7 +56,6 @@ class Navigation extends Component {
             Logout
           </Menu.Item>
         </Menu>
-        {this.state.toggleRedirect && <Redirect path to="/login" />}
       </div>
     )
   }
