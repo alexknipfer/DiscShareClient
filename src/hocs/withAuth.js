@@ -14,7 +14,7 @@ export default ComposedComponent => {
     }
 
     render() {
-      return <ComposedComponent auth={auth.loggedIn} />
+      return <ComposedComponent auth={auth.loggedIn} {...this.props} />
     }
   }
 }
