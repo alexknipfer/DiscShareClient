@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { LocalStorage } from '../../utils/LocalStorage'
 import { Menu } from 'semantic-ui-react'
+import { Nav } from './styles'
 
 class Navigation extends Component {
   logout = () => {
@@ -16,43 +17,31 @@ class Navigation extends Component {
 
   renderVisitorNav = () => {
     return (
-      <div>
-        <Menu pointing inverted fixed="top" className="nav-main">
-          <Link to="/">
-            <Menu.Item link className="nav-links">
-              Home
-            </Menu.Item>
-          </Link>
-          <Link to="/register">
-            <Menu.Item link className="nav-links">
-              Register
-            </Menu.Item>
-          </Link>
-          <Link to="/login">
-            <Menu.Item link className="nav-links">
-              Login
-            </Menu.Item>
-          </Link>
-        </Menu>
-      </div>
+      <Nav pointing inverted fixed="top">
+        <Link to="/">
+          <Menu.Item link>Home</Menu.Item>
+        </Link>
+        <Link to="/register">
+          <Menu.Item link>Register</Menu.Item>
+        </Link>
+        <Link to="/login">
+          <Menu.Item link>Login</Menu.Item>
+        </Link>
+      </Nav>
     )
   }
 
   renderUserNav = () => {
     return (
       <div>
-        <Menu pointing inverted fixed="top" className="nav-main">
+        <Menu pointing inverted fixed="top">
           <Link to="/">
-            <Menu.Item link className="nav-links">
-              Home
-            </Menu.Item>
+            <Menu.Item link>Home</Menu.Item>
           </Link>
           <Link to="/editAccount">
-            <Menu.Item link className="nav-links">
-              Edit Account
-            </Menu.Item>
+            <Menu.Item link>Edit Account</Menu.Item>
           </Link>
-          <Menu.Item link className="nav-links" onClick={this.logout}>
+          <Menu.Item link onClick={this.logout}>
             Logout
           </Menu.Item>
         </Menu>
