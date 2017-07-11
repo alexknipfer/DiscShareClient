@@ -1,5 +1,3 @@
-import '../sass/root.css'
-
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import EditAccount from './EditAccount'
