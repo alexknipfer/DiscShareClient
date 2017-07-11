@@ -1,4 +1,5 @@
-import { Button, Card, Form, Grid, Input, Message } from 'semantic-ui-react'
+import { Button, Form, Grid, Input, Message } from 'semantic-ui-react'
+import { CenteredGrid, PaddedCard } from '../commonStyles'
 import React, { Component } from 'react'
 import { action, extendObservable } from 'mobx'
 
@@ -46,38 +47,36 @@ const Login = observer(
 
     render() {
       return (
-        <div>
-          <Grid className="center-horizontal">
-            <Grid.Column mobile={16} computer={5}>
-              <Card fluid className="card-padding">
-                <h3>Register</h3>
-                <Form
-                  onSubmit={this.handleSubmit}
-                  error={this.errorMessageVisible}
-                >
-                  <Form.Field>
-                    <label>Email</label>
-                    <Input id="email" required />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Username</label>
-                    <Input id="username" required />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Password</label>
-                    <Input id="password" type="password" required />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Confirm Password</label>
-                    <Input id="confirm-password" type="password" required />
-                  </Form.Field>
-                  <Message error content={this.errorMessage} />
-                  <Button type="submit">Register</Button>
-                </Form>
-              </Card>
-            </Grid.Column>
-          </Grid>
-        </div>
+        <CenteredGrid>
+          <Grid.Column mobile={16} computer={5}>
+            <PaddedCard fluid>
+              <h3>Register</h3>
+              <Form
+                onSubmit={this.handleSubmit}
+                error={this.errorMessageVisible}
+              >
+                <Form.Field>
+                  <label>Email</label>
+                  <Input id="email" required />
+                </Form.Field>
+                <Form.Field>
+                  <label>Username</label>
+                  <Input id="username" required />
+                </Form.Field>
+                <Form.Field>
+                  <label>Password</label>
+                  <Input id="password" type="password" required />
+                </Form.Field>
+                <Form.Field>
+                  <label>Confirm Password</label>
+                  <Input id="confirm-password" type="password" required />
+                </Form.Field>
+                <Message error content={this.errorMessage} />
+                <Button type="submit">Register</Button>
+              </Form>
+            </PaddedCard>
+          </Grid.Column>
+        </CenteredGrid>
       )
     }
   }

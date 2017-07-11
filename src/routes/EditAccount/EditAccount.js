@@ -1,4 +1,5 @@
-import { Button, Card, Form, Grid, Input, Message } from 'semantic-ui-react'
+import { Button, Form, Grid, Input, Message } from 'semantic-ui-react'
+import { CenteredGrid, PaddedCard } from '../commonStyles'
 import React, { Component } from 'react'
 import { action, extendObservable } from 'mobx'
 
@@ -41,75 +42,69 @@ const EditAccount = observer(
     render() {
       const { user } = this.props
       return (
-        <div>
-          <Grid className="center-horizontal">
-            <Grid.Row>
-              <Grid.Column mobile={16} computer={10}>
-                <Card fluid className="card-padding">
-                  <Form
-                    onSubmit={() => this.handleSubmit(user)}
-                    success={this.successMessageVisible}
-                  >
-                    <Grid>
-                      <Grid.Column mobile={16} computer={16}>
-                        <h3>Edit Account</h3>
-                      </Grid.Column>
-                      <Grid.Column mobile={16} computer={8}>
-                        <Form.Field>
-                          <label>First Name</label>
-                          <Input id="firstName" />
-                        </Form.Field>
-                      </Grid.Column>
-                      <Grid.Column mobile={16} computer={8}>
-                        <Form.Field>
-                          <label>Location</label>
-                          <Input id="location" />
-                        </Form.Field>
-                      </Grid.Column>
-                      <Grid.Column mobile={16} computer={8}>
-                        <Form.Field>
-                          <label>Username</label>
-                          <Input defaultValue={user.username} disabled />
-                        </Form.Field>
-                      </Grid.Column>
-                      <Grid.Column mobile={16} computer={8}>
-                        <Form.Field>
-                          <label>Email</label>
-                          <Input
-                            defaultValue={user.email}
-                            id="email"
-                            required
-                          />
-                        </Form.Field>
-                      </Grid.Column>
-                      <Grid.Column mobile={16} computer={8}>
-                        <Form.Field>
-                          <label>Test Field</label>
-                          <Input />
-                        </Form.Field>
-                      </Grid.Column>
-                      <Grid.Column mobile={16} computer={8}>
-                        <Form.Field>
-                          <label>Test Field</label>
-                          <Input />
-                        </Form.Field>
-                      </Grid.Column>
-                      <Grid.Column mobile={16} computer={16}>
-                        <Message
-                          success
-                          header="Your profile has been updated successfully."
-                        />
-                      </Grid.Column>
-                      <Grid.Column>
-                        <Button type="submit">Submit</Button>
-                      </Grid.Column>
-                    </Grid>
-                  </Form>
-                </Card>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </div>
+        <CenteredGrid>
+          <Grid.Row>
+            <Grid.Column mobile={16} computer={10}>
+              <PaddedCard fluid>
+                <Form
+                  onSubmit={() => this.handleSubmit(user)}
+                  success={this.successMessageVisible}
+                >
+                  <Grid>
+                    <Grid.Column mobile={16} computer={16}>
+                      <h3>Edit Account</h3>
+                    </Grid.Column>
+                    <Grid.Column mobile={16} computer={8}>
+                      <Form.Field>
+                        <label>First Name</label>
+                        <Input id="firstName" />
+                      </Form.Field>
+                    </Grid.Column>
+                    <Grid.Column mobile={16} computer={8}>
+                      <Form.Field>
+                        <label>Location</label>
+                        <Input id="location" />
+                      </Form.Field>
+                    </Grid.Column>
+                    <Grid.Column mobile={16} computer={8}>
+                      <Form.Field>
+                        <label>Username</label>
+                        <Input defaultValue={user.username} disabled />
+                      </Form.Field>
+                    </Grid.Column>
+                    <Grid.Column mobile={16} computer={8}>
+                      <Form.Field>
+                        <label>Email</label>
+                        <Input defaultValue={user.email} id="email" required />
+                      </Form.Field>
+                    </Grid.Column>
+                    <Grid.Column mobile={16} computer={8}>
+                      <Form.Field>
+                        <label>Test Field</label>
+                        <Input />
+                      </Form.Field>
+                    </Grid.Column>
+                    <Grid.Column mobile={16} computer={8}>
+                      <Form.Field>
+                        <label>Test Field</label>
+                        <Input />
+                      </Form.Field>
+                    </Grid.Column>
+                    <Grid.Column mobile={16} computer={16}>
+                      <Message
+                        success
+                        header="Your profile has been updated successfully."
+                      />
+                    </Grid.Column>
+                    <Grid.Column>
+                      <Button type="submit">Submit</Button>
+                    </Grid.Column>
+                  </Grid>
+                </Form>
+              </PaddedCard>
+            </Grid.Column>
+          </Grid.Row>
+        </CenteredGrid>
       )
     }
   }
