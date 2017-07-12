@@ -1,10 +1,11 @@
 import { Button, Form, Grid, Input, Message } from 'semantic-ui-react'
-import { CenteredGrid, PaddedCard } from '../commonStyles'
 import React, { Component } from 'react'
 import { action, observable } from 'mobx'
 
 import { AccountApi } from '../../lib/apis/AccountApi'
+import CenteredGrid from '../../components/CenteredGrid/CenteredGrid'
 import { LocalStorage } from '../../utils/LocalStorage'
+import PaddedCard from '../../components/PaddedCard/PaddedCard'
 import { observer } from 'mobx-react'
 
 @observer
