@@ -4,6 +4,7 @@ import renderer from 'react-test-renderer'
 import { MemoryRouter } from 'react-router'
 import { shallow } from 'enzyme'
 import { Link } from 'react-router-dom'
+import { Menu } from 'semantic-ui-react'
 
 describe('Testing Navigation', () => {
     it('Render nav with auth', () => {
@@ -27,6 +28,11 @@ describe('Testing Navigation', () => {
     it('Has three links', () => {
       const wrapper = shallow(<Navigation auth={true} />)
       expect(wrapper.find(Link).length).toBe(2)
+    })
+
+    it('Simulate Click', () => {
+        const wrapper = shallow(<Navigation auth={true} />)
+        wrapper.find(Menu).last().simulate('click')
     })
 
 })
