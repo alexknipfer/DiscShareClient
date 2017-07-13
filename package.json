@@ -28,6 +28,7 @@
   },
   "proxy": "https://react-backend-ujgqtchies.now.sh",
   "devDependencies": {
+    "enzyme": "^2.9.1",
     "react-app-rewired": "^1.0.8"
   }
 }
