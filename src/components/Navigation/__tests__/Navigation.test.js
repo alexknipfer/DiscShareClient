@@ -1,5 +1,5 @@
 import React from 'react'
-import Navigation from './Navigation'
+import Navigation from '../Navigation'
 import renderer from 'react-test-renderer'
 import { MemoryRouter } from 'react-router'
 
