@@ -35,7 +35,7 @@ class Register extends Component {
           password
         })
         const { token } = result
-        LocalStorage.saveToken(token, { path: '/', expires: 7 })
+        LocalStorage.saveToken(token)
         this.props.history.push('/')
       } catch (error) {
         this.displayErrMessage(error.message)

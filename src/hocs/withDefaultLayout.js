@@ -10,21 +10,11 @@ export default ComposedComponent => {
     height: 100vh;
   `
 
-  const isMobile = () => {
-    return (
-      navigator.userAgent.match(/Android/i) ||
-      navigator.userAgent.match(/webOS/i) ||
-      navigator.userAgent.match(/iPhone/i) ||
-      navigator.userAgent.match(/iPad/i)
-    )
-  }
-
   return class withDefaultLayout extends Component {
     render() {
-      const mobileBrowser = isMobile()
       return (
         <Container>
-          <Navigation isMobile={mobileBrowser} {...this.props} />
+          <Navigation {...this.props} />
           <ComposedComponent {...this.props} />
         </Container>
       )

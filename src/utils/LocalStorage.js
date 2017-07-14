@@ -1,25 +1,11 @@
-import Cookies from 'js-cookie'
-
 export class LocalStorage {
-  static saveToken(token, options) {
-    if (typeof Storage !== 'undefined') {
-      localStorage.setItem('accesstoken', token)
-    } else {
-      Cookies.set('accesstoken', token, options)
-    }
+  static saveToken(token) {
+    localStorage.setItem('accesstoken', token)
   }
   static loadToken() {
-    if (typeof Storage !== 'undefined') {
-      return localStorage.getItem('accesstoken')
-    } else {
-      return Cookies.get('accesstoken')
-    }
+    return localStorage.getItem('accesstoken')
   }
   static deleteToken() {
-    if (typeof Storage !== 'undefined') {
-      return localStorage.removeItem('accesstoken')
-    } else {
-      return Cookies.remove('accesstoken')
-    }
+    return localStorage.removeItem('accesstoken')
   }
 }

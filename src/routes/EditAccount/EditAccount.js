@@ -33,7 +33,7 @@ class EditAccount extends Component {
       location
     })
     const { token } = result
-    LocalStorage.saveToken(token, { path: '/', expires: 7 })
+    LocalStorage.saveToken(token)
     this.displaySuccessMessage()
   }
 
