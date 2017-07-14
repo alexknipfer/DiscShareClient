@@ -42,7 +42,7 @@ class EditAccount extends Component {
     return (
       <CenteredGrid>
         <Grid.Row>
-          <Grid.Column mobile={16} computer={10}>
+          <Grid.Column mobile={14} computer={10}>
             <PaddedCard fluid>
               <Form
                 onSubmit={() => this.handleSubmit(user)}
