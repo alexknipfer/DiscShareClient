@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Navigation Render nav with auth 1`] = `
+<div>
+  <div
+    className="ui inverted pointing top fixed menu"
+  >
+    <a
+      href="/"
+      onClick={[Function]}
+    >
+      <div
+        className="link item"
+        onClick={[Function]}
+      >
+        Home
+      </div>
+    </a>
+    <a
+      href="/editAccount"
+      onClick={[Function]}
+    >
+      <div
+        className="link item"
+        onClick={[Function]}
+      >
+        Edit Account
+      </div>
+    </a>
+    <a
+      className="link item"
+      onClick={[Function]}
+    >
+      Logout
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Testing Navigation Render nav without auth 1`] = `
+<div
+  className="ui inverted pointing top fixed sc-bdVaJa iCWLKP menu"
+>
+  <a
+    href="/"
+    onClick={[Function]}
+  >
+    <div
+      className="link item"
+      onClick={[Function]}
+    >
+      Home
+    </div>
+  </a>
+  <a
+    href="/register"
+    onClick={[Function]}
+  >
+    <div
+      className="link item"
+      onClick={[Function]}
+    >
+      Register
+    </div>
+  </a>
+  <a
+    href="/login"
+    onClick={[Function]}
+  >
+    <div
+      className="link item"
+      onClick={[Function]}
+    >
+      Login
+    </div>
+  </a>
+</div>
+`;
