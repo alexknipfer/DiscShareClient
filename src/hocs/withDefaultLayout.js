@@ -4,11 +4,7 @@ import Navigation from '../components/Navigation/Navigation'
 import styled from 'styled-components'
 
 export default ComposedComponent => {
-  const Container = styled.div`
-    padding: 50px;
-    background-color: #c2dfe3;
-    height: 100vh;
-  `
+  const Container = styled.div`padding: 50px;`
 
   return class withDefaultLayout extends Component {
     render() {
