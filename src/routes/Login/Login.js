@@ -39,7 +39,7 @@ class Login extends Component {
   render() {
     return (
       <CenteredGrid>
-        <Grid.Column mobile={16} computer={5}>
+        <Grid.Column mobile={14} computer={5}>
           <PaddedCard fluid>
             <h3>Login</h3>
             <Form onSubmit={this.handleSubmit} error={this.errorMessageVisible}>
