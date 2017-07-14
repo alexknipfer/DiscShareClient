@@ -1,5 +1,6 @@
 import { Dimmer, Icon } from 'semantic-ui-react'
 
+import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -24,6 +25,10 @@ const MenuOverlay = ({ open }) => {
       </MenuContent>
     </Dimmer>
   )
+}
+
+MenuOverlay.propTypes = {
+  open: PropTypes.bool
 }
 
 export default MenuOverlay

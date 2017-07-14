@@ -6,11 +6,16 @@ import { AccountApi } from '../../lib/apis/AccountApi'
 import CenteredGrid from '../../components/CenteredGrid/CenteredGrid'
 import { LocalStorage } from '../../utils/LocalStorage'
 import PaddedCard from '../../components/PaddedCard/PaddedCard'
+import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
 
 @observer
 class EditAccount extends Component {
   @observable successMessageVisible = false
+
+  static propTypes = {
+    user: PropTypes.object
+  }
 
   @action
   displaySuccessMessage = () => {
