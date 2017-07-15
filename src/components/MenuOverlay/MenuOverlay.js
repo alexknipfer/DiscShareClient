@@ -1,10 +1,29 @@
 import { Dimmer, Icon } from 'semantic-ui-react'
+import { fadeIn, slideInFromLeft } from '../Animations/Animations'
 
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
 const MenuContent = styled.div`text-align: center;`
+
+const DimmerOverlay = styled(Dimmer)`
+  animation: ${fadeIn} 0.7s;
+`
+
+const SlidingHeader = styled.h2`animation: ${slideInFromLeft} 0.5s forwards;`
+
+const SlidingHeaderMiddle = styled.h2`
+  visibility: hidden;
+  animation: ${slideInFromLeft} 0.5s forwards;
+  animation-delay: 0.1s;
+`
+
+const SlidingHeaderBottom = styled.h2`
+  visibility: hidden;
+  animation: ${slideInFromLeft} 0.5s forwards;
+  animation-delay: 0.3s;
+`
 
 const CloseIcon = styled(Icon)`
   position: absolute;
@@ -16,14 +35,14 @@ const CloseIcon = styled(Icon)`
 
 const MenuOverlay = ({ open, triggerClose }) => {
   return (
-    <Dimmer active={open}>
+    <DimmerOverlay active={open}>
       <CloseIcon name="close" size="large" onClick={triggerClose} />
       <MenuContent>
-        <h2>Home</h2>
-        <h2>Register</h2>
-        <h2>Login</h2>
+        <SlidingHeader>Home</SlidingHeader>
+        <SlidingHeaderMiddle>Register</SlidingHeaderMiddle>
+        <SlidingHeaderBottom>Login</SlidingHeaderBottom>
       </MenuContent>
-    </Dimmer>
+    </DimmerOverlay>
   )
 }
 
