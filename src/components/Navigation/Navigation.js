@@ -36,7 +36,7 @@ class Navigation extends Component {
   renderVisitorNav = () => {
     return (
       <div>
-        <MenuOverlay open={this.showMenu} />
+        <MenuOverlay open={this.showMenu} triggerClose={this.triggerMenu} />
         <Nav pointing inverted fixed="top">
           <Link to="/">
             <Menu.Item link>Home</Menu.Item>

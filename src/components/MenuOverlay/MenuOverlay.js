@@ -14,10 +14,10 @@ const CloseIcon = styled(Icon)`
   right: 0px;
 `
 
-const MenuOverlay = ({ open }) => {
+const MenuOverlay = ({ open, triggerClose }) => {
   return (
     <Dimmer active={open}>
-      <CloseIcon name="close" size="large" />
+      <CloseIcon name="close" size="large" onClick={triggerClose} />
       <MenuContent>
         <h2>Home</h2>
         <h2>Register</h2>
@@ -28,7 +28,8 @@ const MenuOverlay = ({ open }) => {
 }
 
 MenuOverlay.propTypes = {
-  open: PropTypes.bool
+  open: PropTypes.bool,
+  triggerClose: PropTypes.func
 }
 
 export default MenuOverlay
