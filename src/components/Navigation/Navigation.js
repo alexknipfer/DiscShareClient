@@ -58,7 +58,7 @@ class Navigation extends Component {
   renderUserNav = () => {
     return (
       <div>
-        <Menu pointing inverted fixed="top">
+        <Nav pointing inverted fixed="top">
           <Link to="/">
             <Menu.Item link>Home</Menu.Item>
           </Link>
@@ -68,7 +68,7 @@ class Navigation extends Component {
           <Menu.Item link onClick={this.logout}>
             Logout
           </Menu.Item>
-        </Menu>
+        </Nav>
       </div>
     )
   }
