@@ -4,9 +4,11 @@ import { action, observable } from 'mobx'
 
 import { AccountApi } from '../../lib/apis/AccountApi'
 import CenteredGrid from '../../components/CenteredGrid/CenteredGrid'
+import Dropzone from 'react-dropzone'
 import { LocalStorage } from '../../utils/LocalStorage'
 import PaddedCard from '../../components/PaddedCard/PaddedCard'
 import PropTypes from 'prop-types'
+import { UploadApi } from '../../lib/apis/UploadApi'
 import { observer } from 'mobx-react'
 
 @observer
@@ -42,6 +44,10 @@ class EditAccount extends Component {
     this.displaySuccessMessage()
   }
 
+  uploadImage = async files => {
+    await UploadApi.uploadProfileImage({ files })
+  }
+
   render() {
     const { user } = this.props
     return (
@@ -49,6 +55,13 @@ class EditAccount extends Component {
         <Grid.Row>
           <Grid.Column mobile={14} computer={10}>
             <PaddedCard fluid>
+              <Dropzone
+                className="button"
+                accept="image/*"
+                onDrop={files => this.uploadImage(files)}
+              >
+                <Button>Upload Image</Button>
+              </Dropzone>
               <Form
                 onSubmit={() => this.handleSubmit(user)}
                 success={this.successMessageVisible}
