@@ -13,6 +13,7 @@ const MobileMenuItem = styled(Menu.Item)`
   @media (min-width: 700px) {
     display: none !important;
   }
+  display: ${props => (props.visible ? 'none !important' : 'initial')};
 `
 
 @observer
@@ -47,7 +48,12 @@ class Navigation extends Component {
           <Link to="/login">
             <Menu.Item link>Login</Menu.Item>
           </Link>
-          <MobileMenuItem link position="right" onClick={this.triggerMenu}>
+          <MobileMenuItem
+            link
+            position="right"
+            onClick={this.triggerMenu}
+            visible={this.showMenu}
+          >
             <Icon name="bars" />
           </MobileMenuItem>
         </Nav>
