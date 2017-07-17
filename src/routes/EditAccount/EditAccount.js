@@ -46,8 +46,8 @@ class EditAccount extends Component {
 
   uploadImage = async files => {
     const file = files[0]
-    // console.log('FILE: ', file)
-    await UploadApi.uploadProfileImage({ file })
+    console.log('FILE: ', file)
+    await UploadApi.uploadProfileImage(file)
   }
 
   render() {
@@ -59,6 +59,7 @@ class EditAccount extends Component {
             <PaddedCard fluid>
               <Dropzone
                 className="button"
+                name="avatar"
                 accept="image/*"
                 onDrop={files => this.uploadImage(files)}
               >
