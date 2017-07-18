@@ -45,7 +45,6 @@ class EditAccount extends Component {
   }
 
   uploadImage = async files => {
-    const file = files[0]
     console.log('FILE: ', files)
     await UploadApi.uploadProfileImage(files)
   }
