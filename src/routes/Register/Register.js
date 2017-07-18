@@ -1,15 +1,27 @@
 import { Button, Form, Grid, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
+import { action, observable } from 'mobx'
 
 import CenteredGrid from '../../components/CenteredGrid/CenteredGrid'
 import PaddedCard from '../../components/PaddedCard/PaddedCard'
 import PropTypes from 'prop-types'
 import RegisterMutation from '../../mutations/register'
 import { graphql } from 'react-apollo'
+import { observer } from 'mobx-react'
 
+@observer
 class Register extends Component {
+  @observable errorMessageVisible = false
+  @observable errorMessage = null
+
   static propTypes = {
     register: PropTypes.func
+  }
+
+  @action
+  displayErrMessage = err => {
+    this.errorMessageVisible = !this.errorMessageVisible
+    this.errorMessage = err
   }
 
   handleSubmit = async register => {
@@ -18,11 +30,15 @@ class Register extends Component {
     const password = document.getElementById('password').value
     const confirmPass = document.getElementById('confirm-password').value
 
-    try {
-      const user = await register(email, username, password)
-    } catch (err) {
-      const { graphQLErrors } = err
-      console.log(graphQLErrors[0].message)
+    if (password !== confirmPass) {
+      this.displayErrMessage('Passwords do not match.')
+    } else {
+      try {
+        const user = await register(email, username, password)
+      } catch (err) {
+        const { graphQLErrors } = err
+        this.displayErrMessage(graphQLErrors[0].message)
+      }
     }
   }
 
