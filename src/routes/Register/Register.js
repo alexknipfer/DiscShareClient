@@ -1,6 +1,7 @@
 import { Button, Form, Grid, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
 import { action, observable } from 'mobx'
+import { LocalStorage } from '../../utils/LocalStorage'
 
 import CenteredGrid from '../../components/CenteredGrid/CenteredGrid'
 import PaddedCard from '../../components/PaddedCard/PaddedCard'
@@ -35,6 +36,8 @@ class Register extends Component {
     } else {
       try {
         const user = await register(email, username, password)
+        LocalStorage.saveToken(user.data.register)
+        this.props.history.push('/')
       } catch (err) {
         const { graphQLErrors } = err
         this.displayErrMessage(graphQLErrors[0].message)
