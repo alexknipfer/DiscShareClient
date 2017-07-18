@@ -1,55 +1,42 @@
 import { Button, Form, Grid, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
-import { action, observable } from 'mobx'
 
-import { AccountApi } from '../../lib/apis/AccountApi'
 import CenteredGrid from '../../components/CenteredGrid/CenteredGrid'
-import { LocalStorage } from '../../utils/LocalStorage'
 import PaddedCard from '../../components/PaddedCard/PaddedCard'
-import { observer } from 'mobx-react'
+import PropTypes from 'prop-types'
+import RegisterMutation from '../../mutations/register'
+import { graphql } from 'react-apollo'
 
-@observer
 class Register extends Component {
-  @observable errorMessageVisible = false
-  @observable errorMessage = null
-
-  @action
-  displayErrMessage = err => {
-    this.errorMessageVisible = !this.errorMessageVisible
-    this.errorMessage = err
+  static propTypes = {
+    register: PropTypes.func
   }
 
-  handleSubmit = async () => {
+  handleSubmit = async register => {
     const email = document.getElementById('email').value
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
     const confirmPass = document.getElementById('confirm-password').value
 
-    if (password !== confirmPass) {
-      this.displayErrMessage('Passwords do not match.')
-    } else {
-      try {
-        const result = await AccountApi.createAccount({
-          email,
-          username,
-          password
-        })
-        const { token } = result
-        LocalStorage.saveToken(token)
-        this.props.history.push('/')
-      } catch (error) {
-        this.displayErrMessage(error.message)
-      }
+    try {
+      const user = await register(email, username, password)
+    } catch (err) {
+      const { graphQLErrors } = err
+      console.log(graphQLErrors[0].message)
     }
   }
 
   render() {
+    const { register } = this.props
     return (
       <CenteredGrid>
         <Grid.Column mobile={14} computer={5}>
           <PaddedCard fluid>
             <h3>Register</h3>
-            <Form onSubmit={this.handleSubmit} error={this.errorMessageVisible}>
+            <Form
+              onSubmit={() => this.handleSubmit(register)}
+              error={this.errorMessageVisible}
+            >
               <Form.Field>
                 <label>Email</label>
                 <Input id="email" required />
@@ -76,4 +63,9 @@ class Register extends Component {
   }
 }
 
-export default Register
+export default graphql(RegisterMutation, {
+  props: ({ mutate }) => ({
+    register: (email, username, password) =>
+      mutate({ variables: { email, username, password } })
+  })
+})(Register)
