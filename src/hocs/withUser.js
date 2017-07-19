@@ -1,27 +1,25 @@
 import React, { Component } from 'react'
 
-import { AccountApi } from '../lib/apis/AccountApi'
+import GetUserProfile from '../queries/getUser'
 import { LocalStorage } from '../utils/LocalStorage'
+import PropTypes from 'prop-types'
+import { graphql } from 'react-apollo'
 
 export default ComposedComponent => {
-  return class withUser extends Component {
-    state = {
-      user: {}
+  class withUser extends Component {
+    static propTypes = {
+      loading: PropTypes.bool,
+      getUser: PropTypes.object
     }
-
-    async componentWillMount() {
-      const token = LocalStorage.loadToken()
-      if (token !== undefined) {
-        const user = await AccountApi.getUserData({ token })
-        this.setState({
-          user: user
-        })
-      }
-    }
-
     render() {
-      const { user } = this.state.user
-      return <ComposedComponent user={user} {...this.props} />
+      return <ComposedComponent {...this.props} />
     }
   }
+  return graphql(GetUserProfile, {
+    props: ({ data: { loading, getUser } }) => ({
+      loading,
+      getUser
+    }),
+    options: { variables: { accesstoken: LocalStorage.loadToken() } }
+  })(withUser)
 }
