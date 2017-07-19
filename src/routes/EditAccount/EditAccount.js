@@ -2,7 +2,6 @@ import { Button, Form, Grid, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
 import { action, observable } from 'mobx'
 
-import { AccountApi } from '../../lib/apis/AccountApi'
 import CenteredGrid from '../../components/CenteredGrid/CenteredGrid'
 import Dropzone from 'react-dropzone'
 import { LocalStorage } from '../../utils/LocalStorage'
@@ -10,13 +9,16 @@ import PaddedCard from '../../components/PaddedCard/PaddedCard'
 import PropTypes from 'prop-types'
 import { UploadApi } from '../../lib/apis/UploadApi'
 import { observer } from 'mobx-react'
+import EditAccountMutation from '../../mutations/editAccount'
+import { graphql } from 'react-apollo'
 
 @observer
 class EditAccount extends Component {
   @observable successMessageVisible = false
 
   static propTypes = {
-    user: PropTypes.object
+    user: PropTypes.object,
+    editAccount: PropTypes.func
   }
 
   @action
@@ -27,19 +29,14 @@ class EditAccount extends Component {
     }, 3000)
   }
 
-  handleSubmit = async user => {
+  handleSubmit = async (userId, editAccount) => {
     const email = document.getElementById('email').value
     const firstName = document.getElementById('firstName').value
     const location = document.getElementById('location').value
-    const userId = user._id
 
-    const result = await AccountApi.editAccount({
-      userId,
-      email,
-      firstName,
-      location
-    })
-    const { token } = result
+    console.log(editAccount)
+
+    const token = await editAccount(userId, email, firstName, location)
     LocalStorage.saveToken(token)
     this.displaySuccessMessage()
   }
@@ -50,7 +47,7 @@ class EditAccount extends Component {
   }
 
   render() {
-    const { user } = this.props
+    const { user, editAccount } = this.props
     return (
       <CenteredGrid>
         <Grid.Row>
@@ -65,7 +62,7 @@ class EditAccount extends Component {
                 <Button>Upload Image</Button>
               </Dropzone>
               <Form
-                onSubmit={() => this.handleSubmit(user)}
+                onSubmit={() => this.handleSubmit(user.id, editAccount)}
                 success={this.successMessageVisible}
               >
                 <Grid>
@@ -127,4 +124,9 @@ class EditAccount extends Component {
   }
 }
 
-export default EditAccount
+export default graphql(EditAccountMutation, {
+  props: ({ mutate }) => ({
+    editAccount: (userId, email, firstName, location) =>
+      mutate({ variables: { userId, email, firstName, location }})
+  })
+})(EditAccount)
