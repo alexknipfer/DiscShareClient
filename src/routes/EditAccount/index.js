@@ -3,14 +3,12 @@ import { Loader } from 'semantic-ui-react'
 import React from 'react'
 import { pageWithUserData } from '../../hocs/page'
 
-export default pageWithUserData(({ auth, user }) => {
+export default pageWithUserData(({ auth, getUser, loading }) => {
   if (auth) {
-    if (!user) {
+    if (loading) {
       return <Loader active />
     } else {
-      return <EditAccount user={user} />
+      return <EditAccount user={getUser} />
     }
-  } else {
-    return <h3>You are not authorized to view this page</h3>
   }
 })
