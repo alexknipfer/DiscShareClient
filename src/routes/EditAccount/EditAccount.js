@@ -3,13 +3,11 @@ import React, { Component } from 'react'
 import { action, observable } from 'mobx'
 
 import CenteredGrid from '../../components/CenteredGrid/CenteredGrid'
-import Dropzone from 'react-dropzone'
 import EditAccountMutation from '../../mutations/editAccount'
 import GetUserProfile from '../../queries/getUser'
 import { LocalStorage } from '../../utils/LocalStorage'
 import PaddedCard from '../../components/PaddedCard/PaddedCard'
 import PropTypes from 'prop-types'
-import { UploadApi } from '../../lib/apis/UploadApi'
 import { graphql } from 'react-apollo'
 import { observer } from 'mobx-react'
 
@@ -40,11 +38,6 @@ class EditAccount extends Component {
     this.displaySuccessMessage()
   }
 
-  uploadImage = async files => {
-    console.log('FILE: ', files)
-    await UploadApi.uploadProfileImage(files)
-  }
-
   render() {
     const { user, editAccount } = this.props
     return (
@@ -52,14 +45,6 @@ class EditAccount extends Component {
         <Grid.Row>
           <Grid.Column mobile={14} computer={10}>
             <PaddedCard fluid>
-              <Dropzone
-                className="button"
-                name="avatar"
-                accept="image/*"
-                onDrop={files => this.uploadImage(files)}
-              >
-                <Button>Upload Image</Button>
-              </Dropzone>
               <Form
                 onSubmit={() => this.handleSubmit(user.id, editAccount)}
                 success={this.successMessageVisible}
