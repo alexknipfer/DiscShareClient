@@ -4,13 +4,14 @@ import { action, observable } from 'mobx'
 
 import CenteredGrid from '../../components/CenteredGrid/CenteredGrid'
 import Dropzone from 'react-dropzone'
+import EditAccountMutation from '../../mutations/editAccount'
+import GetUserProfile from '../../queries/getUser'
 import { LocalStorage } from '../../utils/LocalStorage'
 import PaddedCard from '../../components/PaddedCard/PaddedCard'
 import PropTypes from 'prop-types'
 import { UploadApi } from '../../lib/apis/UploadApi'
-import { observer } from 'mobx-react'
-import EditAccountMutation from '../../mutations/editAccount'
 import { graphql } from 'react-apollo'
+import { observer } from 'mobx-react'
 
 @observer
 class EditAccount extends Component {
@@ -34,10 +35,8 @@ class EditAccount extends Component {
     const firstName = document.getElementById('firstName').value
     const location = document.getElementById('location').value
 
-    console.log(editAccount)
-
-    const token = await editAccount(userId, email, firstName, location)
-    LocalStorage.saveToken(token)
+    const result = await editAccount(userId, email, firstName, location)
+    LocalStorage.saveToken(result.data.editAccount)
     this.displaySuccessMessage()
   }
 
@@ -127,6 +126,14 @@ class EditAccount extends Component {
 export default graphql(EditAccountMutation, {
   props: ({ mutate }) => ({
     editAccount: (userId, email, firstName, location) =>
-      mutate({ variables: { userId, email, firstName, location }})
+      mutate({ variables: { userId, email, firstName, location } })
+  }),
+  options: () => ({
+    refetchQueries: [
+      {
+        query: GetUserProfile,
+        variables: { accesstoken: LocalStorage.loadToken() }
+      }
+    ]
   })
 })(EditAccount)
