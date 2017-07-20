@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
+import AuthorizedRoute from '../components/AuthorizedRoute/'
 import EditAccount from './EditAccount'
 import Home from './Home'
 import Login from './Login'
@@ -13,7 +14,7 @@ const App = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/editAccount" component={EditAccount} />
+        <AuthorizedRoute exact path="/editAccount" component={EditAccount} />
       </Switch>
     </BrowserRouter>
   )
