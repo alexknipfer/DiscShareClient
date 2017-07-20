@@ -21,10 +21,21 @@ const MobileMenuItem = styled(({ visible, ...rest }) =>
 @observer
 class Navigation extends Component {
   @observable showMenu = false
+  @observable auth = false
+
+  componentWillMount() {
+    const token = LocalStorage.loadToken()
+    if (token !== null) this.authorize()
+  }
 
   logout = () => {
     LocalStorage.deleteToken()
     this.props.history.push('/login')
+  }
+
+  @action
+  authorize = () => {
+    this.auth = true
   }
 
   @action
@@ -33,7 +44,8 @@ class Navigation extends Component {
   }
 
   render() {
-    return this.props.auth ? this.renderUserNav() : this.renderVisitorNav()
+    console.log('AUTH: ', this.auth)
+    return this.auth ? this.renderUserNav() : this.renderVisitorNav()
   }
 
   renderVisitorNav = () => {
