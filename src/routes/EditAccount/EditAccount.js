@@ -16,6 +16,8 @@ class EditAccount extends Component {
   @observable successMessageVisible = false
 
   static propTypes = {
+    auth: PropTypes.bool,
+    loading: PropTypes.bool,
     getUser: PropTypes.object,
     editAccount: PropTypes.func
   }
@@ -39,7 +41,7 @@ class EditAccount extends Component {
   }
 
   render() {
-    const { getUser, editAccount } = this.props
+    const { loading, getUser, editAccount } = this.props
     return (
       <CenteredGrid>
         <Grid.Row>
@@ -48,6 +50,7 @@ class EditAccount extends Component {
               <Form
                 onSubmit={() => this.handleSubmit(getUser.id, editAccount)}
                 success={this.successMessageVisible}
+                loading={loading}
               >
                 <Grid>
                   <Grid.Column mobile={16} computer={16}>
@@ -113,11 +116,11 @@ export default graphql(EditAccountMutation, {
     editAccount: (userId, email, firstName, location) =>
       mutate({ variables: { userId, email, firstName, location } })
   }),
-  options: () => ({
+  options: ({ token }) => ({
     refetchQueries: [
       {
         query: GetUserProfile,
-        variables: { accesstoken: LocalStorage.loadToken() }
+        variables: { accesstoken: token }
       }
     ]
   })
