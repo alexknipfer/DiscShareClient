@@ -44,7 +44,6 @@ class Navigation extends Component {
   }
 
   render() {
-    console.log('AUTH: ', this.auth)
     return this.auth ? this.renderUserNav() : this.renderVisitorNav()
   }
 

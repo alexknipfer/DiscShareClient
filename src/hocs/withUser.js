@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import GetUserProfile from '../queries/getUser'
-import { LocalStorage } from '../utils/LocalStorage'
+import { Loader } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 
@@ -12,7 +12,9 @@ export default ComposedComponent => {
       getUser: PropTypes.object
     }
     render() {
-      return <ComposedComponent {...this.props} />
+      return this.props.loading
+        ? <Loader active />
+        : <ComposedComponent {...this.props} />
     }
   }
   return graphql(GetUserProfile, {
@@ -20,6 +22,6 @@ export default ComposedComponent => {
       loading,
       getUser
     }),
-    options: { variables: { accesstoken: LocalStorage.loadToken() } }
+    options: ({ token }) => ({ variables: { accesstoken: token } })
   })(withUser)
 }

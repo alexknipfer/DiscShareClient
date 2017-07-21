@@ -40,7 +40,6 @@ class EditAccount extends Component {
 
   render() {
     const { getUser, editAccount } = this.props
-    console.log('PROPS: ', this.props)
     return (
       <CenteredGrid>
         <Grid.Row>

@@ -1,41 +1,32 @@
 import React, { Component } from 'react'
 
-import GetUserProfile from '../queries/getUser'
-import { Loader } from 'semantic-ui-react'
 import { LocalStorage } from '../utils/LocalStorage'
-import PropTypes from 'prop-types'
-import { graphql } from 'react-apollo'
-import { observable } from 'mobx'
-import { observer } from 'mobx-react'
 
 export default ComposedComponent => {
-  @observer
-  class withAuth extends Component {
-    @observable auth = false
-
-    static propTypes = {
-      loading: PropTypes.bool,
-      getUser: PropTypes.object
+  return class withAuth extends Component {
+    state = {
+      auth: false,
+      token: null
     }
 
     componentWillMount() {
       const token = LocalStorage.loadToken()
       if (token !== null) {
-        this.auth = true
+        this.setState({
+          auth: true,
+          token: token
+        })
       }
     }
 
     render() {
-      return this.props.loading
-        ? <Loader active />
-        : <ComposedComponent auth={this.auth} {...this.props} />
+      return (
+        <ComposedComponent
+          auth={this.state.auth}
+          token={this.state.token}
+          {...this.props}
+        />
+      )
     }
   }
-  return graphql(GetUserProfile, {
-    props: ({ data: { loading, getUser } }) => ({
-      loading,
-      getUser
-    }),
-    options: { variables: { accesstoken: LocalStorage.loadToken() } }
-  })(withAuth)
 }
