@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import GetUserProfile from '../queries/getUser'
+import { Loader } from 'semantic-ui-react'
 import { LocalStorage } from '../utils/LocalStorage'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
@@ -25,7 +26,9 @@ export default ComposedComponent => {
     }
 
     render() {
-      return <ComposedComponent auth={this.auth} {...this.props} />
+      return this.props.loading
+        ? <Loader active />
+        : <ComposedComponent auth={this.auth} {...this.props} />
     }
   }
   return graphql(GetUserProfile, {

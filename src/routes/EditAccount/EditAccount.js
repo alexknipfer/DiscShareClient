@@ -16,7 +16,7 @@ class EditAccount extends Component {
   @observable successMessageVisible = false
 
   static propTypes = {
-    user: PropTypes.object,
+    getUser: PropTypes.object,
     editAccount: PropTypes.func
   }
 
@@ -39,14 +39,15 @@ class EditAccount extends Component {
   }
 
   render() {
-    const { user, editAccount } = this.props
+    const { getUser, editAccount } = this.props
+    console.log('PROPS: ', this.props)
     return (
       <CenteredGrid>
         <Grid.Row>
           <Grid.Column mobile={14} computer={10}>
             <PaddedCard fluid>
               <Form
-                onSubmit={() => this.handleSubmit(user.id, editAccount)}
+                onSubmit={() => this.handleSubmit(getUser.id, editAccount)}
                 success={this.successMessageVisible}
               >
                 <Grid>
@@ -68,13 +69,13 @@ class EditAccount extends Component {
                   <Grid.Column mobile={16} computer={8}>
                     <Form.Field>
                       <label>Username</label>
-                      <Input defaultValue={user.username} disabled />
+                      <Input defaultValue={getUser.username} disabled />
                     </Form.Field>
                   </Grid.Column>
                   <Grid.Column mobile={16} computer={8}>
                     <Form.Field>
                       <label>Email</label>
-                      <Input defaultValue={user.email} id="email" required />
+                      <Input defaultValue={getUser.email} id="email" required />
                     </Form.Field>
                   </Grid.Column>
                   <Grid.Column mobile={16} computer={8}>
