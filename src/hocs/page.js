@@ -8,7 +8,7 @@ export const pageWithDefaultLayout = flowRight(withDefaultLayout)
 export const pageWithAuth = flowRight(withDefaultLayout, withAuth)
 
 export const pageWithAuthAndUserData = flowRight(
+  withDefaultLayout,
   withAuth,
-  withUser,
-  withDefaultLayout
+  withUser
 )

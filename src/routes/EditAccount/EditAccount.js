@@ -17,7 +17,6 @@ class EditAccount extends Component {
 
   static propTypes = {
     auth: PropTypes.bool,
-    loading: PropTypes.bool,
     getUser: PropTypes.object,
     editAccount: PropTypes.func
   }
@@ -41,7 +40,8 @@ class EditAccount extends Component {
   }
 
   render() {
-    const { loading, getUser, editAccount } = this.props
+    console.log('PROPS: ', this.props)
+    const { getUser, editAccount } = this.props
     return (
       <CenteredGrid>
         <Grid.Row>
@@ -50,7 +50,6 @@ class EditAccount extends Component {
               <Form
                 onSubmit={() => this.handleSubmit(getUser.id, editAccount)}
                 success={this.successMessageVisible}
-                loading={loading}
               >
                 <Grid>
                   <Grid.Column mobile={16} computer={16}>

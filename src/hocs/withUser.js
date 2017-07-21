@@ -14,7 +14,7 @@ export default ComposedComponent => {
     render() {
       return this.props.loading
         ? <Loader active />
-        : <ComposedComponent {...this.props} />
+        : <ComposedComponent getUser={this.props.getUser} />
     }
   }
   return graphql(GetUserProfile, {
