@@ -16,6 +16,13 @@ class LoginForm extends Component {
   @observable errorMessageVisible = false
   @observable errorMessage = null
 
+  static propTypes = {
+    form: PropTypes.object,
+    detectValues: PropTypes.func,
+    login: PropTypes.func,
+    onChange: PropTypes.func
+  }
+
   componentDidMount() {
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
