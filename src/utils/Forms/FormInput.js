@@ -1,13 +1,17 @@
+import { Input } from 'semantic-ui-react'
 import React from 'react'
 
-const FormInput = ({ error, onChange, placeholder, type, value }) => {
-  console.log('PROPS: ', onChange)
+const FormInput = ({ id, name, error, onChange, placeholder, type, value }) => {
+  console.log('VALUE: ', value)
   return (
     <div>
-      <input
+      <Input
+        id={id}
         value={value}
         type={type || 'text'}
-        onChange={e => onChange(e.target.name, value)}
+        name={name}
+        onChange={e => onChange(e.target.name, e.target.value)}
+        placeholder={placeholder}
       />
       {error &&
         <div>

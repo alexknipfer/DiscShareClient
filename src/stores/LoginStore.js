@@ -6,10 +6,10 @@ class LoginStore {
   @observable
   form = {
     fields: {
-      email: {
+      username: {
         value: '',
         error: null,
-        rule: 'required|email'
+        rule: 'required'
       },
       password: {
         value: '',
@@ -25,13 +25,11 @@ class LoginStore {
 
   @action
   onFieldChange = (field, value) => {
-    // if (!field) field = 'email'
-    console.log('FIELD: ', field)
     this.form.fields[field].value = value
-    let { email, password } = this.form.fields
+    let { username, password } = this.form.fields
     const validation = new Validator(
-      { email: email.value, password: password.value },
-      { email: email.rule, password: password.rule }
+      { username: username.value, password: password.value },
+      { username: username.rule, password: password.rule }
     )
     this.form.meta.isValid = validation.passes()
     this.form.fields[field].error = validation.errors.first(field)
