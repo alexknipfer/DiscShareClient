@@ -12,19 +12,16 @@ import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { observer } from 'mobx-react'
 
-let loginStore = new LoginStore()
-
 @observer
 class Login extends Component {
-  onSubmitForm = () => {
-    console.log('submitted')
-  }
   render() {
+    const { history } = this.props
     return (
       <LoginForm
         onSubmit={this.onSubmitForm}
-        form={loginStore.form}
-        onChange={loginStore.onFieldChange}
+        form={LoginStore.form}
+        onChange={LoginStore.onFieldChange}
+        history={history}
       />
     )
   }

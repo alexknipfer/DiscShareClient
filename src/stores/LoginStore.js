@@ -36,4 +36,4 @@ class LoginStore {
   }
 }
 
-export default LoginStore
+export default new LoginStore()
