@@ -51,7 +51,7 @@ class LoginForm extends Component {
 
   render() {
     const { form, login, onChange } = this.props
-    const { fields } = form
+    const { fields, meta } = form
     return (
       <CenteredGrid>
         <Grid.Column mobile={14} computer={5}>
@@ -82,12 +82,12 @@ class LoginForm extends Component {
                   placeholder="Password"
                 />
               </Form.Field>
-              {form.meta.error &&
+              {meta.error &&
                 <div>
-                  {form.meta.error}
+                  {meta.error}
                 </div>}
               <Message error content={this.errorMessage} />
-              <Button disabled={!form.meta.isValid} type="submit">
+              <Button disabled={!meta.isValid} type="submit">
                 Login
               </Button>
             </Form>
