@@ -14,6 +14,7 @@ import { observer } from 'mobx-react'
 @observer
 class EditAccount extends Component {
   @observable successMessageVisible = false
+  @observable formLoading = false
 
   static propTypes = {
     auth: PropTypes.bool,
@@ -29,18 +30,24 @@ class EditAccount extends Component {
     }, 3000)
   }
 
+  @action
+  toggleFormLoad = () => {
+    this.formLoading = !this.formLoading
+  }
+
   handleSubmit = async (userId, editAccount) => {
+    this.toggleFormLoad()
     const email = document.getElementById('email').value
     const firstName = document.getElementById('firstName').value
     const location = document.getElementById('location').value
 
     const result = await editAccount(userId, email, firstName, location)
+    this.toggleFormLoad()
     LocalStorage.saveToken(result.data.editAccount)
     this.displaySuccessMessage()
   }
 
   render() {
-    console.log('PROPS: ', this.props)
     const { getUser, editAccount } = this.props
     return (
       <CenteredGrid>
@@ -50,6 +57,7 @@ class EditAccount extends Component {
               <Form
                 onSubmit={() => this.handleSubmit(getUser.id, editAccount)}
                 success={this.successMessageVisible}
+                loading={this.formLoading}
               >
                 <Grid>
                   <Grid.Column mobile={16} computer={16}>
