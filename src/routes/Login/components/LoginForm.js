@@ -43,6 +43,7 @@ class LoginForm extends Component {
   }
 
   render() {
+    console.log('PROPS: ', this.props)
     const { form, login, onChange } = this.props
     return (
       <CenteredGrid>
@@ -58,7 +59,7 @@ class LoginForm extends Component {
                   id="username"
                   name="username"
                   value={form.fields.username.value}
-                  error={form.fields.username.error}
+                  errorMessage={form.fields.username.error}
                   onChange={onChange}
                   placeholder="Username"
                 />
@@ -69,7 +70,7 @@ class LoginForm extends Component {
                   type="password"
                   name="password"
                   value={form.fields.password.value}
-                  error={form.fields.password.error}
+                  errorMessage={form.fields.password.error}
                   onChange={onChange}
                   placeholder="Password"
                 />

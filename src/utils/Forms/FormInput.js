@@ -1,24 +1,50 @@
-import { Input } from 'semantic-ui-react'
-import React from 'react'
+import { Icon, Input } from 'semantic-ui-react'
 
-const FormInput = ({ id, name, error, onChange, placeholder, type, value }) => {
-  console.log('VALUE: ', value)
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled from 'styled-components'
+
+const ErrorMessage = styled.div`
+  color: red;
+  font-size: 12px;
+  padding-left: 5px;
+`
+
+const FormInput = ({
+  id,
+  name,
+  errorMessage,
+  onChange,
+  placeholder,
+  type,
+  value
+}) => {
+  console.log('ERROR: ', errorMessage)
   return (
     <div>
       <Input
         id={id}
-        value={value}
         type={type || 'text'}
         name={name}
         onChange={e => onChange(e.target.name, e.target.value)}
         placeholder={placeholder}
+        icon={errorMessage && <Icon name="exclamation circle" color="red" />}
       />
-      {error &&
-        <div>
-          {error}
-        </div>}
+      {errorMessage &&
+        <ErrorMessage>
+          {errorMessage}
+        </ErrorMessage>}
     </div>
   )
+}
+
+FormInput.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  type: PropTypes.oneOf(['text', 'email', 'password'])
 }
 
 export default FormInput
