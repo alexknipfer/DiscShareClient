@@ -18,6 +18,7 @@ class Login extends Component {
     const { history } = this.props
     return (
       <LoginForm
+        detectValues={LoginStore.detectValues}
         onSubmit={this.onSubmitForm}
         form={LoginStore.form}
         onChange={LoginStore.onFieldChange}

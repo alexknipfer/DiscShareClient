@@ -16,6 +16,12 @@ class LoginForm extends Component {
   @observable errorMessageVisible = false
   @observable errorMessage = null
 
+  componentDidMount() {
+    const username = document.getElementById('username').value
+    const password = document.getElementById('password').value
+    this.props.detectValues({ username, password })
+  }
+
   @action
   displayErrMessage = err => {
     this.errorMessageVisible = !this.errorMessageVisible
@@ -54,7 +60,7 @@ class LoginForm extends Component {
                   value={form.fields.username.value}
                   error={form.fields.username.error}
                   onChange={onChange}
-                  placeholder="email"
+                  placeholder="Username"
                 />
               </Form.Field>
               <Form.Field>
@@ -65,7 +71,7 @@ class LoginForm extends Component {
                   value={form.fields.password.value}
                   error={form.fields.password.error}
                   onChange={onChange}
-                  placeholder="password"
+                  placeholder="Password"
                 />
               </Form.Field>
               {form.meta.error &&

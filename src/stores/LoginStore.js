@@ -24,6 +24,15 @@ class LoginStore {
   }
 
   @action
+  detectValues = values => {
+    console.log('INIT VALUES: ', values)
+    const { username, password } = values
+    if (username === '' || password === '') {
+      this.form.meta.isValid = false
+    }
+  }
+
+  @action
   onFieldChange = (field, value) => {
     this.form.fields[field].value = value
     let { username, password } = this.form.fields
