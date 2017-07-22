@@ -77,6 +77,7 @@ class Navigation extends Component {
   renderUserNav = () => {
     return (
       <div>
+        <MenuOverlay open={this.showMenu} triggerClose={this.triggerMenu} />
         <Nav pointing inverted fixed="top">
           <Link to="/">
             <Menu.Item link>Home</Menu.Item>
@@ -87,6 +88,14 @@ class Navigation extends Component {
           <Menu.Item link onClick={this.logout}>
             Logout
           </Menu.Item>
+          <MobileMenuItem
+            link
+            position="right"
+            onClick={this.triggerMenu}
+            visible={this.showMenu}
+          >
+            <Icon name="bars" />
+          </MobileMenuItem>
         </Nav>
       </div>
     )
