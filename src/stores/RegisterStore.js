@@ -20,6 +20,11 @@ class RegisterStore {
         value: '',
         error: null,
         rule: 'required'
+      },
+      confirmPassword: {
+        value: '',
+        error: null,
+        rule: 'required'
       }
     },
     meta: {
@@ -30,8 +35,13 @@ class RegisterStore {
 
   @action
   detectValues = values => {
-    const { email, username, password } = values
-    if (email === '' || username === '' || password === '') {
+    const { email, username, password, confirmPassword } = values
+    if (
+      email === '' ||
+      username === '' ||
+      password === '' ||
+      confirmPassword === ''
+    ) {
       this.form.meta.isValid = false
     }
   }
@@ -39,14 +49,21 @@ class RegisterStore {
   @action
   onFieldChange = (field, value) => {
     this.form.fields[field].value = value
-    let { username, password } = this.form.fields
+
+    let { email, username, password, confirmPassword } = this.form.fields
     const validation = new Validator(
       {
         email: email.value,
         username: username.value,
-        password: password.value
+        password: password.value,
+        confirmPassword: confirmPassword.value
       },
-      { email: email.rule, username: username.rule, password: password.rule }
+      {
+        email: email.rule,
+        username: username.rule,
+        password: password.rule,
+        confirmPassword: confirmPassword.rule
+      }
     )
     this.form.meta.isValid = validation.passes()
     this.form.fields[field].error = validation.errors.first(field)
