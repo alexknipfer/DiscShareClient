@@ -19,7 +19,6 @@ const FormInput = ({
   type,
   value
 }) => {
-  console.log('ERROR: ', errorMessage)
   return (
     <div>
       <Input
