@@ -45,7 +45,11 @@ class LoginForm extends Component {
       this.props.history.push('/')
     } catch (err) {
       const { graphQLErrors } = err
-      this.displayErrMessage(graphQLErrors[0].message)
+      if (graphQLErrors[0]) {
+        this.displayErrMessage(graphQLErrors[0].message)
+      } else {
+        this.displayErrMessage(err.message)
+      }
     }
   }
 
