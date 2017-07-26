@@ -1,7 +1,8 @@
 import React from 'react'
+import SearchBar from './components/SearchBar'
 
 const Home = () => {
-  return <h3>Home</h3>
+  return <SearchBar />
 }
 
 export default Home
