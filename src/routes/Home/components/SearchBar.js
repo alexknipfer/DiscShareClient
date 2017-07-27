@@ -25,6 +25,7 @@ const SearchWrapper = styled.div`
 class SearchBar extends Component {
   render() {
     const inputStyle = {
+      position: 'relative',
       borderWidth: 0,
       paddingLeft: 12,
       width: '100%',
@@ -36,10 +37,25 @@ class SearchBar extends Component {
       display: 'flex',
       alignItems: 'center'
     }
+    const suggests = {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      maxHeight: '25em',
+      padding: 0,
+      marginTop: '-1px',
+      background: '#fff',
+      border: '2px solid #267dc0',
+      borderTopWidth: 0,
+      overflowX: 'hidden',
+      overflowY: 'auto',
+      listStyle: 'none',
+      zIndex: 500
+    }
     return (
       <SearchContainer>
         <SearchWrapper>
-          <Geosuggest style={{ input: inputStyle }} />
+          <Geosuggest style={{ input: inputStyle, suggests: suggests }} />
         </SearchWrapper>
       </SearchContainer>
     )
