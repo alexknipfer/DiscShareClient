@@ -19,7 +19,8 @@
     "react-test-renderer": "^15.6.1",
     "semantic-ui-react": "^0.70.0",
     "serve": "^6.0.2",
-    "styled-components": "^2.1.1"
+    "styled-components": "^2.1.1",
+    "validatorjs": "^3.13.3"
   },
   "scripts": {
     "start": "react-app-rewired start",
