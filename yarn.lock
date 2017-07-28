@@ -5599,6 +5599,12 @@ react-error-overlay@^1.0.9:
     settle-promise "1.0.0"
     source-map "0.5.6"
 
+react-geolocated@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-geolocated/-/react-geolocated-2.0.0.tgz#77fc90818c66f80172c0028269f063494f504ae7"
+  dependencies:
+    prop-types "^15.5.8"
+
 react-geosuggest@^2.3.6:
   version "2.3.6"
   resolved "https://registry.yarnpkg.com/react-geosuggest/-/react-geosuggest-2.3.6.tgz#8943fabcf0aa4dc54551ffdbf6ea04cd2a958af4"
