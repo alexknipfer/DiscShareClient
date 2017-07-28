@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 
 import Geosuggest from 'react-geosuggest'
-import { Search } from 'semantic-ui-react'
+import { geolocated } from 'react-geolocated'
+import { observable } from 'mobx'
+import { observer } from 'mobx-react'
 import search from './search.css'
 import styled from 'styled-components'
 
@@ -23,7 +25,16 @@ const SearchWrapper = styled.div`
   height: 35px;
 `
 
+@observer
 class SearchBar extends Component {
+  @observable userLat
+  @observable userLng
+
+  componentWillMount() {
+    this.userLat = this.props.coords.latitude
+    this.userLng = this.props.coords.longitude
+  }
+
   render() {
     return (
       <SearchContainer>
@@ -35,4 +46,9 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: false
+  },
+  userDecisionTimeout: 5000
+})(SearchBar)

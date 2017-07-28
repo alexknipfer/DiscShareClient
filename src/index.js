@@ -16,7 +16,7 @@ const client = new ApolloClient({
   })
 })
 
-// eslint - disable - next - line
+// eslint-disable-next-line
 injectGlobal`
   body {
     background-color: #353D45;
