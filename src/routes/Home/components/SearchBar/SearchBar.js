@@ -27,14 +27,6 @@ const SearchWrapper = styled.div`
 
 @observer
 class SearchBar extends Component {
-  @observable userLat
-  @observable userLng
-
-  componentWillMount() {
-    this.userLat = this.props.coords.latitude
-    this.userLng = this.props.coords.longitude
-  }
-
   render() {
     return (
       <SearchContainer>
