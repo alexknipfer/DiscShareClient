@@ -1,8 +1,14 @@
+import GoogleMap from './components/GoogleMap'
 import React from 'react'
-import SearchBar from './components/SearchBar/SearchBar'
+import SearchBar from './components/SearchBar'
 
 const Home = () => {
-  return <SearchBar />
+  return (
+    <div>
+      <SearchBar />
+      <GoogleMap />
+    </div>
+  )
 }
 
 export default Home
