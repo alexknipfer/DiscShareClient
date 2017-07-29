@@ -1,10 +1,10 @@
+import './search.css'
+
 import React, { Component } from 'react'
 
 import Geosuggest from 'react-geosuggest'
+import { Loader } from 'semantic-ui-react'
 import { geolocated } from 'react-geolocated'
-import { observable } from 'mobx'
-import { observer } from 'mobx-react'
-import search from './search.css'
 import styled from 'styled-components'
 
 const SearchContainer = styled.div`
@@ -25,13 +25,20 @@ const SearchWrapper = styled.div`
   height: 35px;
 `
 
-@observer
 class SearchBar extends Component {
   onSuggestSelect = suggest => {
     console.log('SUGGEST: ', suggest)
   }
 
   render() {
+    return !this.props.loaded ? this.renderLoader() : this.renderContent()
+  }
+
+  renderLoader = () => {
+    return <Loader active />
+  }
+
+  renderContent = () => {
     return (
       <SearchContainer>
         <SearchWrapper>
