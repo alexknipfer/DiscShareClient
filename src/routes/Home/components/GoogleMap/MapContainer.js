@@ -2,12 +2,6 @@ import React, { Component } from 'react'
 
 import { Loader } from 'semantic-ui-react'
 import MapComponent from './MapComponent'
-import styled from 'styled-components'
-
-const MapContainer = styled.div`
-  height: : 500px;
-  width: 500px;
-`
 
 class GoogleMap extends Component {
   render() {
@@ -20,11 +14,7 @@ class GoogleMap extends Component {
 
   renderContent = () => {
     const { google } = this.props
-    return (
-      <MapContainer>
-        <MapComponent google={google} />
-      </MapContainer>
-    )
+    return <MapComponent google={google} />
   }
 }
 
