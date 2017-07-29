@@ -27,11 +27,18 @@ const SearchWrapper = styled.div`
 
 @observer
 class SearchBar extends Component {
+  onSuggestSelect = suggest => {
+    console.log('SUGGEST: ', suggest)
+  }
+
   render() {
     return (
       <SearchContainer>
         <SearchWrapper>
-          <Geosuggest />
+          <Geosuggest
+            onSuggestSelect={this.onSuggestSelect}
+            suggestsHiddenClassName="geosuggest__suggests--hidden"
+          />
         </SearchWrapper>
       </SearchContainer>
     )
