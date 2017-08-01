@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
+import CenteredLoader from '../components/Loader/CenteredLoader'
 import GetUserProfile from '../queries/getUser'
-import { Loader } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 
@@ -13,7 +13,7 @@ export default ComposedComponent => {
     }
     render() {
       return this.props.loading
-        ? <Loader active />
+        ? <CenteredLoader active={this.props.loading} />
         : <ComposedComponent getUser={this.props.getUser} />
     }
   }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import { Loader } from 'semantic-ui-react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 
@@ -45,11 +44,7 @@ class MapComponent extends Component {
   }
 
   render() {
-    return (
-      <MapContainer ref="map">
-        <Loader active />
-      </MapContainer>
-    )
+    return <MapContainer ref="map" />
   }
 }
 

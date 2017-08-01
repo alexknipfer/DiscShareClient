@@ -2,8 +2,8 @@ import './search.css'
 
 import React, { Component } from 'react'
 
+import CenteredLoader from '../../../../components/Loader/CenteredLoader'
 import Geosuggest from 'react-geosuggest'
-import { Loader } from 'semantic-ui-react'
 import { geolocated } from 'react-geolocated'
 import styled from 'styled-components'
 
@@ -30,7 +30,7 @@ class SearchBar extends Component {
   }
 
   renderLoader = () => {
-    return <Loader active />
+    return <CenteredLoader loading={!this.props.loaded} />
   }
 
   renderContent = () => {
