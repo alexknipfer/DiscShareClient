@@ -1,20 +1,23 @@
+import CenteredGrid from '../../components/CenteredGrid/CenteredGrid'
 import GoogleMap from './components/GoogleMap'
+import { Grid } from 'semantic-ui-react'
 import React from 'react'
 import SearchBar from './components/SearchBar'
-import styled from 'styled-components'
-
-const CenterContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
 
 const Home = () => {
   return (
-    <CenterContent>
-      <SearchBar />
-      <GoogleMap />
-    </CenterContent>
+    <CenteredGrid centered>
+      <Grid.Row>
+        <Grid.Column mobile={14} tablet={10} computer={8}>
+          <SearchBar />
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Column mobile={14} tablet={14} computer={12}>
+          <GoogleMap />
+        </Grid.Column>
+      </Grid.Row>
+    </CenteredGrid>
   )
 }
 

@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 const MapContainer = styled.div`
   margin-top: 40px;
-  width: 800px;
+  width: 100%;
   height: 200px;
 `
 

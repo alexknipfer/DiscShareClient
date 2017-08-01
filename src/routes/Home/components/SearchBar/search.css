@@ -18,7 +18,7 @@
 
 .geosuggest__suggests {
   position: absolute;
-  width: 400px;
+  width: 100%;
   left: 0;
   right: 0;
   max-height: 25em;
