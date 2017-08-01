@@ -1,4 +1,4 @@
-import MapContainer from './MapContainer'
+import MapComponent from './MapComponent'
 import googleMapsWrapper from '../../../../hocs/googleMapsWrapper'
 
-export default googleMapsWrapper(MapContainer)
+export default googleMapsWrapper(MapComponent)
