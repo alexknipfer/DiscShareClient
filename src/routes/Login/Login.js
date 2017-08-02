@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import LoginForm from './components/LoginForm'
-import LoginStore from '../../stores/LoginStore'
+import LoginStore from './stores/LoginStore'
 import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import PropTypes from 'prop-types'
 import RegisterForm from './components/RegisterForm'
-import RegisterStore from '../../stores/RegisterStore'
+import RegisterStore from './stores/RegisterStore'
 import { observer } from 'mobx-react'
 
 @observer
