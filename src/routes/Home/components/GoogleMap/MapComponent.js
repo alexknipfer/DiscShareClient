@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
+import LocationStore from '../../stores/LocationStore'
 import ReactDOM from 'react-dom'
+import { observer } from 'mobx-react'
 import styled from 'styled-components'
 
 const MapContainer = styled.div`
@@ -9,6 +11,7 @@ const MapContainer = styled.div`
   height: 200px;
 `
 
+@observer
 class MapComponent extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props.google) {
@@ -21,6 +24,10 @@ class MapComponent extends Component {
   }
 
   loadMap = () => {
+    const { currentSelectedLocation } = LocationStore
+    const { location } = currentSelectedLocation
+
+    console.log('CURR LOCATION LOADED: ', currentSelectedLocation)
     if (this.props && this.props.google) {
       const { google } = this.props
       const maps = google.maps
@@ -29,8 +36,8 @@ class MapComponent extends Component {
       const node = ReactDOM.findDOMNode(mapRef)
 
       let zoom = 14
-      let lat = 37.774929
-      let lng = -122.419416
+      let lat = location.lat
+      let lng = location.lng
       const center = new maps.LatLng(lat, lng)
       const mapConfig = Object.assign(
         {},
