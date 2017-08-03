@@ -55,6 +55,9 @@ class Navigation extends Component {
           <Link to="/">
             <Menu.Item link>Home</Menu.Item>
           </Link>
+          <Link to="/dashboard">
+            <Menu.Item link>Dashboard</Menu.Item>
+          </Link>
           <Link to="/register">
             <Menu.Item link>Register</Menu.Item>
           </Link>
@@ -81,6 +84,9 @@ class Navigation extends Component {
         <Nav pointing inverted fixed="top">
           <Link to="/">
             <Menu.Item link>Home</Menu.Item>
+          </Link>
+          <Link to="/dashboard">
+            <Menu.Item link>Dashboard</Menu.Item>
           </Link>
           <Link to="/editAccount">
             <Menu.Item link>Edit Account</Menu.Item>
