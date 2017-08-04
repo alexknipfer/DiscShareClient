@@ -20,6 +20,8 @@ const client = new ApolloClient({
 injectGlobal`
   body {
     background-color: #353D45;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 `
 
