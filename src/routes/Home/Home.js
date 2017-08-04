@@ -1,4 +1,4 @@
-import CenteredGrid from '../../components/CenteredGrid/CenteredGrid'
+import { CenteredGrid } from '../../components/CenteredGrid/CenteredGrid'
 import GoogleMap from './components/GoogleMap'
 import { Grid } from 'semantic-ui-react'
 import React from 'react'
