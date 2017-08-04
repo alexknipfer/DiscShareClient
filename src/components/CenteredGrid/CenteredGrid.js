@@ -1,9 +1,16 @@
 import { Grid } from 'semantic-ui-react'
 import styled from 'styled-components'
 
-const CenteredGrid = styled(Grid)`
+export const CenteredGrid = styled(Grid)`
   display: flex;
   justify-content: center;
 `
 
-export default CenteredGrid
+export const CenteredColumn = styled(Grid.Column)`
+  display: flex;
+  justify-content: center;
+  @media (max-width: 800px) {
+    display: flex !important;
+    justify-content: center !important;
+  }
+`
