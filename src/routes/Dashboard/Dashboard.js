@@ -6,7 +6,7 @@ import React, { Component } from 'react'
 import { action, observable } from 'mobx'
 
 import AddButton from '../../components/AddButton/AddButton'
-import AddDiscModal from '../../components/Modals/AddDiscModal'
+import AddDiscModal from './components/AddDiscModal'
 import DashboardCard from '../../components/Cards/DashboardCard'
 import { Grid } from 'semantic-ui-react'
 import { observer } from 'mobx-react'
