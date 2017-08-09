@@ -1,8 +1,9 @@
-import { Button, Form, Grid, Input, Modal } from 'semantic-ui-react'
+import { Button, Form, Modal } from 'semantic-ui-react'
 import React, { Component } from 'react'
 
 import DashboardStore from '../../stores/DashboardStore'
 import FormInput from '../../../../utils/Forms/FormInput'
+import LocationInput from '../../../../utils/Forms/LocationInput'
 import { observer } from 'mobx-react'
 
 @observer
@@ -27,14 +28,7 @@ class AddDiscModal extends Component {
               />
             </Form.Field>
             <Form.Field>
-              <FormInput
-                id="discLocation"
-                name="discLocation"
-                value={fields.discLocation.value}
-                errorMessage={fields.discLocation.error}
-                onChange={DashboardStore.onFieldChange}
-                placeholder="Where was this disc found?"
-              />
+              <LocationInput />
             </Form.Field>
             <Form.Field>
               <FormInput
