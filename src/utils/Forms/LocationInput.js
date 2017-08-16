@@ -11,7 +11,6 @@ const SearchWrapper = styled.div`
   align-items: center;
   flex: auto;
   border-radius: 3px;
-  background-color: hsla(0, 0%, 39%, .25);
   margin: 0;
   width: 100%;
   height: 35px;
