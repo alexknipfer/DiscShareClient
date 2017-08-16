@@ -28,7 +28,14 @@ class AddDiscModal extends Component {
               />
             </Form.Field>
             <Form.Field>
-              <LocationInput />
+              <FormInput
+                id="discLocation"
+                name="discLocation"
+                value={fields.discLocation.value}
+                errorMessage={fields.discLocation.error}
+                onChange={DashboardStore.onFieldChange}
+                placeholder="Disc Location"
+              />
             </Form.Field>
             <Form.Field>
               <FormInput
