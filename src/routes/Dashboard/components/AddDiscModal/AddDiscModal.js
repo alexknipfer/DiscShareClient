@@ -4,10 +4,16 @@ import React, { Component } from 'react'
 import DashboardStore from '../../stores/DashboardStore'
 import FormInput from '../../../../utils/Forms/FormInput'
 import LocationInput from '../../../../utils/Forms/LocationInput'
+import LocationStore from '../../../../stores/LocationStore'
 import { observer } from 'mobx-react'
 
 @observer
 class AddDiscModal extends Component {
+  submitDisc = () => {
+    const { currentSelectedLocation } = LocationStore
+    console.log('SEL LOCATION: ', currentSelectedLocation)
+  }
+
   render() {
     const { form } = DashboardStore
     const { fields, meta } = form
@@ -46,10 +52,7 @@ class AddDiscModal extends Component {
                 placeholder="Name on disc"
               />
             </Form.Field>
-            {meta.error &&
-              <div>
-                {meta.error}
-              </div>}
+            {meta.error && <div>{meta.error}</div>}
             <Modal.Actions>
               <Button negative onClick={toggleModal}>
                 Cancel
