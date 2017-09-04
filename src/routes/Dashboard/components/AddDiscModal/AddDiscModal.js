@@ -28,7 +28,7 @@ class AddDiscModal extends Component {
               />
             </Form.Field>
             <Form.Field>
-              <FormInput
+              <LocationInput
                 id="discLocation"
                 name="discLocation"
                 value={fields.discLocation.value}

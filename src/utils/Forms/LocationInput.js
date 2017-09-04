@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 import Geosuggest from 'react-geosuggest'
 import LocationStore from '../../routes/Home/stores/LocationStore'
-import googleMapsWrapper from '../../hocs/googleMapsWrapper'
 import { observer } from 'mobx-react'
 import styled from 'styled-components'
 
@@ -13,7 +12,7 @@ const SearchWrapper = styled.div`
   border-radius: 3px;
   margin: 0;
   width: 100%;
-  height: 35px;
+  height: 37px !important;
 `
 @observer
 class LocationInput extends Component {
@@ -33,4 +32,4 @@ class LocationInput extends Component {
   }
 }
 
-export default googleMapsWrapper(LocationInput)
+export default LocationInput
