@@ -7,6 +7,7 @@ class LocationStore {
   @action
   setLocation = location => {
     this.selectedLocation = { ...this.selectedLocation, location }
+    console.log('SELECTED LOCATION: ', this.selectedLocation)
   }
 
   get currentSelectedLocation() {

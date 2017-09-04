@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import LocationStore from '../../stores/LocationStore'
+import LocationStore from '../../../../stores/LocationStore'
 import ReactDOM from 'react-dom'
 import { observer } from 'mobx-react'
 import styled from 'styled-components'
@@ -27,7 +27,6 @@ class MapComponent extends Component {
     const { currentSelectedLocation } = LocationStore
     const { location } = currentSelectedLocation
 
-    console.log('CURR LOCATION LOADED: ', currentSelectedLocation)
     if (this.props && this.props.google) {
       const { google } = this.props
       const maps = google.maps

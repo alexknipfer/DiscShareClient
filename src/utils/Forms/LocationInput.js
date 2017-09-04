@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import Geosuggest from 'react-geosuggest'
-import LocationStore from '../../routes/Home/stores/LocationStore'
+import LocationStore from '../../stores/LocationStore'
 import { observer } from 'mobx-react'
 import styled from 'styled-components'
 
