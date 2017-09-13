@@ -13,8 +13,7 @@ class DashboardStore {
       },
       discLocation: {
         value: '',
-        error: null,
-        rule: 'required'
+        error: null
       },
       nameOnDisc: {
         value: '',
@@ -29,12 +28,11 @@ class DashboardStore {
 
   @action
   onFieldChange = (field, value) => {
-    console.log('FIELD: ', value)
     this.form.fields[field].value = value
-    let { discName, discLocation } = this.form.fields
+    let { discName } = this.form.fields
     const validation = new Validator(
-      { discName: discName.value, discLocation: discLocation.value },
-      { discName: discName.rule, discLocation: discLocation.rule }
+      { discName: discName.value },
+      { discName: discName.rule }
     )
     this.form.meta.isValid = validation.passes()
     this.form.fields[field].error = validation.errors.first(field)
