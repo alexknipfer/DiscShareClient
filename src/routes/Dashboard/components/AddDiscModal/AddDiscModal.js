@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 
 import AddDiscMutation from '../../../../mutations/addDisc'
 import DashboardStore from '../../stores/DashboardStore'
+import DiscsQuery from '../../../../queries/discs'
 import FormInput from '../../../../utils/Forms/FormInput'
 import LocationInput from '../../../../utils/Forms/LocationInput'
 import LocationStore from '../../../../stores/LocationStore'
@@ -97,6 +98,13 @@ export default graphql(AddDiscMutation, {
           longitude,
           nameOnDisc
         }
-      })
+      }),
+    options: props => ({
+      refetchQueries: [
+        {
+          query: DiscsQuery
+        }
+      ]
+    })
   })
 })(AddDiscModal)
