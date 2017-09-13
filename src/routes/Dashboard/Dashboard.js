@@ -7,10 +7,12 @@ import { action, observable } from 'mobx'
 
 import AddButton from '../../components/AddButton/AddButton'
 import AddDiscModal from './components/AddDiscModal/AddDiscModal'
+import CenteredLoader from '../../components/Loader/CenteredLoader'
 import DashboardCard from '../../components/Cards/DashboardCard'
+import DiscsQuery from '../../queries/discs'
 import { Grid } from 'semantic-ui-react'
+import { graphql } from 'react-apollo'
 import { observer } from 'mobx-react'
-import { sampleData } from './sampleData'
 
 @observer
 class Dashboard extends Component {
@@ -22,6 +24,16 @@ class Dashboard extends Component {
   }
 
   render() {
+    const { loading } = this.props
+    return loading ? this.renderLoader() : this.renderContent()
+  }
+
+  renderLoader = () => {
+    return <CenteredLoader loading={this.props.loading} />
+  }
+
+  renderContent = () => {
+    const { discs } = this.props
     return (
       <CenteredGrid>
         <AddButton toggleModal={this.toggleModal} />
@@ -30,7 +42,7 @@ class Dashboard extends Component {
           modalOpen={this.displayModal}
         />
         <Grid.Row>
-          {sampleData.map((disc, key) => {
+          {discs.map((disc, key) => {
             return (
               <CenteredColumn
                 key={key}
@@ -41,8 +53,9 @@ class Dashboard extends Component {
                 <DashboardCard
                   image="/images/elliot.jpg"
                   header={disc.discName}
-                  meta={disc.location}
-                  description={disc.description}
+                  meta={disc.locationDescription}
+                  description={`The name found on the disc was ${disc.nameOnDisc ||
+                    'unknown'}.`}
                 />
               </CenteredColumn>
             )
@@ -53,4 +66,9 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard
+export default graphql(DiscsQuery, {
+  props: ({ data: { loading, discs } }) => ({
+    loading,
+    discs
+  })
+})(Dashboard)
