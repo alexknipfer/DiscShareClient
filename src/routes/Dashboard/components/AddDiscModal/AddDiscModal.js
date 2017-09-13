@@ -1,23 +1,36 @@
 import { Button, Form, Modal } from 'semantic-ui-react'
 import React, { Component } from 'react'
 
+import AddDiscMutation from '../../../../mutations/addDisc'
 import DashboardStore from '../../stores/DashboardStore'
 import FormInput from '../../../../utils/Forms/FormInput'
 import LocationInput from '../../../../utils/Forms/LocationInput'
 import LocationStore from '../../../../stores/LocationStore'
+import { graphql } from 'react-apollo'
 import { observer } from 'mobx-react'
 
 @observer
 class AddDiscModal extends Component {
-  submitDisc = () => {
-    const { currentSelectedLocation } = LocationStore
-    console.log('SEL LOCATION: ', currentSelectedLocation)
+  submitDisc = async addDisc => {
+    const discName = document.getElementById('discName').value
+    const nameOnDisc = document.getElementById('nameOnDisc').value
+    const {
+      currentSelectedLocation: { location: selectedLocation }
+    } = LocationStore
+    const { description, location: { lat, lng } } = selectedLocation
+
+    try {
+      await addDisc(discName, description, lat, lng, nameOnDisc)
+      this.props.toggleModal()
+    } catch (error) {
+      console.log('ERROR ADDING DISC: ', error)
+    }
   }
 
   render() {
     const { form } = DashboardStore
     const { fields, meta } = form
-    const { toggleModal, modalOpen } = this.props
+    const { toggleModal, modalOpen, addDisc } = this.props
     return (
       <Modal size="small" open={modalOpen} onClose={toggleModal}>
         <Modal.Header>Add Disc</Modal.Header>
@@ -63,6 +76,7 @@ class AddDiscModal extends Component {
                 icon="checkmark"
                 labelPosition="right"
                 content="Add"
+                onClick={() => this.submitDisc(addDisc)}
               />
             </Modal.Actions>
           </Form>
@@ -72,4 +86,17 @@ class AddDiscModal extends Component {
   }
 }
 
-export default AddDiscModal
+export default graphql(AddDiscMutation, {
+  props: ({ mutate }) => ({
+    addDisc: (discName, locationDescription, latitude, longitude, nameOnDisc) =>
+      mutate({
+        variables: {
+          discName,
+          locationDescription,
+          latitude,
+          longitude,
+          nameOnDisc
+        }
+      })
+  })
+})(AddDiscModal)
