@@ -89,8 +89,8 @@ class AddDiscModal extends Component {
 
 export default graphql(AddDiscMutation, {
   props: ({ mutate }) => ({
-    addDisc: (discName, locationDescription, latitude, longitude, nameOnDisc) =>
-      mutate({
+    addDisc: (discName, locationDescription, latitude, longitude, nameOnDisc) => {
+      return mutate({
         variables: {
           discName,
           locationDescription,
@@ -98,13 +98,14 @@ export default graphql(AddDiscMutation, {
           longitude,
           nameOnDisc
         }
-      }),
-    options: props => ({
-      refetchQueries: [
-        {
-          query: DiscsQuery
-        }
-      ]
-    })
+      })
+    },
+  }),
+  options: props => ({
+    refetchQueries: [
+      {
+        query: DiscsQuery
+      }
+    ]
   })
 })(AddDiscModal)
