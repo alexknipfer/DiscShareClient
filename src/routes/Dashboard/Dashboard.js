@@ -24,16 +24,12 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { loading } = this.props
-    return loading ? this.renderLoader() : this.renderContent()
-  }
+    const { loading, discs } = this.props
 
-  renderLoader = () => {
-    return <CenteredLoader loading={this.props.loading} />
-  }
+    if (loading) {
+      return <CenteredLoader />
+    }
 
-  renderContent = () => {
-    const { discs } = this.props
     return (
       <CenteredGrid>
         <AddButton toggleModal={this.toggleModal} />
