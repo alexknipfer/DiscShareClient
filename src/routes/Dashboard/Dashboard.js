@@ -43,6 +43,7 @@ class Dashboard extends Component {
               <CenteredColumn
                 key={key}
                 mobile={16}
+                tablet={4}
                 computer={4}
                 style={{ marginBottom: 20 }}
               >
