@@ -1,5 +1,7 @@
 import { Button, Form, Modal } from 'semantic-ui-react'
 import React, { Component } from 'react'
+import { graphql } from 'react-apollo'
+import { observer } from 'mobx-react'
 
 import AddDiscMutation from '../../../../mutations/addDisc'
 import AddDiscModalFormValidator from '../../../../lib/FormValidation/AddDiscModal'
@@ -7,8 +9,6 @@ import DiscsQuery from '../../../../queries/discs'
 import FormInput from '../../../../utils/Forms/FormInput'
 import LocationInput from '../../../../utils/Forms/LocationInput'
 import LocationStore from '../../../../stores/LocationStore'
-import { graphql } from 'react-apollo'
-import { observer } from 'mobx-react'
 
 @observer
 class AddDiscModal extends Component {

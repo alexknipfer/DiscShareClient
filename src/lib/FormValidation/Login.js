@@ -25,7 +25,6 @@ class LoginStore {
 
   @action
   detectValues = values => {
-    console.log('INIT VALUES: ', values)
     const { username, password } = values
     if (username === '' || password === '') {
       this.form.meta.isValid = false
