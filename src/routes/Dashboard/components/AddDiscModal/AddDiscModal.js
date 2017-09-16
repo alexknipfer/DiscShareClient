@@ -2,7 +2,7 @@ import { Button, Form, Modal } from 'semantic-ui-react'
 import React, { Component } from 'react'
 
 import AddDiscMutation from '../../../../mutations/addDisc'
-import DashboardStore from '../../stores/DashboardStore'
+import AddDiscModalFormValidator from '../../../../lib/FormValidation/AddDiscModal'
 import DiscsQuery from '../../../../queries/discs'
 import FormInput from '../../../../utils/Forms/FormInput'
 import LocationInput from '../../../../utils/Forms/LocationInput'
@@ -29,7 +29,7 @@ class AddDiscModal extends Component {
   }
 
   render() {
-    const { form } = DashboardStore
+    const { form, onFieldChange } = AddDiscModalFormValidator
     const { fields, meta } = form
     const { toggleModal, modalOpen, addDisc } = this.props
     return (
@@ -43,7 +43,7 @@ class AddDiscModal extends Component {
                 name="discName"
                 value={fields.discName.value}
                 errorMessage={fields.discName.error}
-                onChange={DashboardStore.onFieldChange}
+                onChange={onFieldChange}
                 placeholder="Disc Name"
               />
             </Form.Field>
@@ -53,7 +53,7 @@ class AddDiscModal extends Component {
                 name="discLocation"
                 value={fields.discLocation.value}
                 errorMessage={fields.discLocation.error}
-                onChange={DashboardStore.onFieldChange}
+                onChange={onFieldChange}
                 placeholder="Disc Location"
               />
             </Form.Field>
@@ -62,7 +62,7 @@ class AddDiscModal extends Component {
                 id="nameOnDisc"
                 name="nameOnDisc"
                 value={fields.nameOnDisc.value}
-                onChange={DashboardStore.onFieldChange}
+                onChange={onFieldChange}
                 placeholder="Name on disc"
               />
             </Form.Field>

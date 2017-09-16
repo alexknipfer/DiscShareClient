@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import LoginForm from './components/LoginForm'
-import LoginStore from './stores/LoginStore'
+import LoginFormValidator from '../../lib/FormValidation/Login'
 import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
 
@@ -15,10 +15,10 @@ class Login extends Component {
     const { history } = this.props
     return (
       <LoginForm
-        detectValues={LoginStore.detectValues}
+        detectValues={LoginFormValidator.detectValues}
         onSubmit={this.onSubmitForm}
-        form={LoginStore.form}
-        onChange={LoginStore.onFieldChange}
+        form={LoginFormValidator.form}
+        onChange={LoginFormValidator.onFieldChange}
         history={history}
       />
     )
