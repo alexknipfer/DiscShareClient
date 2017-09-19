@@ -6,8 +6,6 @@ export default gql`
       id
       discName
       locationDescription
-      latitude
-      longitude
       nameOnDisc
     }
   }

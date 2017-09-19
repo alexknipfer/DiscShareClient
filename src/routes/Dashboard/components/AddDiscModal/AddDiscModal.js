@@ -18,10 +18,10 @@ class AddDiscModal extends Component {
     const {
       currentSelectedLocation: { location: selectedLocation }
     } = LocationStore
-    const { description, location: { lat, lng } } = selectedLocation
+    const { description, location: { lng, lat } } = selectedLocation
 
     try {
-      await addDisc(discName, description, lat, lng, nameOnDisc)
+      await addDisc(discName, description, lng, lat, nameOnDisc)
       this.props.toggleModal()
     } catch (error) {
       console.log('ERROR ADDING DISC: ', error)

@@ -4,21 +4,19 @@ export default gql`
   mutation addDisc(
     $discName: String!
     $locationDescription: String!
-    $latitude: String!
     $longitude: String!
+    $latitude: String!
     $nameOnDisc: String
   ) {
     addDisc(
       discName: $discName
       locationDescription: $locationDescription
-      latitude: $latitude
       longitude: $longitude
+      latitude: $latitude
       nameOnDisc: $nameOnDisc
     ) {
       discName
       locationDescription
-      latitude
-      longitude
       nameOnDisc
     }
   }

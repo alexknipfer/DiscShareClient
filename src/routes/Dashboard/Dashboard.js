@@ -38,6 +38,9 @@ class Dashboard extends Component {
           modalOpen={this.displayModal}
         />
         <Grid.Row>
+          {discs.length === 0 &&
+            <h3>No Discs Found</h3>
+          }
           {discs.map((disc, key) => {
             return (
               <CenteredColumn
