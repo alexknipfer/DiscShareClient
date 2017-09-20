@@ -3,7 +3,6 @@ import './search.css'
 import React, { Component } from 'react'
 
 import Geosuggest from 'react-geosuggest'
-import LocationStore from '../../../../stores/LocationStore'
 import { geolocated } from 'react-geolocated'
 import { observer } from 'mobx-react'
 import styled from 'styled-components'
@@ -22,16 +21,14 @@ const SearchWrapper = styled.div`
 `
 @observer
 class SearchBar extends Component {
-  onSuggestSelect = suggest => {
-    LocationStore.setLocation(suggest)
-  }
 
   render() {
+    const { selectLocation } = this.props
     return (
       <SearchContainer>
         <SearchWrapper>
           <Geosuggest
-            onSuggestSelect={this.onSuggestSelect}
+            onSuggestSelect={selectLocation}
             suggestsHiddenClassName="geosuggest__suggests--hidden"
           />
         </SearchWrapper>
