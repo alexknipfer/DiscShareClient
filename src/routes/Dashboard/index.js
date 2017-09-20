@@ -1,4 +1,4 @@
-import Dashboard from './Dashboard'
+import DashboardMain from './components/DashboardMain/DashboardMain'
 import { pageWithDefaultLayout } from '../../hocs/page'
 
-export default pageWithDefaultLayout(Dashboard)
+export default pageWithDefaultLayout(DashboardMain)

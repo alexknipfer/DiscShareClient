@@ -1,21 +1,21 @@
 import {
   CenteredColumn,
   CenteredGrid
-} from '../../components/CenteredGrid/CenteredGrid'
+} from '../../../../components/CenteredGrid/CenteredGrid'
 import React, { Component } from 'react'
 import { action, observable } from 'mobx'
 
-import AddButton from '../../components/AddButton/AddButton'
-import AddDiscModal from './components/AddDiscModal/AddDiscModal'
-import CenteredLoader from '../../components/Loader/CenteredLoader'
-import DashboardCard from '../../components/Cards/DashboardCard'
-import DiscsQuery from '../../queries/discs'
+import AddButton from '../../../../components/AddButton/AddButton'
+import AddDiscModal from '../../components/AddDiscModal/AddDiscModal'
+import CenteredLoader from '../../../../components/Loader/CenteredLoader'
+import DashboardCard from '../../../../components/Cards/DashboardCard'
+import DiscsQuery from '../../../../queries/discs'
 import { Grid } from 'semantic-ui-react'
 import { graphql } from 'react-apollo'
 import { observer } from 'mobx-react'
 
 @observer
-class Dashboard extends Component {
+class DashboardMain extends Component {
   @observable displayModal = false
 
   @action
@@ -38,9 +38,7 @@ class Dashboard extends Component {
           modalOpen={this.displayModal}
         />
         <Grid.Row>
-          {discs.length === 0 &&
-            <h3>No Discs Found</h3>
-          }
+          {discs.length === 0 && <h3>No Discs Found</h3>}
           {discs.map((disc, key) => {
             return (
               <CenteredColumn
@@ -71,4 +69,4 @@ export default graphql(DiscsQuery, {
     loading,
     discs
   })
-})(Dashboard)
+})(DashboardMain)
