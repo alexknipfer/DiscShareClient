@@ -1,24 +1,26 @@
-import { CenteredGrid } from '../../components/CenteredGrid/CenteredGrid'
-import { Grid } from 'semantic-ui-react'
 import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
 
-import LocationStore from '../../stores/LocationStore'
+import { CenteredGrid } from '../../components/CenteredGrid/CenteredGrid'
 import DiscsByLocationQuery from '../../queries/discsByLocation'
+import { Grid } from 'semantic-ui-react'
+import LocationStore from '../../stores/LocationStore'
 import SearchBar from './components/SearchBar'
+import { graphql } from 'react-apollo'
+import queryString from 'query-string'
 
-const selectLocation = (location) => {
-  LocationStore.setLocation(location)
-}
+export default class Home extends Component {
+  selectLocation = location => {
+    const { location: { lng, lat } } = location
+    const queryValue = queryString.stringify({ lng, lat })
+    this.props.history.push(`/discsdashboard/?${queryValue}`)
+  }
 
-class Home extends Component {
   render() {
-    console.log(LocationStore.currentSelectedLocation.location.lng)
     return (
       <CenteredGrid centered>
         <Grid.Row>
           <Grid.Column mobile={14} tablet={10} computer={8}>
-            <SearchBar selectLocation={selectLocation} />
+            <SearchBar selectLocation={this.selectLocation} />
           </Grid.Column>
         </Grid.Row>
       </CenteredGrid>
@@ -26,15 +28,15 @@ class Home extends Component {
   }
 }
 
-export default graphql(DiscsByLocationQuery, {
-  props: ({ data: { loading, discsByLocation } }) => ({
-    loading,
-    discsByLocation
-  }),
-  options: props => ({
-    variables: {
-      longitude: LocationStore.currentSelectedLocation.location.lng,
-      latitude: LocationStore.currentSelectedLocation.location.lat
-    }
-  })
-})(Home)
+// export default graphql(DiscsByLocationQuery, {
+//   props: ({ data: { loading, discsByLocation } }) => ({
+//     loading,
+//     discsByLocation
+//   }),
+//   options: props => ({
+//     variables: {
+//       longitude: LocationStore.currentSelectedLocation.location.lng,
+//       latitude: LocationStore.currentSelectedLocation.location.lat
+//     }
+//   })
+// })(Home)
