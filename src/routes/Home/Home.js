@@ -27,16 +27,3 @@ export default class Home extends Component {
     )
   }
 }
-
-// export default graphql(DiscsByLocationQuery, {
-//   props: ({ data: { loading, discsByLocation } }) => ({
-//     loading,
-//     discsByLocation
-//   }),
-//   options: props => ({
-//     variables: {
-//       longitude: LocationStore.currentSelectedLocation.location.lng,
-//       latitude: LocationStore.currentSelectedLocation.location.lat
-//     }
-//   })
-// })(Home)

@@ -1,8 +1,26 @@
 import React, { Component } from 'react'
+import { graphql } from 'react-apollo'
+import queryString from 'query-string'
 
-export default class DiscsDashboard extends Component {
+import DiscsByLocationQuery from '../../../../queries/discsByLocation'
+
+class DiscsDashboard extends Component {
   render() {
-    console.log('PROPS: ', this.props)
     return <h3>Discs Dashboard</h3>
   }
 }
+
+export default graphql(DiscsByLocationQuery, {
+  props: ({ data: { loading, discsByLocation } }) => ({
+    loading,
+    discsByLocation
+  }),
+  options: props => {
+    const { lng, lat } = queryString.parse(props.location.search)
+    return {
+      variables: {
+        longitude: lng,
+        latitude: lat
+    }}
+  }
+})(DiscsDashboard)
