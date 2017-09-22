@@ -10,7 +10,7 @@ const ErrorMessage = styled.div`
   padding-left: 5px;
 `
 
-const FormInput = ({
+const TextInput = ({
   id,
   name,
   errorMessage,
@@ -37,7 +37,7 @@ const FormInput = ({
   )
 }
 
-FormInput.propTypes = {
+TextInput.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
   errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
@@ -46,4 +46,4 @@ FormInput.propTypes = {
   type: PropTypes.oneOf(['text', 'email', 'password'])
 }
 
-export default FormInput
+export default TextInput

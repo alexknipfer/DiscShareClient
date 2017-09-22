@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
+import { observer } from 'mobx-react'
 
 import Geosuggest from 'react-geosuggest'
-import LocationStore from '../../stores/LocationStore'
-import { observer } from 'mobx-react'
 import styled from 'styled-components'
 
 const SearchWrapper = styled.div`
@@ -16,8 +15,9 @@ const SearchWrapper = styled.div`
 `
 @observer
 class LocationInput extends Component {
-  onSuggestSelect = suggest => {
-    LocationStore.setLocation(suggest)
+  onSuggestSelect = location => {
+    const { selectLocation } = this.props
+    selectLocation(location)
   }
 
   render() {

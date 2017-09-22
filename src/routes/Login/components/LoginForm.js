@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { action, observable } from 'mobx'
 
 import { CenteredGrid } from '../../../components/CenteredGrid/CenteredGrid'
-import FormInput from '../../../utils/Forms/FormInput'
+import TextInput from '../../../lib/Forms/FormInput/TextInput'
 import { LocalStorage } from '../../../utils/LocalStorage'
 import LoginMutation from '../../../mutations/login'
 import PaddedCard from '../../../components/Cards/PaddedCard'
@@ -66,7 +66,7 @@ class LoginForm extends Component {
               error={this.errorMessageVisible}
             >
               <Form.Field>
-                <FormInput
+                <TextInput
                   id="username"
                   name="username"
                   value={fields.username.value}
@@ -76,7 +76,7 @@ class LoginForm extends Component {
                 />
               </Form.Field>
               <Form.Field>
-                <FormInput
+                <TextInput
                   id="password"
                   type="password"
                   name="password"

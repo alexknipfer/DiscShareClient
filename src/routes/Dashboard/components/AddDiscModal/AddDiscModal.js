@@ -4,21 +4,25 @@ import { graphql } from 'react-apollo'
 import { observer } from 'mobx-react'
 
 import AddDiscMutation from '../../../../mutations/addDisc'
-import AddDiscModalFormValidator from '../../../../lib/FormValidation/AddDiscModal'
+import AddDiscModalFormValidator from '../../../../lib/Forms/FormValidation/AddDiscModal'
 import DiscsQuery from '../../../../queries/discs'
-import FormInput from '../../../../utils/Forms/FormInput'
-import LocationInput from '../../../../utils/Forms/LocationInput'
-import LocationStore from '../../../../stores/LocationStore'
+import TextInput from '../../../../lib/Forms/FormInput/TextInput'
+import LocationInput from '../../../../lib/Forms/FormInput/LocationInput'
+
+const viewStore = {
+  selectedLocation: null
+}
 
 @observer
 class AddDiscModal extends Component {
+
+  selectLocation = (location) => viewStore.selectedLocation = location
+
   submitDisc = async addDisc => {
     const discName = document.getElementById('discName').value
     const nameOnDisc = document.getElementById('nameOnDisc').value
-    const {
-      currentSelectedLocation: { location: selectedLocation }
-    } = LocationStore
-    const { description, location: { lng, lat } } = selectedLocation
+
+    const { description, location: { lng, lat } } = viewStore.selectedLocation
 
     try {
       await addDisc(discName, description, lng, lat, nameOnDisc)
@@ -38,7 +42,7 @@ class AddDiscModal extends Component {
         <Modal.Content>
           <Form>
             <Form.Field>
-              <FormInput
+              <TextInput
                 id="discName"
                 name="discName"
                 value={fields.discName.value}
@@ -54,11 +58,12 @@ class AddDiscModal extends Component {
                 value={fields.discLocation.value}
                 errorMessage={fields.discLocation.error}
                 onChange={onFieldChange}
+                selectLocation={this.selectLocation}
                 placeholder="Disc Location"
               />
             </Form.Field>
             <Form.Field>
-              <FormInput
+              <TextInput
                 id="nameOnDisc"
                 name="nameOnDisc"
                 value={fields.nameOnDisc.value}

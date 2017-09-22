@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { action, observable } from 'mobx'
 
 import { CenteredGrid } from '../../../components/CenteredGrid/CenteredGrid'
-import FormInput from '../../../utils/Forms/FormInput'
+import TextInput from '../../../lib/Forms/FormInput/TextInput'
 import { LocalStorage } from '../../../utils/LocalStorage'
 import PaddedCard from '../../../components/Cards/PaddedCard'
 import PropTypes from 'prop-types'
@@ -73,7 +73,7 @@ class RegisterForm extends Component {
               error={this.errorMessageVisible}
             >
               <Form.Field>
-                <FormInput
+                <TextInput
                   id="email"
                   name="email"
                   value={fields.email.value}
@@ -83,7 +83,7 @@ class RegisterForm extends Component {
                 />
               </Form.Field>
               <Form.Field>
-                <FormInput
+                <TextInput
                   id="username"
                   name="username"
                   value={fields.username.value}
@@ -93,7 +93,7 @@ class RegisterForm extends Component {
                 />
               </Form.Field>
               <Form.Field>
-                <FormInput
+                <TextInput
                   id="password"
                   type="password"
                   name="password"
@@ -104,7 +104,7 @@ class RegisterForm extends Component {
                 />
               </Form.Field>
               <Form.Field>
-                <FormInput
+                <TextInput
                   id="confirm-password"
                   type="password"
                   name="confirmPassword"
