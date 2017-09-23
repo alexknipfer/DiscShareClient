@@ -9,6 +9,7 @@
     "mobx": "^3.2.0",
     "mobx-react": "^4.2.2",
     "npm-run-all": "^4.0.2",
+    "path": "^0.12.7",
     "prop-types": "^15.5.10",
     "query-string": "^5.0.0",
     "react": "^15.6.1",
@@ -22,6 +23,7 @@
     "react-test-renderer": "^15.6.1",
     "semantic-ui-react": "^0.73.0",
     "serve": "^6.0.2",
+    "shelljs": "^0.7.8",
     "styled-components": "^2.1.1",
     "validatorjs": "^3.13.3"
   },
@@ -31,7 +33,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "now-start": "serve -s build",
-    "deploy": "now"
+    "deploy": "node deploy/now-deploy.js"
   },
   "devDependencies": {
     "enzyme": "^2.9.1",
