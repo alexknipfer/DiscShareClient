@@ -6,8 +6,8 @@ import { observer } from 'mobx-react'
 import AddDiscMutation from '../../../../mutations/addDisc'
 import AddDiscModalFormValidator from '../../../../lib/Forms/FormValidation/AddDiscModal'
 import DiscsQuery from '../../../../queries/discs'
-import TextInput from '../../../../lib/Forms/FormInput/TextInput'
-import LocationInput from '../../../../lib/Forms/FormInput/LocationInput'
+import TextInput from '../../../../lib/Forms/InputTypes/TextInput'
+import LocationInput from '../../../../lib/Forms/InputTypes/LocationInput'
 
 const viewStore = {
   selectedLocation: null

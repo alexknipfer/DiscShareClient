@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import AuthorizedRoute from '../components/AuthorizedRoute/'
-import Dashboard from './Dashboard'
+import Dashboard from './DashboardMain'
 import DiscsDashboard from './DiscsDashboard'
 import EditAccount from './EditAccount'
 import Home from './Home'
