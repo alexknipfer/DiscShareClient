@@ -9,7 +9,7 @@ import TextInput from '../../../../lib/Forms/InputTypes/TextInput'
 import { LocalStorage } from '../../../../utils/LocalStorage'
 import PaddedCard from '../../../../components/PaddedCard'
 import PropTypes from 'prop-types'
-import RegisterMutation from '../../../../mutations/register'
+import RegisterMutation from '../../mutations/register'
 
 @observer
 class RegisterForm extends Component {

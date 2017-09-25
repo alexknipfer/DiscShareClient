@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import { action, observable } from 'mobx'
 
 import { CenteredGrid } from '../../components/CenteredGrid'
-import EditAccountMutation from '../../mutations/editAccount'
-import GetUserProfile from '../../queries/getUser'
+import EditAccountMutation from './mutations/editAccount'
+import GetUserQuery from '../../queries/getUser'
 import { LocalStorage } from '../../utils/LocalStorage'
 import PaddedCard from '../../components/PaddedCard'
 import PropTypes from 'prop-types'
@@ -126,7 +126,7 @@ export default graphql(EditAccountMutation, {
   options: ({ token }) => ({
     refetchQueries: [
       {
-        query: GetUserProfile,
+        query: GetUserQuery,
         variables: { accesstoken: token }
       }
     ]

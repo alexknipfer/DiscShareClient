@@ -3,7 +3,7 @@ import { graphql } from 'react-apollo'
 import queryString from 'query-string'
 import { Grid } from 'semantic-ui-react'
 
-import DiscsByLocationQuery from '../../../../queries/discsByLocation'
+import DiscsByLocationQuery from '../queries/discsByLocation'
 import { CenteredColumn, CenteredGrid } from '../../../../components/CenteredGrid'
 import CenteredLoader from '../../../../components/CenteredLoader'
 import DashboardCard from '../../../../components/DashboardCard'

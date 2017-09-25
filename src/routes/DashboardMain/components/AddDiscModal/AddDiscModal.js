@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import { observer } from 'mobx-react'
 
-import AddDiscMutation from '../../../../mutations/addDisc'
+import AddDiscMutation from '../../mutations/addDisc'
 import AddDiscModalFormValidator from '../../../../lib/Forms/FormValidation/AddDiscModal'
-import DiscsQuery from '../../../../queries/discs'
+import DiscsQuery from '../../queries/discs'
 import TextInput from '../../../../lib/Forms/InputTypes/TextInput'
 import LocationInput from '../../../../lib/Forms/InputTypes/LocationInput'
 
