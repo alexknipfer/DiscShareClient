@@ -1,14 +1,14 @@
 import {
   CenteredColumn,
   CenteredGrid
-} from '../../../../components/CenteredGrid/CenteredGrid'
+} from '../../../../components/CenteredGrid'
 import React, { Component } from 'react'
 import { action, observable } from 'mobx'
 
-import AddButton from '../../../../components/AddButton/AddButton'
+import AddButton from '../../../../components/AddButton'
 import AddDiscModal from '../../components/AddDiscModal/AddDiscModal'
 import CenteredLoader from '../../../../components/Loader/CenteredLoader'
-import DashboardCard from '../../../../components/Cards/DashboardCard'
+import DashboardCard from '../../../../components/DashboardCard'
 import DiscsQuery from '../../../../queries/discs'
 import { Grid } from 'semantic-ui-react'
 import { graphql } from 'react-apollo'

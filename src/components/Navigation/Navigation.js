@@ -4,7 +4,7 @@ import { action, observable } from 'mobx'
 
 import { Link } from 'react-router-dom'
 import { LocalStorage } from '../../utils/LocalStorage'
-import MenuOverlay from '../MenuOverlay/MenuOverlay'
+import MenuOverlay from '../MenuOverlay'
 import { Nav } from './styles'
 import { observer } from 'mobx-react'
 import styled from 'styled-components'

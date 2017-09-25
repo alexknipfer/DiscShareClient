@@ -1,5 +1,5 @@
 import { Dimmer, Icon } from 'semantic-ui-react'
-import { fadeIn, slideInFromLeft } from '../Animations/Animations'
+import { fadeIn, slideInFromLeft } from '../Animations'
 
 import PropTypes from 'prop-types'
 import React from 'react'

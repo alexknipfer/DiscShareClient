@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import queryString from 'query-string'
 import { Grid } from 'semantic-ui-react'
 
-import { CenteredGrid } from '../../components/CenteredGrid/CenteredGrid'
+import { CenteredGrid } from '../../components/CenteredGrid'
 import SearchBar from './components/SearchBar'
 
 export default class Home extends Component {

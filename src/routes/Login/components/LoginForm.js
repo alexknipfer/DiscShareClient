@@ -2,7 +2,7 @@ import { Button, Form, Grid, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
 import { action, observable } from 'mobx'
 
-import { CenteredGrid } from '../../../components/CenteredGrid/CenteredGrid'
+import { CenteredGrid } from '../../../components/CenteredGrid'
 import TextInput from '../../../lib/Forms/FormInput/TextInput'
 import { LocalStorage } from '../../../utils/LocalStorage'
 import LoginMutation from '../../../mutations/login'

@@ -4,9 +4,9 @@ import queryString from 'query-string'
 import { Grid } from 'semantic-ui-react'
 
 import DiscsByLocationQuery from '../../../../queries/discsByLocation'
-import { CenteredColumn, CenteredGrid } from '../../../../components/CenteredGrid/CenteredGrid'
-import CenteredLoader from '../../../../components/Loader/CenteredLoader'
-import DashboardCard from '../../../../components/Cards/DashboardCard'
+import { CenteredColumn, CenteredGrid } from '../../../../components/CenteredGrid'
+import CenteredLoader from '../../../../components/CenteredLoader'
+import DashboardCard from '../../../../components/DashboardCard'
 
 class DiscsDashboard extends Component {
   render() {
