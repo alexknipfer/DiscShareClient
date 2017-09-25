@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import CenteredLoader from '../components/Loader/CenteredLoader'
+import CenteredLoader from '../components/CenteredLoader'
 import GetUserProfile from '../queries/getUser'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'

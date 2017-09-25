@@ -1,4 +1,4 @@
-import Home from './Home'
+import HomeView from './components/HomeView'
 import { pageWithDefaultLayout } from '../../hocs/page'
 
-export default pageWithDefaultLayout(Home)
+export default pageWithDefaultLayout(HomeView)

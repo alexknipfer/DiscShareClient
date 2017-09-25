@@ -2,11 +2,11 @@ import { Button, Form, Grid, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
 import { action, observable } from 'mobx'
 
-import { CenteredGrid } from '../../components/CenteredGrid/CenteredGrid'
-import EditAccountMutation from '../../mutations/editAccount'
-import GetUserProfile from '../../queries/getUser'
+import { CenteredGrid } from '../../components/CenteredGrid'
+import EditAccountMutation from './mutations/editAccount'
+import GetUserQuery from '../../queries/getUser'
 import { LocalStorage } from '../../utils/LocalStorage'
-import PaddedCard from '../../components/Cards/PaddedCard'
+import PaddedCard from '../../components/PaddedCard'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 import { observer } from 'mobx-react'
@@ -126,7 +126,7 @@ export default graphql(EditAccountMutation, {
   options: ({ token }) => ({
     refetchQueries: [
       {
-        query: GetUserProfile,
+        query: GetUserQuery,
         variables: { accesstoken: token }
       }
     ]
