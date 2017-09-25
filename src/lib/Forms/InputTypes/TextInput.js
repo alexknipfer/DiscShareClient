@@ -29,10 +29,7 @@ const TextInput = ({
         placeholder={placeholder}
         icon={errorMessage && <Icon name="exclamation circle" color="red" />}
       />
-      {errorMessage &&
-        <ErrorMessage>
-          {errorMessage}
-        </ErrorMessage>}
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </div>
   )
 }

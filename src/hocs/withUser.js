@@ -12,9 +12,11 @@ export default ComposedComponent => {
       getUser: PropTypes.object
     }
     render() {
-      return this.props.loading
-        ? <CenteredLoader active={this.props.loading} />
-        : <ComposedComponent getUser={this.props.getUser} />
+      return this.props.loading ? (
+        <CenteredLoader active={this.props.loading} />
+      ) : (
+        <ComposedComponent getUser={this.props.getUser} />
+      )
     }
   }
   return graphql(GetUserProfile, {

@@ -9,9 +9,9 @@ import { Nav } from './styles'
 import { observer } from 'mobx-react'
 import styled from 'styled-components'
 
-const MobileMenuItem = styled(({ visible, ...rest }) =>
+const MobileMenuItem = styled(({ visible, ...rest }) => (
   <Menu.Item {...rest} />
-)`
+))`
   @media (min-width: 700px) {
     display: none !important;
   }

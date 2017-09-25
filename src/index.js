@@ -12,7 +12,7 @@ import registerServiceWorker from './registerServiceWorker'
 
 const client = new ApolloClient({
   networkInterface: createNetworkInterface({
-    uri: 
+    uri:
       process.env.NODE_ENV === 'production'
         ? process.env.REACT_APP_API
         : 'http://localhost:4000/graphql'

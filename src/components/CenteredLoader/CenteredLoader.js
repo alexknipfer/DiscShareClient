@@ -9,9 +9,10 @@ const Center = styled.div`
   align-items: center;
 `
 
-const CenteredLoader = ({ loading }) =>
+const CenteredLoader = ({ loading }) => (
   <Center>
     <Loader active={loading} inline="centered" />
   </Center>
+)
 
 export default CenteredLoader

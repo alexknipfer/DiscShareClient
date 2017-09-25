@@ -7,9 +7,7 @@ import styled from 'styled-components'
 
 const MenuContent = styled.div`text-align: center;`
 
-const DimmerOverlay = styled(Dimmer)`
-  animation: ${fadeIn} 0.7s;
-`
+const DimmerOverlay = styled(Dimmer)`animation: ${fadeIn} 0.7s;`
 
 const SlidingHeader = styled.h2`animation: ${slideInFromLeft} 0.5s forwards;`
 

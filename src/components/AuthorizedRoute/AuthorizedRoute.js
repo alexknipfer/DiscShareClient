@@ -15,14 +15,16 @@ const AuthorizedRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={props =>
-        auth !== null
-          ? <Component {...props} />
-          : <Redirect
-              to={{
-                pathname: '/login',
-                state: { from: props.location }
-              }}
-            />}
+        auth !== null ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: props.location }
+            }}
+          />
+        )}
     />
   )
 }

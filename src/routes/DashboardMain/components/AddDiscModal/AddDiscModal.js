@@ -15,8 +15,7 @@ const viewStore = {
 
 @observer
 class AddDiscModal extends Component {
-
-  selectLocation = (location) => viewStore.selectedLocation = location
+  selectLocation = location => (viewStore.selectedLocation = location)
 
   submitDisc = async addDisc => {
     const discName = document.getElementById('discName').value
@@ -94,7 +93,13 @@ class AddDiscModal extends Component {
 
 export default graphql(AddDiscMutation, {
   props: ({ mutate }) => ({
-    addDisc: (discName, locationDescription, longitude, latitude, nameOnDisc) => {
+    addDisc: (
+      discName,
+      locationDescription,
+      longitude,
+      latitude,
+      nameOnDisc
+    ) => {
       return mutate({
         variables: {
           discName,
@@ -104,7 +109,7 @@ export default graphql(AddDiscMutation, {
           nameOnDisc
         }
       })
-    },
+    }
   }),
   options: props => ({
     refetchQueries: [

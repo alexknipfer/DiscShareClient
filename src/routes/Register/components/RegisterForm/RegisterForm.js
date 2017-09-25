@@ -114,10 +114,7 @@ class RegisterForm extends Component {
                   placeholder="Confirm Password"
                 />
               </Form.Field>
-              {meta.error &&
-                <div>
-                  {meta.error}
-                </div>}
+              {meta.error && <div>{meta.error}</div>}
               <Message error content={this.errorMessage} />
               <Button disabled={!meta.isValid} type="submit">
                 Register

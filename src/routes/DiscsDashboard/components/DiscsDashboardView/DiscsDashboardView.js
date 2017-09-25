@@ -4,7 +4,10 @@ import queryString from 'query-string'
 import { Grid } from 'semantic-ui-react'
 
 import DiscsByLocationQuery from '../queries/discsByLocation'
-import { CenteredColumn, CenteredGrid } from '../../../../components/CenteredGrid'
+import {
+  CenteredColumn,
+  CenteredGrid
+} from '../../../../components/CenteredGrid'
 import CenteredLoader from '../../../../components/CenteredLoader'
 import DashboardCard from '../../../../components/DashboardCard'
 
@@ -56,6 +59,7 @@ export default graphql(DiscsByLocationQuery, {
       variables: {
         longitude: lng,
         latitude: lat
-    }}
+      }
+    }
   }
 })(DiscsDashboard)

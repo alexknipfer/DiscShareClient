@@ -21,7 +21,6 @@ const SearchWrapper = styled.div`
 `
 @observer
 class SearchBar extends Component {
-
   render() {
     const { selectLocation } = this.props
     return (
