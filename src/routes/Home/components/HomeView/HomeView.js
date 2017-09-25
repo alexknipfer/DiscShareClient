@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import queryString from 'query-string'
 import { Grid } from 'semantic-ui-react'
 
-import { CenteredGrid } from '../../components/CenteredGrid'
-import SearchBar from './components/SearchBar'
+import { CenteredGrid } from '../../../../components/CenteredGrid'
+import SearchBar from '../SearchBar'
 
 export default class Home extends Component {
   selectLocation = location => {

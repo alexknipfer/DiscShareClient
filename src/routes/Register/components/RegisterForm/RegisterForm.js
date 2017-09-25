@@ -1,15 +1,15 @@
 import { Button, Form, Grid, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
 import { action, observable } from 'mobx'
-
-import { CenteredGrid } from '../../../components/CenteredGrid'
-import TextInput from '../../../lib/Forms/InputTypes/TextInput'
-import { LocalStorage } from '../../../utils/LocalStorage'
-import PaddedCard from '../../../components/PaddedCard'
-import PropTypes from 'prop-types'
-import RegisterMutation from '../../../mutations/register'
 import { graphql } from 'react-apollo'
 import { observer } from 'mobx-react'
+
+import { CenteredGrid } from '../../../../components/CenteredGrid'
+import TextInput from '../../../../lib/Forms/InputTypes/TextInput'
+import { LocalStorage } from '../../../../utils/LocalStorage'
+import PaddedCard from '../../../../components/PaddedCard'
+import PropTypes from 'prop-types'
+import RegisterMutation from '../../../../mutations/register'
 
 @observer
 class RegisterForm extends Component {

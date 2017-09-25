@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-import LoginForm from './components/LoginForm'
-import LoginFormValidator from '../../lib/Forms/FormValidation/Login'
+import LoginForm from '../LoginForm'
+import LoginFormValidator from '../../../../lib/Forms/FormValidation/Login'
 import PropTypes from 'prop-types'
 import { observer } from 'mobx-react'
 

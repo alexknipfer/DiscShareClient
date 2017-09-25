@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import AuthorizedRoute from '../components/AuthorizedRoute/'
-import Dashboard from './DashboardMain'
+import DashboardMain from './DashboardMain'
 import DiscsDashboard from './DiscsDashboard'
 import EditAccount from './EditAccount'
 import Home from './Home'
@@ -16,7 +16,7 @@ const App = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/dashboard" component={DashboardMain} />
         <Route path="/discsdashboard" component={DiscsDashboard} />
         <AuthorizedRoute exact path="/editAccount" component={EditAccount} />
       </Switch>

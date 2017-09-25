@@ -1,4 +1,4 @@
-import Login from './Login'
+import LoginView from './components/LoginView'
 import withDefaultLayout from '../../hocs/withDefaultLayout'
 
-export default withDefaultLayout(Login)
+export default withDefaultLayout(LoginView)
