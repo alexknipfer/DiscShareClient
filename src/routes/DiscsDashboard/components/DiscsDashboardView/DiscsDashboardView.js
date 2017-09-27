@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
-import queryString from 'query-string'
-import { Grid } from 'semantic-ui-react'
-
-import DiscsByLocationQuery from '../queries/discsByLocation'
 import {
   CenteredColumn,
   CenteredGrid
 } from '../../../../components/CenteredGrid'
+import React, { Component } from 'react'
+
 import CenteredLoader from '../../../../components/CenteredLoader'
 import DashboardCard from '../../../../components/DashboardCard'
+import DiscsByLocationQuery from '../queries/discsByLocation'
+import { Grid } from 'semantic-ui-react'
+import { graphql } from 'react-apollo'
+import queryString from 'query-string'
 
 class DiscsDashboard extends Component {
   render() {
@@ -54,11 +54,12 @@ export default graphql(DiscsByLocationQuery, {
     discsByLocation
   }),
   options: props => {
-    const { lng, lat } = queryString.parse(props.location.search)
+    const { lng, lat, radius } = queryString.parse(props.location.search)
     return {
       variables: {
         longitude: lng,
-        latitude: lat
+        latitude: lat,
+        radius
       }
     }
   }
