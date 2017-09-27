@@ -1,12 +1,13 @@
 import './search.css'
 
 import React, { Component } from 'react'
-import styled from 'styled-components'
-import { observer } from 'mobx-react'
-import Geosuggest from 'react-geosuggest'
-import { geolocated } from 'react-geolocated'
+
 import { Dropdown } from 'semantic-ui-react'
-import { observable, action } from 'mobx'
+import Geosuggest from 'react-geosuggest'
+import HomeStore from '../../stores/HomeStore'
+import { geolocated } from 'react-geolocated'
+import { observer } from 'mobx-react'
+import styled from 'styled-components'
 
 const SearchContainer = styled.div`
   display: flex;
@@ -45,12 +46,10 @@ const mileSelections = [
 
 @observer
 class SearchBar extends Component {
-  @observable selectedMiles = 10
-
-  @action updateMiles = miles => (this.selectedMiles = miles)
-
   render() {
     const { selectLocation } = this.props
+    const { radius } = HomeStore
+
     return (
       <SearchContainer>
         <SearchWrapper>
@@ -60,7 +59,7 @@ class SearchBar extends Component {
           />
         </SearchWrapper>
         <Dropdown
-          text={`${this.selectedMiles} miles`}
+          text={`${radius} miles`}
           icon="filter"
           floating
           labeled
@@ -71,7 +70,7 @@ class SearchBar extends Component {
             {mileSelections.map(option => (
               <Dropdown.Item
                 key={option.value}
-                onClick={() => this.updateMiles(option.value)}
+                onClick={() => HomeStore.updateRadius(option.value)}
                 {...option}
               />
             ))}
