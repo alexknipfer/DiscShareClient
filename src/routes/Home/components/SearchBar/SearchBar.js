@@ -60,11 +60,12 @@ class SearchBar extends Component {
         </SearchWrapper>
         <Dropdown
           text={`${radius} miles`}
-          icon="filter"
+          icon="bullseye"
           floating
           labeled
           button
           className="icon"
+          style={{ opacity: 0.5 }}
         >
           <Dropdown.Menu>
             {mileSelections.map(option => (
