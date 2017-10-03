@@ -65,7 +65,7 @@ class SearchBar extends Component {
           labeled
           button
           className="icon"
-          style={{ opacity: 0.5 }}
+          style={{ opacity: 0.5, minWidth: '130px' }}
         >
           <Dropdown.Menu>
             {mileSelections.map(option => (
