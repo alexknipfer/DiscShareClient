@@ -18,7 +18,7 @@ class EditAccount extends Component {
 
   static propTypes = {
     auth: PropTypes.bool,
-    getUser: PropTypes.object,
+    user: PropTypes.object,
     editAccount: PropTypes.func
   }
 
@@ -48,14 +48,14 @@ class EditAccount extends Component {
   }
 
   render() {
-    const { getUser, editAccount } = this.props
+    const { user, editAccount } = this.props
     return (
       <CenteredGrid>
         <Grid.Row>
           <Grid.Column mobile={14} computer={10}>
             <PaddedCard fluid>
               <Form
-                onSubmit={() => this.handleSubmit(getUser.id, editAccount)}
+                onSubmit={() => this.handleSubmit(user.id, editAccount)}
                 success={this.successMessageVisible}
                 loading={this.formLoading}
               >
@@ -78,13 +78,13 @@ class EditAccount extends Component {
                   <Grid.Column mobile={16} computer={8}>
                     <Form.Field>
                       <label>Username</label>
-                      <Input defaultValue={getUser.username} disabled />
+                      <Input defaultValue={user.username} disabled />
                     </Form.Field>
                   </Grid.Column>
                   <Grid.Column mobile={16} computer={8}>
                     <Form.Field>
                       <label>Email</label>
-                      <Input defaultValue={getUser.email} id="email" required />
+                      <Input defaultValue={user.email} id="email" required />
                     </Form.Field>
                   </Grid.Column>
                   <Grid.Column mobile={16} computer={8}>
