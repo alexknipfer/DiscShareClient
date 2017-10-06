@@ -13,10 +13,15 @@ import DiscsQuery from '../../queries/discs'
 import { Grid } from 'semantic-ui-react'
 import { graphql } from 'react-apollo'
 import { observer } from 'mobx-react'
+import GoogleMapsService from '../../../../lib/services/GoogleMapsService'
 
 @observer
 class DashboardMain extends Component {
   @observable displayModal = false
+
+  async componentDidMount() {
+    await GoogleMapsService.mount()
+  }
 
   @action
   toggleModal = () => {
@@ -24,7 +29,7 @@ class DashboardMain extends Component {
   }
 
   render() {
-    const { loading, discs } = this.props
+    const { loading, discs, user } = this.props
 
     if (loading) {
       return <CenteredLoader />
@@ -36,6 +41,7 @@ class DashboardMain extends Component {
         <AddDiscModal
           toggleModal={this.toggleModal}
           modalOpen={this.displayModal}
+          userId={user.id}
         />
         <Grid.Row>
           {discs.length === 0 && <h3>No Discs Found</h3>}
