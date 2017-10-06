@@ -15,14 +15,14 @@ export default ComposedComponent => {
       return this.props.loading ? (
         <CenteredLoader active={this.props.loading} />
       ) : (
-        <ComposedComponent getUser={this.props.getUser} />
+        <ComposedComponent {...this.props} />
       )
     }
   }
   return graphql(GetUserProfile, {
     props: ({ data: { loading, getUser } }) => ({
       loading,
-      getUser
+      user: getUser
     }),
     options: ({ token }) => ({ variables: { accesstoken: token } })
   })(withUser)
