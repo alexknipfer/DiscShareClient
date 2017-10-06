@@ -17,14 +17,14 @@ const viewStore = {
 class AddDiscModal extends Component {
   selectLocation = location => (viewStore.selectedLocation = location)
 
-  submitDisc = async addDisc => {
+  submitDisc = async (addDisc, userId) => {
     const discName = document.getElementById('discName').value
     const nameOnDisc = document.getElementById('nameOnDisc').value
 
     const { description, location: { lng, lat } } = viewStore.selectedLocation
 
     try {
-      await addDisc(discName, description, lng, lat, nameOnDisc)
+      await addDisc(discName, description, lng, lat, nameOnDisc, userId)
       this.props.toggleModal()
     } catch (error) {
       console.log('ERROR ADDING DISC: ', error)
@@ -34,7 +34,8 @@ class AddDiscModal extends Component {
   render() {
     const { form, onFieldChange } = AddDiscModalFormValidator
     const { fields, meta } = form
-    const { toggleModal, modalOpen, addDisc } = this.props
+    const { toggleModal, modalOpen, addDisc, userId } = this.props
+
     return (
       <Modal size="small" open={modalOpen} onClose={toggleModal}>
         <Modal.Header>Add Disc</Modal.Header>
@@ -81,7 +82,7 @@ class AddDiscModal extends Component {
                 icon="checkmark"
                 labelPosition="right"
                 content="Add"
-                onClick={() => this.submitDisc(addDisc)}
+                onClick={() => this.submitDisc(addDisc, userId)}
               />
             </Modal.Actions>
           </Form>
@@ -98,7 +99,8 @@ export default graphql(AddDiscMutation, {
       locationDescription,
       longitude,
       latitude,
-      nameOnDisc
+      nameOnDisc,
+      userId
     ) => {
       return mutate({
         variables: {
@@ -106,7 +108,8 @@ export default graphql(AddDiscMutation, {
           locationDescription,
           longitude,
           latitude,
-          nameOnDisc
+          nameOnDisc,
+          userId
         }
       })
     }

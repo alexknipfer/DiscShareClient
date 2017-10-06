@@ -7,6 +7,7 @@ export default gql`
     $longitude: String!
     $latitude: String!
     $nameOnDisc: String
+    $userId: String!
   ) {
     addDisc(
       discName: $discName
@@ -14,6 +15,7 @@ export default gql`
       longitude: $longitude
       latitude: $latitude
       nameOnDisc: $nameOnDisc
+      userId: $userId
     ) {
       discName
       locationDescription
