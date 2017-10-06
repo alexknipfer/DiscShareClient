@@ -117,7 +117,10 @@ export default graphql(AddDiscMutation, {
   options: props => ({
     refetchQueries: [
       {
-        query: DiscsQuery
+        query: DiscsQuery,
+        variables: {
+          userId: props.userId
+        }
       }
     ]
   })

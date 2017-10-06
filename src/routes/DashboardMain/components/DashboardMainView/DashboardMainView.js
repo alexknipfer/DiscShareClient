@@ -74,5 +74,8 @@ export default graphql(DiscsQuery, {
   props: ({ data: { loading, discs } }) => ({
     loading,
     discs
+  }),
+  options: props => ({
+    variables: { userId: props.user.id }
   })
 })(DashboardMain)
