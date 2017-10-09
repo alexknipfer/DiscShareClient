@@ -4,7 +4,7 @@ import { action, observable } from 'mobx'
 import { graphql } from 'react-apollo'
 import { observer } from 'mobx-react'
 
-import { CenteredGrid } from '../../../../components/CenteredGrid'
+import { CenteredCardGrid } from '../../../../components/CenteredGrid'
 import TextInput from '../../../../lib/Forms/InputTypes/TextInput'
 import { LocalStorage } from '../../../../utils/LocalStorage'
 import LoginMutation from '../mutations/login'
@@ -57,7 +57,7 @@ class LoginForm extends Component {
     const { form, login, onChange } = this.props
     const { fields, meta } = form
     return (
-      <CenteredGrid>
+      <CenteredCardGrid>
         <Grid.Column mobile={14} computer={5}>
           <PaddedCard fluid>
             <h3>Login</h3>
@@ -94,7 +94,7 @@ class LoginForm extends Component {
             </Form>
           </PaddedCard>
         </Grid.Column>
-      </CenteredGrid>
+      </CenteredCardGrid>
     )
   }
 }

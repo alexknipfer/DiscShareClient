@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Icon, Grid, Divider } from 'semantic-ui-react'
-import { CenteredGrid } from '../../components/CenteredGrid'
+import { CenteredCardGrid } from '../../components/CenteredGrid'
 import PaddedCard from '../../components/PaddedCard'
 import styled from 'styled-components'
 
@@ -21,7 +21,7 @@ const Unauthorized = props => {
   const { location: { state } } = props
   const attemptedRoute = formatRoute(state.from.pathname)
   return (
-    <CenteredGrid>
+    <CenteredCardGrid>
       <Grid.Column mobile={14} computer={8}>
         <PaddedCard fluid>
           <Card.Header>
@@ -44,7 +44,7 @@ const Unauthorized = props => {
           </p>
         </PaddedCard>
       </Grid.Column>
-    </CenteredGrid>
+    </CenteredCardGrid>
   )
 }
 

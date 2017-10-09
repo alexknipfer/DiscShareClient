@@ -2,7 +2,7 @@ import { Button, Form, Grid, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
 import { action, observable } from 'mobx'
 
-import { CenteredGrid } from '../../components/CenteredGrid'
+import { CenteredCardGrid } from '../../components/CenteredGrid'
 import EditAccountMutation from './mutations/editAccount'
 import GetUserQuery from '../../queries/getUser'
 import { LocalStorage } from '../../utils/LocalStorage'
@@ -50,7 +50,7 @@ class EditAccount extends Component {
   render() {
     const { user, editAccount } = this.props
     return (
-      <CenteredGrid>
+      <CenteredCardGrid>
         <Grid.Row>
           <Grid.Column mobile={14} computer={10}>
             <PaddedCard fluid>
@@ -113,7 +113,7 @@ class EditAccount extends Component {
             </PaddedCard>
           </Grid.Column>
         </Grid.Row>
-      </CenteredGrid>
+      </CenteredCardGrid>
     )
   }
 }

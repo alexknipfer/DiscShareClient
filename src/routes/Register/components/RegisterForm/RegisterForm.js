@@ -4,7 +4,7 @@ import { action, observable } from 'mobx'
 import { graphql } from 'react-apollo'
 import { observer } from 'mobx-react'
 
-import { CenteredGrid } from '../../../../components/CenteredGrid'
+import { CenteredCardGrid } from '../../../../components/CenteredGrid'
 import TextInput from '../../../../lib/Forms/InputTypes/TextInput'
 import { LocalStorage } from '../../../../utils/LocalStorage'
 import PaddedCard from '../../../../components/PaddedCard'
@@ -64,7 +64,7 @@ class RegisterForm extends Component {
     const { form, register, onChange } = this.props
     const { fields, meta } = form
     return (
-      <CenteredGrid>
+      <CenteredCardGrid>
         <Grid.Column mobile={14} computer={5}>
           <PaddedCard fluid>
             <h3>Register</h3>
@@ -122,7 +122,7 @@ class RegisterForm extends Component {
             </Form>
           </PaddedCard>
         </Grid.Column>
-      </CenteredGrid>
+      </CenteredCardGrid>
     )
   }
 }
