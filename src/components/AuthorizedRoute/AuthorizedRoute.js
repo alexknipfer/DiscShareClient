@@ -20,7 +20,7 @@ const AuthorizedRoute = ({ component: Component, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: '/login',
+              pathname: '/unauthorized',
               state: { from: props.location }
             }}
           />
