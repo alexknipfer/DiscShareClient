@@ -8,6 +8,7 @@ import Home from './Home'
 import Login from './Login'
 import React from 'react'
 import Register from './Register'
+import Unauthorized from './Unauthorized'
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <AuthorizedRoute exact path="/dashboard" component={DashboardMain} />
         <Route path="/discsdashboard" component={DiscsDashboard} />
         <AuthorizedRoute exact path="/editAccount" component={EditAccount} />
+        <Route path="/unauthorized" component={Unauthorized} />
       </Switch>
     </BrowserRouter>
   )
