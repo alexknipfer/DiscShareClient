@@ -4,6 +4,7 @@ import styled from 'styled-components'
 export const CenteredGrid = styled(Grid)`
   display: flex;
   justify-content: center;
+  margin-top: 100px !important;
 `
 
 export const CenteredColumn = styled(Grid.Column)`
