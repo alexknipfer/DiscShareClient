@@ -55,9 +55,6 @@ class Navigation extends Component {
           <Link to="/">
             <Menu.Item link>Home</Menu.Item>
           </Link>
-          <Link to="/dashboard">
-            <Menu.Item link>Dashboard</Menu.Item>
-          </Link>
           <Link to="/register">
             <Menu.Item link>Register</Menu.Item>
           </Link>
