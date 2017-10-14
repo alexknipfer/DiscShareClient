@@ -5,6 +5,7 @@ import { observable, action } from 'mobx'
 import { graphql } from 'react-apollo'
 import queryString from 'query-string'
 
+import ResetPasswordMutation from '../mutations/resetPassword'
 import ResetPasswordFormValidator from './ResetPasswordValidator'
 import { CenteredCardGrid } from '../../../components/CenteredGrid'
 import PaddedCard from '../../../components/PaddedCard'
@@ -12,8 +13,31 @@ import TextInput from '../../../lib/Forms/InputTypes/TextInput'
 
 @observer
 class ResetPasswordForm extends Component {
+  @observable errorMessageVisible = false
+  @observable errorMessage = null
+
+  handleSubmit = (history, mutate) => {
+    const password = document.getElementById('password').value
+    const confirmPassword = document.getElementById('confirmPassword').value
+
+    const tokenQuery = history.location.search
+    const { token } = queryString.parse(tokenQuery)
+
+    if (password !== confirmPassword) {
+      this.displayErrMessage('Passwords do not match.')
+    } else {
+      mutate({ variables: { password, token } })
+    }
+  }
+
+  @action
+  displayErrMessage = err => {
+    this.errorMessageVisible = !this.errorMessageVisible
+    this.errorMessage = err
+  }
+
   render() {
-    const { history } = this.props
+    const { history, mutate } = this.props
     const { form, onFieldChange } = ResetPasswordFormValidator
     const { fields, meta } = form
     return (
@@ -22,7 +46,10 @@ class ResetPasswordForm extends Component {
           <PaddedCard fluid>
             <div>
               <h3>Reset Password</h3>
-              <Form>
+              <Form
+                onSubmit={() => this.handleSubmit(history, mutate)}
+                error={this.errorMessageVisible}
+              >
                 <Form.Field>
                   <TextInput
                     id="password"
@@ -46,6 +73,7 @@ class ResetPasswordForm extends Component {
                   />
                 </Form.Field>
                 {meta.error && <div>{meta.error}</div>}
+                <Message error content={this.errorMessage} />
                 <Button disabled={!meta.isValid} type="submit">
                   Reset Password
                 </Button>
@@ -58,4 +86,4 @@ class ResetPasswordForm extends Component {
   }
 }
 
-export default ResetPasswordForm
+export default graphql(ResetPasswordMutation)(ResetPasswordForm)
