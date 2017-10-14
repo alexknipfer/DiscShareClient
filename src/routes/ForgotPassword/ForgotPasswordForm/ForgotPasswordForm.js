@@ -56,6 +56,7 @@ class ForgotPasswordForm extends Component {
                 <Form
                   onSubmit={() => this.handleSubmit(sendResetPasswordEmail)}
                   error={this.errorMessageVisible}
+                  loading={this.formLoading}
                 >
                   <Form.Field>
                     <TextInput
