@@ -1,3 +1,4 @@
 import ForgotPasswordView from './ForgotPasswordView'
+import withDefaultLayout from '../../../hocs/withDefaultLayout'
 
-export default ForgotPasswordView
+export default withDefaultLayout(ForgotPasswordView)
