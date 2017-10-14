@@ -54,7 +54,7 @@ class LoginForm extends Component {
   }
 
   render() {
-    const { form, login, onChange } = this.props
+    const { form, login, onChange, history } = this.props
     const { fields, meta } = form
     return (
       <CenteredCardGrid>
@@ -87,7 +87,9 @@ class LoginForm extends Component {
                 />
               </Form.Field>
               <Grid.Row textAlign="right">
-                <a>Forgot Password?</a>
+                <a onClick={() => history.push('/forgotPassword')}>
+                  Forgot Password?
+                </a>
               </Grid.Row>
               {meta.error && <div>{meta.error}</div>}
               <Message error content={this.errorMessage} />
