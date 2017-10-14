@@ -86,6 +86,9 @@ class LoginForm extends Component {
                   placeholder="Password"
                 />
               </Form.Field>
+              <Grid.Row textAlign="right">
+                <a>Forgot Password?</a>
+              </Grid.Row>
               {meta.error && <div>{meta.error}</div>}
               <Message error content={this.errorMessage} />
               <Button disabled={!meta.isValid} type="submit">
