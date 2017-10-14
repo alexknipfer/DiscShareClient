@@ -4,7 +4,7 @@ import { observer } from 'mobx-react'
 import { observable, action } from 'mobx'
 import { graphql } from 'react-apollo'
 
-import ResetPasswordEmailMutation from '../mutations/resetPasswordEmail'
+import SendResetPasswordEmailMutation from '../mutations/sendResetPasswordEmail'
 import ForgotPasswordValidator from './ForgotPasswordValidator'
 import { CenteredCardGrid } from '../../../components/CenteredGrid'
 import PaddedCard from '../../../components/PaddedCard'
@@ -17,14 +17,14 @@ class ForgotPasswordForm extends Component {
   @observable errorMessage = null
   @observable errorMessageVisible = false
 
-  handleSubmit = async resetPasswordEmail => {
+  handleSubmit = async sendResetPasswordEmail => {
     this.formLoading = true
     const email = document.getElementById('email').value
 
     try {
-      const result = await resetPasswordEmail(email)
+      const result = await sendResetPasswordEmail(email)
       this.formLoading = false
-      this.resetStatus = result.data.resetPasswordEmail
+      this.resetStatus = result.data.sendResetPasswordEmail
     } catch (err) {
       this.formLoading = false
       const { graphQLErrors } = err
@@ -43,7 +43,7 @@ class ForgotPasswordForm extends Component {
   }
 
   render() {
-    const { resetPasswordEmail, history } = this.props
+    const { sendResetPasswordEmail, history } = this.props
     const { form, onFieldChange } = ForgotPasswordValidator
     const { fields, meta } = form
     return (
@@ -54,7 +54,7 @@ class ForgotPasswordForm extends Component {
               <div>
                 <h3>Forgot Password</h3>
                 <Form
-                  onSubmit={() => this.handleSubmit(resetPasswordEmail)}
+                  onSubmit={() => this.handleSubmit(sendResetPasswordEmail)}
                   error={this.errorMessageVisible}
                 >
                   <Form.Field>
@@ -91,8 +91,8 @@ class ForgotPasswordForm extends Component {
   }
 }
 
-export default graphql(ResetPasswordEmailMutation, {
+export default graphql(SendResetPasswordEmailMutation, {
   props: ({ mutate }) => ({
-    resetPasswordEmail: email => mutate({ variables: { email } })
+    sendResetPasswordEmail: email => mutate({ variables: { email } })
   })
 })(ForgotPasswordForm)
