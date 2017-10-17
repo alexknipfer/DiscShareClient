@@ -41,20 +41,13 @@ class EditAccount extends Component {
   }
 
   uploadToS3 = async (file, signedRequest) => {
-    console.log('FILE: ', file)
-    console.log('SINGED REQ: ', signedRequest, typeof signedRequest)
-
     const options = {
       headers: {
         'Content-Type': file.type
       }
     }
 
-    try {
-      await axios.put(signedRequest, file, options)
-    } catch (err) {
-      console.log('UPLOAD ERROR: ', err)
-    }
+    await axios.put(signedRequest, file, options)
   }
 
   onDrop = async files => (this.file = files[0])
@@ -68,7 +61,6 @@ class EditAccount extends Component {
     const firstName = document.getElementById('firstName').value
     const location = document.getElementById('location').value
 
-    console.log('FORMATTED URL: ', formatFileName(file.name))
     const response = await signS3(formatFileName(file.name), file.type)
 
     const { signedRequest, url } = response.data.signS3
