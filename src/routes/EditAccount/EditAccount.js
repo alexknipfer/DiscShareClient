@@ -1,9 +1,8 @@
 import { Button, Form, Grid, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
-import { action, observable } from 'mobx'
-import Dropzone from 'react-dropzone'
 import axios from 'axios'
 
+import EditAccountViewStore from './stores/EditAccountViewStore'
 import formatFileName from '../../lib/formatters/formatFileName'
 import { CenteredCardGrid } from '../../components/CenteredGrid'
 import SignS3Mutation from './mutations/signS3'
@@ -17,27 +16,10 @@ import { observer } from 'mobx-react'
 
 @observer
 class EditAccount extends Component {
-  @observable successMessageVisible = false
-  @observable formLoading = false
-  @observable file = null
-
   static propTypes = {
     auth: PropTypes.bool,
     user: PropTypes.object,
     editAccount: PropTypes.func
-  }
-
-  @action
-  displaySuccessMessage = () => {
-    this.successMessageVisible = !this.successMessageVisible
-    setTimeout(() => {
-      this.successMessageVisible = !this.successMessageVisible
-    }, 3000)
-  }
-
-  @action
-  toggleFormLoad = () => {
-    this.formLoading = !this.formLoading
   }
 
   uploadToS3 = async (file, signedRequest) => {
@@ -50,30 +32,42 @@ class EditAccount extends Component {
     await axios.put(signedRequest, file, options)
   }
 
-  onDrop = async files => (this.file = files[0])
+  onDrop = async event => EditAccountViewStore.updateFile(event.target.files[0])
 
   handleSubmit = async userId => {
     const { editAccount, signS3 } = this.props
-    const { file } = this
+    const { file } = EditAccountViewStore
+    let profileImage = null
 
-    this.toggleFormLoad()
+    EditAccountViewStore.toggleFormLoad()
     const email = document.getElementById('email').value
     const firstName = document.getElementById('firstName').value
     const location = document.getElementById('location').value
 
-    const response = await signS3(formatFileName(file.name), file.type)
+    if (file) {
+      const response = await signS3(formatFileName(file.name), file.type)
 
-    const { signedRequest, url } = response.data.signS3
-    await this.uploadToS3(file, signedRequest)
+      const { signedRequest, url } = response.data.signS3
+      profileImage = url
+      await this.uploadToS3(file, signedRequest)
+    }
 
-    const result = await editAccount(userId, email, firstName, location)
-    this.toggleFormLoad()
+    const result = await editAccount(
+      userId,
+      email,
+      firstName,
+      location,
+      profileImage
+    )
+    EditAccountViewStore.toggleFormLoad()
     LocalStorage.saveToken(result.data.editAccount)
-    this.displaySuccessMessage()
+    EditAccountViewStore.displaySuccessMessage()
   }
 
   render() {
     const { user } = this.props
+    const { successMessageVisible, formLoading } = EditAccountViewStore
+    console.log('USER: ', user)
     return (
       <CenteredCardGrid>
         <Grid.Row>
@@ -81,8 +75,8 @@ class EditAccount extends Component {
             <PaddedCard fluid>
               <Form
                 onSubmit={() => this.handleSubmit(user.id)}
-                success={this.successMessageVisible}
-                loading={this.formLoading}
+                success={successMessageVisible}
+                loading={formLoading}
               >
                 <Grid>
                   <Grid.Column mobile={16} computer={16}>
@@ -125,9 +119,14 @@ class EditAccount extends Component {
                     </Form.Field>
                   </Grid.Column>
                   <Grid.Column mobile={16} computer={16}>
-                    <Dropzone onDrop={this.onDrop}>
-                      <p>Choose an image</p>
-                    </Dropzone>
+                    <Button icon="upload" />
+                    <input
+                      id="file-upload"
+                      type="file"
+                      accept="image/*"
+                      ref="upload"
+                      onChange={this.onDrop}
+                    />
                   </Grid.Column>
                   <Grid.Column mobile={16} computer={16}>
                     <Message
@@ -151,8 +150,10 @@ class EditAccount extends Component {
 export default compose(
   graphql(EditAccountMutation, {
     props: ({ mutate }) => ({
-      editAccount: (userId, email, firstName, location) =>
-        mutate({ variables: { userId, email, firstName, location } })
+      editAccount: (userId, email, firstName, location, profileImage) =>
+        mutate({
+          variables: { userId, email, firstName, location, profileImage }
+        })
     }),
     options: ({ token }) => ({
       refetchQueries: [
