@@ -1,4 +1,4 @@
-import { Button, Form, Grid, Input, Message } from 'semantic-ui-react'
+import { Button, Form, Grid, Image, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
 import axios from 'axios'
 
@@ -35,9 +35,9 @@ class EditAccount extends Component {
   onDrop = async event => EditAccountViewStore.updateFile(event.target.files[0])
 
   handleSubmit = async userId => {
-    const { editAccount, signS3 } = this.props
+    const { editAccount, signS3, user } = this.props
     const { file } = EditAccountViewStore
-    let profileImage = null
+    let profileImage = user.profileImage || ''
 
     EditAccountViewStore.toggleFormLoad()
     const email = document.getElementById('email').value
@@ -118,16 +118,23 @@ class EditAccount extends Component {
                       <Input />
                     </Form.Field>
                   </Grid.Column>
-                  <Grid.Column mobile={16} computer={16}>
-                    <Button icon="upload" />
-                    <input
-                      id="file-upload"
-                      type="file"
-                      accept="image/*"
-                      ref="upload"
-                      onChange={this.onDrop}
-                    />
-                  </Grid.Column>
+                  <Grid.Row>
+                    <Grid.Column mobile={12} computer={12}>
+                      <Button icon="upload" />
+                      <input
+                        id="file-upload"
+                        type="file"
+                        accept="image/*"
+                        ref="upload"
+                        onChange={this.onDrop}
+                      />
+                    </Grid.Column>
+                    <Grid.Column mobile={4} computer={4}>
+                      {user.profileImage && (
+                        <Image src={user.profileImage} size="tiny" />
+                      )}
+                    </Grid.Column>
+                  </Grid.Row>
                   <Grid.Column mobile={16} computer={16}>
                     <Message
                       success
@@ -155,17 +162,14 @@ export default compose(
           variables: { userId, email, firstName, location, profileImage }
         })
     }),
-    options: ({ user }) => {
-      console.log('USER IN QUERY: ', user)
-      return {
-        refetchQueries: [
-          {
-            query: GetUserByIdQuery,
-            variables: { userId: user.id }
-          }
-        ]
-      }
-    }
+    options: ({ user }) => ({
+      refetchQueries: [
+        {
+          query: GetUserByIdQuery,
+          variables: { userId: user.id }
+        }
+      ]
+    })
   }),
   graphql(SignS3Mutation, {
     props: ({ mutate }) => ({
