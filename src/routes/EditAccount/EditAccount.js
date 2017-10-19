@@ -57,7 +57,7 @@ class EditAccount extends Component {
       email,
       firstName,
       location,
-      'final test'
+      profileImage
     )
     EditAccountViewStore.toggleFormLoad()
     LocalStorage.saveToken(result.data.editAccount)
@@ -67,7 +67,7 @@ class EditAccount extends Component {
   render() {
     const { user } = this.props
     const { successMessageVisible, formLoading } = EditAccountViewStore
-    console.log('USER: ', user)
+
     return (
       <CenteredCardGrid>
         <Grid.Row>
@@ -156,7 +156,7 @@ export default compose(
         })
     }),
     options: ({ user }) => {
-      console.log('USER IN QUERY: ', user.id)
+      console.log('USER IN QUERY: ', user)
       return {
         refetchQueries: [
           {
