@@ -7,7 +7,7 @@ import formatFileName from '../../lib/formatters/formatFileName'
 import { CenteredCardGrid } from '../../components/CenteredGrid'
 import SignS3Mutation from './mutations/signS3'
 import EditAccountMutation from './mutations/editAccount'
-import GetUserQuery from '../../queries/getUser'
+import GetUserByIdQuery from './queries/getUserById'
 import { LocalStorage } from '../../utils/LocalStorage'
 import PaddedCard from '../../components/PaddedCard'
 import PropTypes from 'prop-types'
@@ -57,7 +57,7 @@ class EditAccount extends Component {
       email,
       firstName,
       location,
-      profileImage
+      'final test'
     )
     EditAccountViewStore.toggleFormLoad()
     LocalStorage.saveToken(result.data.editAccount)
@@ -155,14 +155,17 @@ export default compose(
           variables: { userId, email, firstName, location, profileImage }
         })
     }),
-    options: ({ token }) => ({
-      refetchQueries: [
-        {
-          query: GetUserQuery,
-          variables: { accesstoken: token }
-        }
-      ]
-    })
+    options: ({ user }) => {
+      console.log('USER IN QUERY: ', user.id)
+      return {
+        refetchQueries: [
+          {
+            query: GetUserByIdQuery,
+            variables: { userId: user.id }
+          }
+        ]
+      }
+    }
   }),
   graphql(SignS3Mutation, {
     props: ({ mutate }) => ({
