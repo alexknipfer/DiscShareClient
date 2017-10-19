@@ -85,7 +85,7 @@ class EditAccount extends Component {
                   <Grid.Column mobile={16} computer={8}>
                     <Form.Field>
                       <label>First Name</label>
-                      <Input id="firstName" />
+                      <Input defaultValue={user.firstName} id="firstName" />
                     </Form.Field>
                   </Grid.Column>
                   <Grid.Column mobile={16} computer={8}>
