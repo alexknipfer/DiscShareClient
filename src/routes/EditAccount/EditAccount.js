@@ -1,6 +1,8 @@
 import { Button, Form, Grid, Image, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
 import axios from 'axios'
+import Dropzone from 'react-dropzone'
+import styled from 'styled-components'
 
 import EditAccountViewStore from './stores/EditAccountViewStore'
 import formatFileName from '../../lib/formatters/formatFileName'
@@ -13,6 +15,11 @@ import PaddedCard from '../../components/PaddedCard'
 import PropTypes from 'prop-types'
 import { compose, graphql } from 'react-apollo'
 import { observer } from 'mobx-react'
+
+const FileLabel = styled.div`
+  font-size: 10px;
+  margin-top: 5px;
+`
 
 @observer
 class EditAccount extends Component {
@@ -32,9 +39,10 @@ class EditAccount extends Component {
     await axios.put(signedRequest, file, options)
   }
 
-  onDrop = async event => EditAccountViewStore.updateFile(event.target.files[0])
+  onDrop = async files => EditAccountViewStore.updateFile(files[0])
 
   handleSubmit = async userId => {
+    console.log('SUBMIT!!!')
     const { editAccount, signS3, user } = this.props
     const { file } = EditAccountViewStore
     let profileImage = user.profileImage || ''
@@ -66,7 +74,7 @@ class EditAccount extends Component {
 
   render() {
     const { user } = this.props
-    const { successMessageVisible, formLoading } = EditAccountViewStore
+    const { successMessageVisible, formLoading, file } = EditAccountViewStore
 
     return (
       <CenteredCardGrid>
@@ -79,9 +87,38 @@ class EditAccount extends Component {
                 loading={formLoading}
               >
                 <Grid>
-                  <Grid.Column mobile={16} computer={16}>
-                    <h3>Edit Account</h3>
-                  </Grid.Column>
+                  <Grid.Row>
+                    <Grid.Column mobile={6} computer={3}>
+                      {user.profileImage && (
+                        <Image
+                          src={user.profileImage}
+                          size="tiny"
+                          shape="circular"
+                        />
+                      )}
+                    </Grid.Column>
+                    <Grid.Column
+                      mobile={10}
+                      computer={13}
+                      verticalAlign="middle"
+                    >
+                      <Dropzone
+                        className="none"
+                        multiple={false}
+                        accept="image/*"
+                        onDrop={this.onDrop}
+                      >
+                        <Button
+                          type="button"
+                          basic
+                          color="vk"
+                          content="Select An Image"
+                          icon="upload"
+                        />
+                        <FileLabel>{file && file.name}</FileLabel>
+                      </Dropzone>
+                    </Grid.Column>
+                  </Grid.Row>
                   <Grid.Column mobile={16} computer={8}>
                     <Form.Field>
                       <label>First Name</label>
@@ -106,35 +143,6 @@ class EditAccount extends Component {
                       <Input defaultValue={user.email} id="email" required />
                     </Form.Field>
                   </Grid.Column>
-                  <Grid.Column mobile={16} computer={8}>
-                    <Form.Field>
-                      <label>Test Field</label>
-                      <Input />
-                    </Form.Field>
-                  </Grid.Column>
-                  <Grid.Column mobile={16} computer={8}>
-                    <Form.Field>
-                      <label>Test Field</label>
-                      <Input />
-                    </Form.Field>
-                  </Grid.Column>
-                  <Grid.Row>
-                    <Grid.Column mobile={12} computer={12}>
-                      <Button icon="upload" />
-                      <input
-                        id="file-upload"
-                        type="file"
-                        accept="image/*"
-                        ref="upload"
-                        onChange={this.onDrop}
-                      />
-                    </Grid.Column>
-                    <Grid.Column mobile={4} computer={4}>
-                      {user.profileImage && (
-                        <Image src={user.profileImage} size="tiny" />
-                      )}
-                    </Grid.Column>
-                  </Grid.Row>
                   <Grid.Column mobile={16} computer={16}>
                     <Message
                       success
