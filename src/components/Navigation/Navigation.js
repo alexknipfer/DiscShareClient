@@ -75,20 +75,24 @@ class Navigation extends Component {
   }
 
   renderUserNav = () => {
+    const { push } = this.props.history
     return (
       <div>
         <MenuOverlay open={this.showMenu} triggerClose={this.triggerMenu} />
-        <Nav pointing inverted fixed="top">
-          <Link to="/">
-            <Menu.Item link>Home</Menu.Item>
-          </Link>
-          <Link to="/dashboard">
-            <Menu.Item link>Dashboard</Menu.Item>
-          </Link>
-          <Link to="/editAccount">
-            <Menu.Item link>Edit Account</Menu.Item>
-          </Link>
-          <Menu.Item link onClick={this.logout}>
+        <Nav pointing inverted stackable fixed="top">
+          <Menu.Item link onClick={() => push('/editAccount')}>
+            <img src="/images/elliot.jpg" style={{ borderRadius: '50%' }} />
+          </Menu.Item>
+
+          <Menu.Item link onClick={() => push('/')}>
+            Home
+          </Menu.Item>
+
+          <Menu.Item link onClick={() => push('/dashboard')}>
+            Dashboard
+          </Menu.Item>
+
+          <Menu.Item link onClick={this.logout} position="right">
             Logout
           </Menu.Item>
           <MobileMenuItem
