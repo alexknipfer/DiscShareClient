@@ -87,7 +87,7 @@ class EditAccount extends Component {
               >
                 <Grid>
                   <Grid.Row>
-                    <Grid.Column mobile={6} computer={3}>
+                    <Grid.Column mobile={6} tablet={3} computer={3}>
                       {user.profileImage && (
                         <Image
                           src={user.profileImage}
@@ -98,6 +98,7 @@ class EditAccount extends Component {
                     </Grid.Column>
                     <Grid.Column
                       mobile={10}
+                      tablet={13}
                       computer={13}
                       verticalAlign="middle"
                     >
