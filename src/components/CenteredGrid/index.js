@@ -9,7 +9,7 @@ export const CenteredGrid = styled(Grid)`
 export const CenteredCardGrid = styled(Grid)`
   display: flex;
   justify-content: center;
-  margin-top: 100px !important;
+  margin-top: 50px !important;
 `
 
 export const CenteredColumn = styled(Grid.Column)`
