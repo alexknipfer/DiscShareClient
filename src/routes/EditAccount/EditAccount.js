@@ -42,7 +42,6 @@ class EditAccount extends Component {
   onDrop = async files => EditAccountViewStore.updateFile(files[0])
 
   handleSubmit = async userId => {
-    console.log('SUBMIT!!!')
     const { editAccount, signS3, user } = this.props
     const { file } = EditAccountViewStore
     let profileImage = user.profileImage || ''
