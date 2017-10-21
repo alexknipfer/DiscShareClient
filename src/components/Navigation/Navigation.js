@@ -52,15 +52,17 @@ class Navigation extends Component {
       <div>
         <MenuOverlay open={this.showMenu} triggerClose={this.triggerMenu} />
         <Nav pointing inverted fixed="top">
-          <Link to="/">
-            <Menu.Item link>Home</Menu.Item>
-          </Link>
-          <Link to="/register">
-            <Menu.Item link>Register</Menu.Item>
-          </Link>
-          <Link to="/login">
-            <Menu.Item link>Login</Menu.Item>
-          </Link>
+          <Menu.Item link>
+            <Link to="/">Home</Link>
+          </Menu.Item>
+          <Menu.Item link>
+            <Link to="/register">Register</Link>
+          </Menu.Item>
+
+          <Menu.Item link>
+            <Link to="/login">Login</Link>
+          </Menu.Item>
+
           <MobileMenuItem
             link
             position="right"
@@ -81,19 +83,23 @@ class Navigation extends Component {
         <MenuOverlay open={this.showMenu} triggerClose={this.triggerMenu} />
         <Nav pointing inverted stackable fixed="top">
           <Menu.Item link onClick={() => push('/editAccount')}>
-            <img src="/images/elliot.jpg" style={{ borderRadius: '50%' }} />
+            <img
+              src="/images/elliot.jpg"
+              alt="profile-img"
+              style={{ borderRadius: '50%' }}
+            />
           </Menu.Item>
 
-          <Menu.Item link onClick={() => push('/')}>
-            Home
+          <Menu.Item link>
+            <Link to="/">Home</Link>
           </Menu.Item>
 
-          <Menu.Item link onClick={() => push('/dashboard')}>
-            Dashboard
+          <Menu.Item link>
+            <Link to="/dashboard">Dashboard</Link>
           </Menu.Item>
 
           <Menu.Item link onClick={this.logout} position="right">
-            Logout
+            logout
           </Menu.Item>
           <MobileMenuItem
             link
