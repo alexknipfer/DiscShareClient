@@ -1,4 +1,4 @@
 import RegisterView from './components/RegisterView'
-import withDefaultLayout from '../../hocs/withDefaultLayout'
+import { pageWithUser } from '../../hocs/page'
 
-export default withDefaultLayout(RegisterView)
+export default pageWithUser(RegisterView)

@@ -1,4 +1,4 @@
 import LoginView from './components/LoginView'
-import withDefaultLayout from '../../hocs/withDefaultLayout'
+import { pageWithUser } from '../../hocs/page'
 
-export default withDefaultLayout(LoginView)
+export default pageWithUser(LoginView)

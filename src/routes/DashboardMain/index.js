@@ -1,4 +1,4 @@
 import DashboardMainView from './components/DashboardMainView'
-import { pageWithAuthAndUserData } from '../../hocs/page'
+import { pageWithUser } from '../../hocs/page'
 
-export default pageWithAuthAndUserData(DashboardMainView)
+export default pageWithUser(DashboardMainView)

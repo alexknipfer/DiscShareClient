@@ -1,5 +1,5 @@
 import EditAccount from './EditAccount'
 import React from 'react'
-import { pageWithAuthAndUserData } from '../../hocs/page'
+import { pageWithUser } from '../../hocs/page'
 
-export default pageWithAuthAndUserData(props => <EditAccount {...props} />)
+export default pageWithUser(props => <EditAccount {...props} />)

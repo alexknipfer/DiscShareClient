@@ -1,4 +1,4 @@
 import DiscsDashboardView from './components/DiscsDashboardView'
-import { pageWithDefaultLayout } from '../../hocs/page'
+import { pageWithUser } from '../../hocs/page'
 
-export default pageWithDefaultLayout(DiscsDashboardView)
+export default pageWithUser(DiscsDashboardView)

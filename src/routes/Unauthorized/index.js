@@ -1,4 +1,4 @@
-import { pageWithDefaultLayout } from '../../hocs/page'
 import Unauthorized from './Unauthorized'
+import { pageWithUser } from '../../hocs/page'
 
-export default pageWithDefaultLayout(Unauthorized)
+export default pageWithUser(Unauthorized)
