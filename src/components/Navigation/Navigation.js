@@ -90,16 +90,16 @@ class Navigation extends Component {
             />
           </Menu.Item>
 
-          <Menu.Item link>
-            <Link to="/">Home</Link>
+          <Menu.Item link onClick={() => push('/')}>
+            Home
           </Menu.Item>
 
-          <Menu.Item link>
-            <Link to="/dashboard">Dashboard</Link>
+          <Menu.Item link onClick={() => push('/dashboard')}>
+            Dashboard
           </Menu.Item>
 
           <Menu.Item link onClick={this.logout} position="right">
-            logout
+            Logout
           </Menu.Item>
           <MobileMenuItem
             link
