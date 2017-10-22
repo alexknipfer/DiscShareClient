@@ -77,14 +77,16 @@ class Navigation extends Component {
   }
 
   renderUserNav = () => {
+    const { user: { profileImage } } = this.props
     const { push } = this.props.history
+
     return (
       <div>
         <MenuOverlay open={this.showMenu} triggerClose={this.triggerMenu} />
         <Nav pointing inverted stackable fixed="top">
           <Menu.Item link onClick={() => push('/editAccount')}>
             <img
-              src="/images/elliot.jpg"
+              src={profileImage}
               alt="profile-img"
               style={{ borderRadius: '50%' }}
             />

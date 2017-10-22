@@ -1,20 +1,20 @@
 import { Button, Form, Grid, Image, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
-import axios from 'axios'
-import Dropzone from 'react-dropzone'
-import styled from 'styled-components'
+import { compose, graphql } from 'react-apollo'
 
-import EditAccountViewStore from './stores/EditAccountViewStore'
-import formatFileName from '../../lib/formatters/formatFileName'
 import { CenteredCardGrid } from '../../components/CenteredGrid'
-import SignS3Mutation from './mutations/signS3'
+import Dropzone from 'react-dropzone'
 import EditAccountMutation from './mutations/editAccount'
+import EditAccountViewStore from './stores/EditAccountViewStore'
 import GetUserByIdQuery from './queries/getUserById'
 import { LocalStorage } from '../../utils/LocalStorage'
 import PaddedCard from '../../components/PaddedCard'
 import PropTypes from 'prop-types'
-import { compose, graphql } from 'react-apollo'
+import SignS3Mutation from './mutations/signS3'
+import axios from 'axios'
+import formatFileName from '../../lib/formatters/formatFileName'
 import { observer } from 'mobx-react'
+import styled from 'styled-components'
 
 const FileLabel = styled.div`
   font-size: 10px;
