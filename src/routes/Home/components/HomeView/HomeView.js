@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import { observable, action } from 'mobx'
-import { observer } from 'mobx-react'
+import { action, observable } from 'mobx'
 
-import { CenteredGrid } from '../../../../components/CenteredGrid'
-import { Grid } from 'semantic-ui-react'
 import CenterLoader from '../../../../components/CenteredLoader'
+import { CenteredGrid } from '../../../../components/CenteredGrid'
+import DefaultLayout from '../../../../layouts/DefaultLayout'
+import GoogleMapsService from '../../../../lib/services/GoogleMapsService'
+import { Grid } from 'semantic-ui-react'
 import HomeStore from '../../stores/HomeStore'
 import SearchBar from '../SearchBar'
+import { observer } from 'mobx-react'
 import queryString from 'query-string'
-import GoogleMapsService from '../../../../lib/services/GoogleMapsService'
 
 @observer
 export default class Home extends Component {
@@ -37,13 +38,15 @@ export default class Home extends Component {
       return <CenterLoader />
     } else {
       return (
-        <CenteredGrid centered>
-          <Grid.Row>
-            <Grid.Column mobile={14} tablet={10} computer={8}>
-              <SearchBar selectLocation={this.selectLocation} />
-            </Grid.Column>
-          </Grid.Row>
-        </CenteredGrid>
+        <DefaultLayout>
+          <CenteredGrid centered>
+            <Grid.Row>
+              <Grid.Column mobile={14} tablet={10} computer={8}>
+                <SearchBar selectLocation={this.selectLocation} />
+              </Grid.Column>
+            </Grid.Row>
+          </CenteredGrid>
+        </DefaultLayout>
       )
     }
   }
