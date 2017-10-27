@@ -39,13 +39,15 @@ export default class Home extends Component {
     } else {
       return (
         <DefaultLayout>
-          <CenteredGrid centered>
-            <Grid.Row>
-              <Grid.Column mobile={14} tablet={10} computer={8}>
-                <SearchBar selectLocation={this.selectLocation} />
-              </Grid.Column>
-            </Grid.Row>
-          </CenteredGrid>
+          {() => (
+            <CenteredGrid centered>
+              <Grid.Row>
+                <Grid.Column mobile={14} tablet={10} computer={8}>
+                  <SearchBar selectLocation={this.selectLocation} />
+                </Grid.Column>
+              </Grid.Row>
+            </CenteredGrid>
+          )}
         </DefaultLayout>
       )
     }

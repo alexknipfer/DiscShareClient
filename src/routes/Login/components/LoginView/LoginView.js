@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import DefaultLayout from '../../../../layouts/DefaultLayout'
 import LoginForm from '../LoginForm'
 import LoginFormValidator from '../../../../lib/Forms/FormValidation/Login'
 import PropTypes from 'prop-types'
@@ -14,13 +15,17 @@ class Login extends Component {
   render() {
     const { history } = this.props
     return (
-      <LoginForm
-        detectValues={LoginFormValidator.detectValues}
-        onSubmit={this.onSubmitForm}
-        form={LoginFormValidator.form}
-        onChange={LoginFormValidator.onFieldChange}
-        history={history}
-      />
+      <DefaultLayout>
+        {() => (
+          <LoginForm
+            detectValues={LoginFormValidator.detectValues}
+            onSubmit={this.onSubmitForm}
+            form={LoginFormValidator.form}
+            onChange={LoginFormValidator.onFieldChange}
+            history={history}
+          />
+        )}
+      </DefaultLayout>
     )
   }
 }

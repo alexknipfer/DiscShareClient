@@ -13,7 +13,7 @@ const DefaultLayout = props => {
     return (
       <div>
         <Navigation {...props} />
-        {children}
+        {children({ user })}
       </div>
     )
   }

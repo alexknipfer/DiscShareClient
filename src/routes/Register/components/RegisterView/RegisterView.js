@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import DefaultLayout from '../../../../layouts/DefaultLayout'
 import PropTypes from 'prop-types'
 import RegisterForm from '../RegisterForm'
 import RegisterStore from '../../stores/RegisterStore'
@@ -14,12 +15,16 @@ class Register extends Component {
   render() {
     const { history } = this.props
     return (
-      <RegisterForm
-        detectValues={RegisterStore.detectValues}
-        form={RegisterStore.form}
-        onChange={RegisterStore.onFieldChange}
-        history={history}
-      />
+      <DefaultLayout>
+        {() => (
+          <RegisterForm
+            detectValues={RegisterStore.detectValues}
+            form={RegisterStore.form}
+            onChange={RegisterStore.onFieldChange}
+            history={history}
+          />
+        )}
+      </DefaultLayout>
     )
   }
 }

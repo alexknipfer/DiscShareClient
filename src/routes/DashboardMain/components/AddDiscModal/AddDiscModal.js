@@ -1,13 +1,10 @@
 import { Button, Form, Modal } from 'semantic-ui-react'
 import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
-import { observer } from 'mobx-react'
 
-import AddDiscMutation from '../../mutations/addDisc'
 import AddDiscModalFormValidator from '../../../../lib/Forms/FormValidation/AddDiscModal'
-import DiscsQuery from '../../queries/discs'
-import TextInput from '../../../../lib/Forms/InputTypes/TextInput'
 import LocationInput from '../../../../lib/Forms/InputTypes/LocationInput'
+import TextInput from '../../../../lib/Forms/InputTypes/TextInput'
+import { observer } from 'mobx-react'
 
 const viewStore = {
   selectedLocation: null
@@ -92,36 +89,4 @@ class AddDiscModal extends Component {
   }
 }
 
-export default graphql(AddDiscMutation, {
-  props: ({ mutate }) => ({
-    addDisc: (
-      discName,
-      locationDescription,
-      longitude,
-      latitude,
-      nameOnDisc,
-      userId
-    ) => {
-      return mutate({
-        variables: {
-          discName,
-          locationDescription,
-          longitude,
-          latitude,
-          nameOnDisc,
-          userId
-        }
-      })
-    }
-  }),
-  options: props => ({
-    refetchQueries: [
-      {
-        query: DiscsQuery,
-        variables: {
-          userId: props.userId
-        }
-      }
-    ]
-  })
-})(AddDiscModal)
+export default AddDiscModal

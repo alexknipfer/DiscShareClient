@@ -4,12 +4,12 @@ import AuthorizedRoute from '../components/AuthorizedRoute/'
 import DashboardMain from './DashboardMain'
 import DiscsDashboard from './DiscsDashboard'
 import EditAccount from './EditAccount'
+import ForgotPassword from './ForgotPassword'
 import Home from './Home'
 import Login from './Login'
-import ForgotPassword from './ForgotPassword'
-import ResetPassword from './ResetPassword'
 import React from 'react'
 import Register from './Register'
+import ResetPassword from './ResetPassword'
 import Unauthorized from './Unauthorized'
 
 const App = () => {
@@ -23,7 +23,11 @@ const App = () => {
         <Route exact path="/resetPassword" component={ResetPassword} />
         <AuthorizedRoute exact path="/dashboard" component={DashboardMain} />
         <Route path="/discsdashboard" component={DiscsDashboard} />
-        <AuthorizedRoute exact path="/editAccount" component={EditAccount} />
+        <AuthorizedRoute
+          exact
+          path="/editAccount/:id"
+          component={EditAccount}
+        />
         <Route path="/unauthorized" component={Unauthorized} />
       </Switch>
     </BrowserRouter>
