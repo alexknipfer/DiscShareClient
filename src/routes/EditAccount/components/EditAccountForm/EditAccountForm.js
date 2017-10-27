@@ -1,18 +1,14 @@
 import { Button, Form, Grid, Image, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
-import { compose, graphql } from 'react-apollo'
 
-import { CenteredCardGrid } from '../../components/CenteredGrid'
+import { CenteredCardGrid } from '../../../../components/CenteredGrid'
 import Dropzone from 'react-dropzone'
-import EditAccountMutation from './mutations/editAccount'
-import EditAccountViewStore from './stores/EditAccountViewStore'
-import GetUserByIdQuery from './queries/getUserById'
-import { LocalStorage } from '../../utils/LocalStorage'
-import PaddedCard from '../../components/PaddedCard'
+import EditAccountViewStore from '../../stores/EditAccountViewStore'
+import { LocalStorage } from '../../../../utils/LocalStorage'
+import PaddedCard from '../../../../components/PaddedCard'
 import PropTypes from 'prop-types'
-import SignS3Mutation from './mutations/signS3'
 import axios from 'axios'
-import formatFileName from '../../lib/formatters/formatFileName'
+import formatFileName from '../../../../lib/formatters/formatFileName'
 import { observer } from 'mobx-react'
 import styled from 'styled-components'
 
@@ -22,7 +18,7 @@ const FileLabel = styled.div`
 `
 
 @observer
-class EditAccount extends Component {
+class EditAccountForm extends Component {
   static propTypes = {
     auth: PropTypes.bool,
     user: PropTypes.object,
@@ -162,27 +158,4 @@ class EditAccount extends Component {
   }
 }
 
-export default compose(
-  graphql(EditAccountMutation, {
-    props: ({ mutate }) => ({
-      editAccount: (userId, email, firstName, location, profileImage) =>
-        mutate({
-          variables: { userId, email, firstName, location, profileImage }
-        })
-    }),
-    options: ({ user }) => ({
-      refetchQueries: [
-        {
-          query: GetUserByIdQuery,
-          variables: { userId: user.id }
-        }
-      ]
-    })
-  }),
-  graphql(SignS3Mutation, {
-    props: ({ mutate }) => ({
-      signS3: (filename, filetype) =>
-        mutate({ variables: { filename, filetype } })
-    })
-  })
-)(EditAccount)
+export default EditAccountForm

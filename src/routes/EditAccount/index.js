@@ -1,3 +1,3 @@
-import EditAccount from './EditAccount'
+import EditAccountView from './components/EditAccountView'
 
-export default EditAccount
+export default EditAccountView
