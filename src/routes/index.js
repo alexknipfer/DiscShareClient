@@ -23,11 +23,7 @@ const App = () => {
         <Route exact path="/resetPassword" component={ResetPassword} />
         <AuthorizedRoute exact path="/dashboard" component={DashboardMain} />
         <Route path="/discsdashboard" component={DiscsDashboard} />
-        <AuthorizedRoute
-          exact
-          path="/editAccount/:id"
-          component={EditAccount}
-        />
+        <AuthorizedRoute exact path="/editAccount" component={EditAccount} />
         <Route path="/unauthorized" component={Unauthorized} />
       </Switch>
     </BrowserRouter>
