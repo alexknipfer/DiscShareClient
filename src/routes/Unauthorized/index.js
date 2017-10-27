@@ -1,4 +1,3 @@
-import Unauthorized from './Unauthorized'
-import { pageWithUser } from '../../hocs/page'
+import UnauthorizedView from './components/UnauthorizedView'
 
-export default pageWithUser(Unauthorized)
+export default UnauthorizedView

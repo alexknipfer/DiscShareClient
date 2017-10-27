@@ -4,6 +4,9 @@ import { LocalStorage } from '../../utils/LocalStorage'
 import Navigation from '../../components/Navigation'
 import React from 'react'
 import { graphql } from 'react-apollo'
+import styled from 'styled-components'
+
+const Container = styled.div`padding-top: 80px;`
 
 const DefaultLayout = props => {
   const { children, loading, user } = props
@@ -13,7 +16,7 @@ const DefaultLayout = props => {
     return (
       <div>
         <Navigation {...props} />
-        {children({ user })}
+        <Container>{children({ user })}</Container>
       </div>
     )
   }
