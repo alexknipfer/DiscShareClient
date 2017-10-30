@@ -1,126 +1,173 @@
-import { Button, Form, Grid, Message } from 'semantic-ui-react'
+import { Button, Form, Grid, Icon, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
 import { action, observable } from 'mobx'
 
 import { CenteredCardGrid } from '../../../../components/CenteredGrid'
+import { Formik } from 'formik'
 import { LocalStorage } from '../../../../utils/LocalStorage'
 import PaddedCard from '../../../../components/PaddedCard'
-import PropTypes from 'prop-types'
-import TextInput from '../../../../lib/Forms/InputTypes/TextInput'
 import { observer } from 'mobx-react'
+import styled from 'styled-components'
+
+const ErrorMessage = styled.div`
+  color: red;
+  font-size: 12px;
+  padding-left: 5px;
+`
 
 @observer
 class RegisterForm extends Component {
-  @observable errorMessageVisible = false
-  @observable errorMessage = null
+  // @observable errorMessageVisible = false
+  // @observable errorMessage = null
 
-  static propTypes = {
-    form: PropTypes.object,
-    detectValues: PropTypes.func,
-    login: PropTypes.func,
-    onChange: PropTypes.func
-  }
+  // @action
+  // displayErrMessage = err => {
+  //   this.errorMessageVisible = !this.errorMessageVisible
+  //   this.errorMessage = err
+  // }
 
-  componentDidMount() {
-    const email = document.getElementById('email').value
-    const username = document.getElementById('username').value
-    const password = document.getElementById('password').value
-    this.props.detectValues({ email, username, password })
-  }
+  handleSubmit = async (register, values, setSubmitting, setErrors) => {
+    console.log('HELLO')
+    // const email = values.email
+    // const username = values.username
+    // const password = values.password
+    // const confirmPass = values.confirmPassword
 
-  @action
-  displayErrMessage = err => {
-    this.errorMessageVisible = !this.errorMessageVisible
-    this.errorMessage = err
-  }
-
-  handleSubmit = async register => {
-    const email = document.getElementById('email').value
-    const username = document.getElementById('username').value
-    const password = document.getElementById('password').value
-    const confirmPass = document.getElementById('confirm-password').value
-
-    if (password !== confirmPass) {
-      this.displayErrMessage('Passwords do not match.')
-    } else {
-      try {
-        const user = await register(email, username, password)
-        LocalStorage.saveToken(user.data.register)
-        this.props.history.push('/')
-      } catch (err) {
-        const { graphQLErrors } = err
-        if (graphQLErrors[0]) {
-          this.displayErrMessage(graphQLErrors[0].message)
-        } else {
-          this.displayErrMessage(err.message)
-        }
-      }
-    }
+    // if (password !== confirmPass) {
+    //   this.displayErrMessage('Passwords do not match.')
+    // } else {
+    //   try {
+    //     setSubmitting(true)
+    //     const user = await register(email, username, password)
+    //     LocalStorage.saveToken(user.data.register)
+    //     this.props.history.push('/')
+    //   } catch (err) {
+    //     setSubmitting(false)
+    //     const { graphQLErrors } = err
+    //     if (graphQLErrors[0]) {
+    //       this.displayErrMessage(graphQLErrors[0].message)
+    //     } else {
+    //       this.displayErrMessage(err.message)
+    //     }
+    //   }
+    // }
   }
 
   render() {
-    const { form, register, onChange } = this.props
-    const { fields, meta } = form
+    const { register } = this.props
+
     return (
-      <CenteredCardGrid>
-        <Grid.Column mobile={14} computer={5}>
-          <PaddedCard fluid>
-            <h3>Register</h3>
-            <Form
-              onSubmit={() => this.handleSubmit(register)}
-              error={this.errorMessageVisible}
-            >
-              <Form.Field>
-                <TextInput
-                  id="email"
-                  name="email"
-                  value={fields.email.value}
-                  errorMessage={fields.email.error}
-                  onChange={onChange}
-                  placeholder="Email"
-                />
-              </Form.Field>
-              <Form.Field>
-                <TextInput
-                  id="username"
-                  name="username"
-                  value={fields.username.value}
-                  errorMessage={fields.username.error}
-                  onChange={onChange}
-                  placeholder="Username"
-                />
-              </Form.Field>
-              <Form.Field>
-                <TextInput
-                  id="password"
-                  type="password"
-                  name="password"
-                  value={fields.password.value}
-                  errorMessage={fields.password.error}
-                  onChange={onChange}
-                  placeholder="Password"
-                />
-              </Form.Field>
-              <Form.Field>
-                <TextInput
-                  id="confirm-password"
-                  type="password"
-                  name="confirmPassword"
-                  value={fields.confirmPassword.value}
-                  errorMessage={fields.confirmPassword.error}
-                  onChange={onChange}
-                  placeholder="Confirm Password"
-                />
-              </Form.Field>
-              {meta.error && <div>{meta.error}</div>}
-              <Message error content={this.errorMessage} />
-              <Button disabled={!meta.isValid} type="submit">
-                Register
-              </Button>
-            </Form>
-          </PaddedCard>
-        </Grid.Column>
-      </CenteredCardGrid>
+      <Formik
+        initialValues={{
+          email: '',
+          username: '',
+          password: '',
+          confirmPassword: ''
+        }}
+        validate={values => {
+          let errors = {}
+          if (!values.email) {
+            errors.email = 'Required'
+          }
+          if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+            errors.email = 'Invalid email address'
+          }
+          if (!values.username) {
+            errors.username = 'Required'
+          }
+          if (!values.password) {
+            errors.password = 'Required'
+          }
+          return errors
+        }}
+        onSubmit={async (values, { setSubmitting, setErrors }) => {
+          await this.handleSubmit(register, values, setSubmitting, setErrors)
+        }}
+        render={({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleSubmit,
+          isSubmitting
+        }) => (
+          <CenteredCardGrid>
+            <Grid.Column mobile={14} computer={5}>
+              <PaddedCard fluid>
+                <h3>Register</h3>
+                <Form
+                  error={this.errorMessageVisible}
+                  loading={isSubmitting}
+                  onSubmit={handleSubmit}
+                >
+                  <Form.Input
+                    type="text"
+                    name="email"
+                    onChange={handleChange}
+                    value={values.email}
+                    icon={
+                      errors.email && (
+                        <Icon name="exclamation circle" color="red" />
+                      )
+                    }
+                    placeholder="Email"
+                  />
+                  {touched.email &&
+                    errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+                  <Form.Input
+                    name="username"
+                    onChange={handleChange}
+                    value={values.username}
+                    icon={
+                      touched.username &&
+                      errors.username && (
+                        <Icon name="exclamation circle" color="red" />
+                      )
+                    }
+                    placeholder="Username"
+                  />
+                  {errors.username && (
+                    <ErrorMessage>{errors.username}</ErrorMessage>
+                  )}
+                  <Form.Input
+                    name="password"
+                    error={touched.password && errors.password ? true : false}
+                    onChange={handleChange}
+                    value={values.password}
+                    icon={
+                      touched.password &&
+                      errors.password && (
+                        <Icon name="exclamation circle" color="red" />
+                      )
+                    }
+                    placeholder="Password"
+                  />
+                  <Form.Input
+                    name="confirmPassword"
+                    error={
+                      touched.confirmPassword && errors.confirmPassword
+                        ? true
+                        : false
+                    }
+                    onChange={handleChange}
+                    value={values.confirmPassword}
+                    icon={
+                      touched.confirmPassword &&
+                      errors.confirmPassword && (
+                        <Icon name="exclamation circle" color="red" />
+                      )
+                    }
+                    placeholder="Confirm Password"
+                  />
+                  {console.log('ERRORS: ', errors, touched)}
+                  <Message error content={errors.submitError} />
+                  <Button type="submit">Register</Button>
+                </Form>
+              </PaddedCard>
+            </Grid.Column>
+          </CenteredCardGrid>
+        )}
+      />
     )
   }
 }
