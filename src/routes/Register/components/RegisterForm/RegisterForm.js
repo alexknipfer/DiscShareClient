@@ -1,6 +1,5 @@
 import { Button, Form, Grid, Icon, Input, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
-import { action, observable } from 'mobx'
 
 import { CenteredCardGrid } from '../../../../components/CenteredGrid'
 import { Formik } from 'formik'
@@ -17,40 +16,31 @@ const ErrorMessage = styled.div`
 
 @observer
 class RegisterForm extends Component {
-  // @observable errorMessageVisible = false
-  // @observable errorMessage = null
-
-  // @action
-  // displayErrMessage = err => {
-  //   this.errorMessageVisible = !this.errorMessageVisible
-  //   this.errorMessage = err
-  // }
-
   handleSubmit = async (register, values, setSubmitting, setErrors) => {
-    console.log('HELLO')
-    // const email = values.email
-    // const username = values.username
-    // const password = values.password
-    // const confirmPass = values.confirmPassword
+    const email = values.email
+    const username = values.username
+    const password = values.password
+    const confirmPass = values.confirmPassword
 
-    // if (password !== confirmPass) {
-    //   this.displayErrMessage('Passwords do not match.')
-    // } else {
-    //   try {
-    //     setSubmitting(true)
-    //     const user = await register(email, username, password)
-    //     LocalStorage.saveToken(user.data.register)
-    //     this.props.history.push('/')
-    //   } catch (err) {
-    //     setSubmitting(false)
-    //     const { graphQLErrors } = err
-    //     if (graphQLErrors[0]) {
-    //       this.displayErrMessage(graphQLErrors[0].message)
-    //     } else {
-    //       this.displayErrMessage(err.message)
-    //     }
-    //   }
-    // }
+    if (password !== confirmPass) {
+      setSubmitting(false)
+      setErrors({ submitError: 'Passwords do not match.' })
+    } else {
+      try {
+        const user = await register(email, username, password)
+        LocalStorage.saveToken(user.data.register)
+        setSubmitting(false)
+        this.props.history.push('/')
+      } catch (err) {
+        setSubmitting(false)
+        const { graphQLErrors } = err
+        if (graphQLErrors[0]) {
+          setErrors({ submitError: graphQLErrors[0].message })
+        } else {
+          setErrors({ submitError: err.message })
+        }
+      }
+    }
   }
 
   render() {
@@ -78,6 +68,9 @@ class RegisterForm extends Component {
           if (!values.password) {
             errors.password = 'Required'
           }
+          if (!values.confirmPassword) {
+            errors.confirmPassword = 'Required'
+          }
           return errors
         }}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
@@ -96,70 +89,81 @@ class RegisterForm extends Component {
               <PaddedCard fluid>
                 <h3>Register</h3>
                 <Form
-                  error={this.errorMessageVisible}
+                  error={errors.submitError ? true : false}
                   loading={isSubmitting}
                   onSubmit={handleSubmit}
                 >
-                  <Form.Input
-                    type="text"
-                    name="email"
-                    onChange={handleChange}
-                    value={values.email}
-                    icon={
+                  <Form.Field>
+                    <Input
+                      type="email"
+                      name="email"
+                      onChange={handleChange}
+                      value={values.email}
+                      icon={
+                        errors.email && (
+                          <Icon name="exclamation circle" color="red" />
+                        )
+                      }
+                      placeholder="Email"
+                    />
+                    {touched.email &&
                       errors.email && (
-                        <Icon name="exclamation circle" color="red" />
-                      )
-                    }
-                    placeholder="Email"
-                  />
-                  {touched.email &&
-                    errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
-                  <Form.Input
-                    name="username"
-                    onChange={handleChange}
-                    value={values.username}
-                    icon={
-                      touched.username &&
+                        <ErrorMessage>{errors.email}</ErrorMessage>
+                      )}
+                  </Form.Field>
+                  <Form.Field>
+                    <Input
+                      type="text"
+                      name="username"
+                      onChange={handleChange}
+                      value={values.username}
+                      icon={
+                        touched.username &&
+                        errors.username && (
+                          <Icon name="exclamation circle" color="red" />
+                        )
+                      }
+                      placeholder="Username"
+                    />
+                    {touched.username &&
                       errors.username && (
-                        <Icon name="exclamation circle" color="red" />
-                      )
-                    }
-                    placeholder="Username"
-                  />
-                  {errors.username && (
-                    <ErrorMessage>{errors.username}</ErrorMessage>
-                  )}
-                  <Form.Input
-                    name="password"
-                    error={touched.password && errors.password ? true : false}
-                    onChange={handleChange}
-                    value={values.password}
-                    icon={
-                      touched.password &&
+                        <ErrorMessage>{errors.username}</ErrorMessage>
+                      )}
+                  </Form.Field>
+                  <Form.Field>
+                    <Input
+                      type="password"
+                      name="password"
+                      onChange={handleChange}
+                      value={values.password}
+                      icon={
+                        touched.password &&
+                        errors.password && (
+                          <Icon name="exclamation circle" color="red" />
+                        )
+                      }
+                      placeholder="Password"
+                    />
+                    {touched.password &&
                       errors.password && (
-                        <Icon name="exclamation circle" color="red" />
-                      )
-                    }
-                    placeholder="Password"
-                  />
-                  <Form.Input
-                    name="confirmPassword"
-                    error={
-                      touched.confirmPassword && errors.confirmPassword
-                        ? true
-                        : false
-                    }
-                    onChange={handleChange}
-                    value={values.confirmPassword}
-                    icon={
-                      touched.confirmPassword &&
-                      errors.confirmPassword && (
-                        <Icon name="exclamation circle" color="red" />
-                      )
-                    }
-                    placeholder="Confirm Password"
-                  />
-                  {console.log('ERRORS: ', errors, touched)}
+                        <ErrorMessage>{errors.password}</ErrorMessage>
+                      )}
+                  </Form.Field>
+                  <Form.Field>
+                    <Input
+                      type="password"
+                      name="confirmPassword"
+                      onChange={handleChange}
+                      value={values.confirmPassword}
+                      icon={
+                        touched.confirmPassword &&
+                        errors.confirmPassword && (
+                          <Icon name="exclamation circle" color="red" />
+                        )
+                      }
+                      placeholder="Confirm Password"
+                    />
+                  </Form.Field>
                   <Message error content={errors.submitError} />
                   <Button type="submit">Register</Button>
                 </Form>
