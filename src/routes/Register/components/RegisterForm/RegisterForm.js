@@ -1,15 +1,13 @@
 import { Button, Form, Grid, Message } from 'semantic-ui-react'
 import React, { Component } from 'react'
 import { action, observable } from 'mobx'
-import { graphql } from 'react-apollo'
-import { observer } from 'mobx-react'
 
 import { CenteredCardGrid } from '../../../../components/CenteredGrid'
-import TextInput from '../../../../lib/Forms/InputTypes/TextInput'
 import { LocalStorage } from '../../../../utils/LocalStorage'
 import PaddedCard from '../../../../components/PaddedCard'
 import PropTypes from 'prop-types'
-import RegisterMutation from '../../mutations/register'
+import TextInput from '../../../../lib/Forms/InputTypes/TextInput'
+import { observer } from 'mobx-react'
 
 @observer
 class RegisterForm extends Component {
@@ -127,9 +125,4 @@ class RegisterForm extends Component {
   }
 }
 
-export default graphql(RegisterMutation, {
-  props: ({ mutate }) => ({
-    register: (email, username, password) =>
-      mutate({ variables: { email, username, password } })
-  })
-})(RegisterForm)
+export default RegisterForm
