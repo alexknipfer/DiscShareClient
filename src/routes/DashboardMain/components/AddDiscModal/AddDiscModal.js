@@ -1,90 +1,140 @@
-import { Button, Form, Modal } from 'semantic-ui-react'
+import { Button, Form, Icon, Input, Modal } from 'semantic-ui-react'
 import React, { Component } from 'react'
 
-import AddDiscModalFormValidator from '../../../../lib/Forms/FormValidation/AddDiscModal'
+import { Formik } from 'formik'
 import LocationInput from '../../../../lib/Forms/InputTypes/LocationInput'
-import TextInput from '../../../../lib/Forms/InputTypes/TextInput'
 import { observer } from 'mobx-react'
+import styled from 'styled-components'
 
-const viewStore = {
-  selectedLocation: null
-}
+const ErrorMessage = styled.div`
+  color: red;
+  font-size: 12px;
+  padding-left: 5px;
+`
 
 @observer
 class AddDiscModal extends Component {
-  selectLocation = location => (viewStore.selectedLocation = location)
+  selectedLocation = null
 
-  submitDisc = async (addDisc, userId) => {
-    const discName = document.getElementById('discName').value
-    const nameOnDisc = document.getElementById('nameOnDisc').value
+  selectLocation = location => (this.selectedLocation = location)
 
-    const { description, location: { lng, lat } } = viewStore.selectedLocation
+  submitDisc = async (addDisc, userId, values, setSubmitting, setErrors) => {
+    const discName = values.discName
+    const nameOnDisc = values.nameOnDisc
+
+    const { description, location: { lng, lat } } = this.selectedLocation
 
     try {
       await addDisc(discName, description, lng, lat, nameOnDisc, userId)
+      setSubmitting(false)
       this.props.toggleModal()
     } catch (error) {
+      setSubmitting(false)
       console.log('ERROR ADDING DISC: ', error)
     }
   }
 
   render() {
-    const { form, onFieldChange } = AddDiscModalFormValidator
-    const { fields, meta } = form
     const { toggleModal, modalOpen, addDisc, userId } = this.props
 
     return (
-      <Modal size="small" open={modalOpen} onClose={toggleModal}>
-        <Modal.Header>Add Disc</Modal.Header>
-        <Modal.Content>
-          <Form>
-            <Form.Field>
-              <TextInput
-                id="discName"
-                name="discName"
-                value={fields.discName.value}
-                errorMessage={fields.discName.error}
-                onChange={onFieldChange}
-                placeholder="Disc Name"
-              />
-            </Form.Field>
-            <Form.Field>
-              <LocationInput
-                id="discLocation"
-                name="discLocation"
-                value={fields.discLocation.value}
-                errorMessage={fields.discLocation.error}
-                onChange={onFieldChange}
-                selectLocation={this.selectLocation}
-                placeholder="Disc Location"
-              />
-            </Form.Field>
-            <Form.Field>
-              <TextInput
-                id="nameOnDisc"
-                name="nameOnDisc"
-                value={fields.nameOnDisc.value}
-                onChange={onFieldChange}
-                placeholder="Name on disc"
-              />
-            </Form.Field>
-            {meta.error && <div>{meta.error}</div>}
-            <Modal.Actions>
-              <Button negative onClick={toggleModal}>
-                Cancel
-              </Button>
-              <Button
-                disabled={!meta.isValid}
-                positive
-                icon="checkmark"
-                labelPosition="right"
-                content="Add"
-                onClick={() => this.submitDisc(addDisc, userId)}
-              />
-            </Modal.Actions>
-          </Form>
-        </Modal.Content>
-      </Modal>
+      <Formik
+        initialValues={{
+          discName: '',
+          discLocation: '',
+          nameOnDisc: ''
+        }}
+        validate={values => {
+          let errors = {}
+          if (!values.discName) {
+            errors.discName = 'Required'
+          }
+          return errors
+        }}
+        onSubmit={async (values, { setSubmitting, setErrors }) => {
+          await this.submitDisc(
+            addDisc,
+            userId,
+            values,
+            setSubmitting,
+            setErrors
+          )
+        }}
+        render={({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleSubmit,
+          isSubmitting
+        }) => (
+          <Modal size="small" open={modalOpen} onClose={toggleModal}>
+            <Modal.Header>Add Disc</Modal.Header>
+            <Modal.Content>
+              <Form
+                error={errors.submitError ? true : false}
+                loading={isSubmitting}
+                onSubmit={handleSubmit}
+              >
+                <Form.Field>
+                  <Input
+                    type="text"
+                    name="discName"
+                    onChange={handleChange}
+                    value={values.discName}
+                    icon={
+                      errors.discName && (
+                        <Icon name="exclamation circle" color="red" />
+                      )
+                    }
+                    placeholder="Disc Name"
+                  />
+                  {touched.discName &&
+                    errors.discName && (
+                      <ErrorMessage>{errors.discName}</ErrorMessage>
+                    )}
+                </Form.Field>
+                <Form.Field>
+                  <LocationInput
+                    id="discLocation"
+                    name="discLocation"
+                    onChange={handleChange}
+                    value={values.discLocation}
+                    placeholder="Disc Location"
+                    selectLocation={this.selectLocation}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Input
+                    type="text"
+                    name="nameOnDisc"
+                    onChange={handleChange}
+                    value={values.nameOnDisc}
+                    icon={
+                      errors.nameOnDisc && (
+                        <Icon name="exclamation circle" color="red" />
+                      )
+                    }
+                    placeholder="Name On Disc"
+                  />
+                </Form.Field>
+                <Modal.Actions>
+                  <Button negative onClick={toggleModal}>
+                    Cancel
+                  </Button>
+                  <Button
+                    positive
+                    icon="checkmark"
+                    labelPosition="right"
+                    content="Add"
+                    type="submit"
+                  />
+                </Modal.Actions>
+              </Form>
+            </Modal.Content>
+          </Modal>
+        )}
+      />
     )
   }
 }
