@@ -1,6 +1,6 @@
 import ForgotPasswordForm from './ForgotPasswordForm'
 import SendResetPasswordEmailMutation from '../mutations/sendResetPasswordEmail'
-import { graphql } from 'graphql'
+import { graphql } from 'react-apollo'
 
 export default graphql(SendResetPasswordEmailMutation, {
   props: ({ mutate }) => ({
