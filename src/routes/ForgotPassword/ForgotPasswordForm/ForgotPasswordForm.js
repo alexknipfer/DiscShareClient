@@ -16,7 +16,7 @@ const ErrorMessage = styled.div`
 
 @observer
 class ForgotPasswordForm extends Component {
-  @observable resetStatus = null
+  @observable resetStatus = false
   @observable errorMessage = null
   @observable errorMessageVisible = false
 
@@ -31,7 +31,7 @@ class ForgotPasswordForm extends Component {
     try {
       const result = await sendResetPasswordEmail(email)
       setSubmitting(false)
-      this.resetStatus = result.data.sendResetPasswordEmail
+      this.resetStatus = true
     } catch (err) {
       setSubmitting(false)
       const { graphQLErrors } = err
@@ -51,6 +51,8 @@ class ForgotPasswordForm extends Component {
 
   render() {
     const { sendResetPasswordEmail, history } = this.props
+
+    console.log('RESET STATUS ', this.resetStatus)
 
     return (
       <Formik
