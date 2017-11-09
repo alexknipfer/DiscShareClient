@@ -29,7 +29,7 @@ class ForgotPasswordForm extends Component {
     const email = values.email
 
     try {
-      const result = await sendResetPasswordEmail(email)
+      await sendResetPasswordEmail(email)
       setSubmitting(false)
       this.resetStatus = true
     } catch (err) {
