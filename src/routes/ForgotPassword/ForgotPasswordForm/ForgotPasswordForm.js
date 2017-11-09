@@ -52,8 +52,6 @@ class ForgotPasswordForm extends Component {
   render() {
     const { sendResetPasswordEmail, history } = this.props
 
-    console.log('RESET STATUS ', this.resetStatus)
-
     return (
       <Formik
         initialValues={{
