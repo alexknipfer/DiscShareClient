@@ -35,19 +35,10 @@ const link = ApolloLink.split(
   new HttpLink({ uri: httpUri })
 )
 
-console.log('REQ URL: ', httpUri)
-
 const client = new ApolloClient({
   link,
   cache: new InMemoryCache()
 })
-
-// const networkInterface = createNetworkInterface({
-//   uri:
-//     process.env.NODE_ENV === 'production'
-//       ? process.env.REACT_APP_API
-//       : 'http://localhost:4000/graphql'
-// })
 
 // eslint-disable-next-line
 injectGlobal`
