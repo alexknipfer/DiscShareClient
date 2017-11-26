@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-cache-inmemory": "^1.1.1",
+    "apollo-client": "^2.0.3",
+    "apollo-link": "^1.0.3",
+    "apollo-link-http": "^1.2.0",
+    "apollo-link-ws": "^1.0.1",
     "axios": "^0.16.2",
     "formik": "^0.9.4",
     "google-maps-react": "^1.1.0",
@@ -30,6 +35,7 @@
     "serve": "^6.0.2",
     "shelljs": "^0.7.8",
     "styled-components": "^2.1.1",
+    "subscriptions-transport-ws": "^0.9.1",
     "validatorjs": "^3.13.3"
   },
   "scripts": {
