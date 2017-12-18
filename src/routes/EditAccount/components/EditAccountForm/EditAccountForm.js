@@ -48,7 +48,7 @@ class EditAccountForm extends Component {
     const location = document.getElementById('location').value
 
     if (file) {
-      const response = await signS3(formatFileName(file.name), file.type)
+      const response = await signS3(formatFileName(file.name, 'profileImages'), file.type)
 
       const { signedRequest, url } = response.data.signS3
       profileImage = url

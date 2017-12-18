@@ -3,7 +3,7 @@ import { compose, graphql } from 'react-apollo'
 import EditAccountForm from './EditAccountForm'
 import EditAccountMutation from '../../mutations/editAccount'
 import GetUserByIdQuery from '../../queries/getUserById'
-import SignS3Mutation from '../../mutations/signS3'
+import SignS3Mutation from '../../../../mutations/signS3'
 
 export default compose(
   graphql(EditAccountMutation, {
