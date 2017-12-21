@@ -7,6 +7,7 @@ export default gql`
       discName
       locationDescription
       nameOnDisc
+      discImage
     }
   }
 `
