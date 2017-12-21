@@ -14,7 +14,8 @@ export default compose(
         longitude,
         latitude,
         nameOnDisc,
-        userId
+        userId,
+        discImage
       ) => {
         return mutate({
           variables: {
@@ -23,7 +24,8 @@ export default compose(
             longitude,
             latitude,
             nameOnDisc,
-            userId
+            userId,
+            discImage
           }
         })
       }
