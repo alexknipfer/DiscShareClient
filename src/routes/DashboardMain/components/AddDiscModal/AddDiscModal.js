@@ -16,6 +16,12 @@ const ErrorMessage = styled.div`
   padding-left: 5px;
 `
 
+const FileInfo = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  margin-bottom: 10px;
+`
 
 @observer
 class AddDiscModal extends Component {
@@ -28,20 +34,33 @@ class AddDiscModal extends Component {
   submitDisc = async (addDisc, userId, values, setSubmitting, setErrors) => {
     const discName = values.discName
     const nameOnDisc = values.nameOnDisc
+    let discImage
 
     const { signS3 } = this.props
     const { file } = AddDiscModalStore
     const { description, location: { lng, lat } } = this.selectedLocation
 
     if (file) {
-      const response = await signS3(formatFileName(file.name, 'discImages'), file.type)
+      const response = await signS3(
+        formatFileName(file.name, 'discImages'),
+        file.type
+      )
 
       const { signedRequest, url } = response.data.signS3
+      discImage = url
       await S3Uploader.uploadFile(file, signedRequest)
     }
 
     try {
-      await addDisc(discName, description, lng, lat, nameOnDisc, userId)
+      await addDisc(
+        discName,
+        description,
+        lng,
+        lat,
+        nameOnDisc,
+        userId,
+        discImage
+      )
       setSubmitting(false)
       this.props.toggleModal()
     } catch (error) {
@@ -52,6 +71,7 @@ class AddDiscModal extends Component {
 
   render() {
     const { toggleModal, modalOpen, addDisc, userId } = this.props
+    const { file } = AddDiscModalStore
 
     return (
       <Formik
@@ -84,88 +104,89 @@ class AddDiscModal extends Component {
           handleSubmit,
           isSubmitting
         }) => (
-            <Modal size="small" open={modalOpen} onClose={toggleModal}>
-              <Modal.Header>Add Disc</Modal.Header>
-              <Modal.Content>
-                <Form
-                  error={errors.submitError ? true : false}
-                  loading={isSubmitting}
-                  onSubmit={handleSubmit}
-                >
-                  <Form.Field>
-                    <Input
-                      type="text"
-                      name="discName"
-                      onChange={handleChange}
-                      value={values.discName}
-                      icon={
-                        errors.discName && (
-                          <Icon name="exclamation circle" color="red" />
-                        )
-                      }
-                      placeholder="Disc Name"
-                    />
-                    {touched.discName &&
+          <Modal size="small" open={modalOpen} onClose={toggleModal}>
+            <Modal.Header>Add Disc</Modal.Header>
+            <Modal.Content>
+              <Form
+                error={errors.submitError ? true : false}
+                loading={isSubmitting}
+                onSubmit={handleSubmit}
+              >
+                <Form.Field>
+                  <Input
+                    type="text"
+                    name="discName"
+                    onChange={handleChange}
+                    value={values.discName}
+                    icon={
                       errors.discName && (
-                        <ErrorMessage>{errors.discName}</ErrorMessage>
-                      )}
-                  </Form.Field>
-                  <Form.Field>
-                    <LocationInput
-                      id="discLocation"
-                      name="discLocation"
-                      onChange={handleChange}
-                      value={values.discLocation}
-                      placeholder="Disc Location"
-                      selectLocation={this.selectLocation}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <Input
-                      type="text"
-                      name="nameOnDisc"
-                      onChange={handleChange}
-                      value={values.nameOnDisc}
-                      icon={
-                        errors.nameOnDisc && (
-                          <Icon name="exclamation circle" color="red" />
-                        )
-                      }
-                      placeholder="Name On Disc"
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <Dropzone
-                      className="none"
-                      multiple={false}
-                      accept="image/*"
-                      onDrop={this.onDrop}
-                    >
-                      <Button
-                        type="button"
-                        basic
-                        color="vk"
-                        content="Select An Image"
-                        icon="upload"
-                      />
-                    </Dropzone>
-                  </Form.Field>
-                  <Modal.Actions>
-                    <Button negative onClick={toggleModal}>
-                      Cancel
-                  </Button>
+                        <Icon name="exclamation circle" color="red" />
+                      )
+                    }
+                    placeholder="Disc Name"
+                  />
+                  {touched.discName &&
+                    errors.discName && (
+                      <ErrorMessage>{errors.discName}</ErrorMessage>
+                    )}
+                </Form.Field>
+                <Form.Field>
+                  <LocationInput
+                    id="discLocation"
+                    name="discLocation"
+                    onChange={handleChange}
+                    value={values.discLocation}
+                    placeholder="Disc Location"
+                    selectLocation={this.selectLocation}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Input
+                    type="text"
+                    name="nameOnDisc"
+                    onChange={handleChange}
+                    value={values.nameOnDisc}
+                    icon={
+                      errors.nameOnDisc && (
+                        <Icon name="exclamation circle" color="red" />
+                      )
+                    }
+                    placeholder="Name On Disc"
+                  />
+                </Form.Field>
+                <FileInfo>
+                  <Dropzone
+                    className="none"
+                    multiple={false}
+                    accept="image/*"
+                    onDrop={this.onDrop}
+                  >
                     <Button
-                      positive
-                      icon="checkmark"
-                      labelPosition="right"
-                      content="Add"
-                      type="submit"
+                      type="button"
+                      basic
+                      color="vk"
+                      content="Select An Image"
+                      icon="upload"
                     />
-                  </Modal.Actions>
-                </Form>
-              </Modal.Content>
-            </Modal>
-          )}
+                  </Dropzone>
+                  <div>{file && file.name}</div>
+                </FileInfo>
+                <Modal.Actions>
+                  <Button negative onClick={toggleModal}>
+                    Cancel
+                  </Button>
+                  <Button
+                    positive
+                    icon="checkmark"
+                    labelPosition="right"
+                    content="Add"
+                    type="submit"
+                  />
+                </Modal.Actions>
+              </Form>
+            </Modal.Content>
+          </Modal>
+        )}
       />
     )
   }
