@@ -53,7 +53,7 @@ class DashboardGrid extends Component {
                 style={{ marginBottom: 20 }}
               >
                 <DashboardCard
-                  image="/images/elliot.jpg"
+                  image={disc.discImage}
                   header={disc.discName}
                   meta={disc.locationDescription}
                   description={`The name found on the disc was ${disc.nameOnDisc ||
