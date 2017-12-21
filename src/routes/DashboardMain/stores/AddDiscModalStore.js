@@ -11,7 +11,6 @@ class AddDiscModalStore {
   @action
   updateFile = file => {
     this.file = file
-    console.log('FILE: ', this.file)
   }
 }
 
