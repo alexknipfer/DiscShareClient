@@ -22,3 +22,5 @@ const App = () => (
     </BrowserRouter>
   </ApolloProvider>
 )
+
+export default App
