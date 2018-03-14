@@ -39,7 +39,7 @@
     "eject": "react-scripts eject",
     "now-start": "serve -s build",
     "deploy": "node deploy/now-deploy.js",
-    "format": "prettier --single-quote --no-semi --trailing-comma none --write \"src/**/*.js\""
+    "format": "prettier --write \"src/**/*.js\""
   },
   "devDependencies": {
     "enzyme": "^3.3.0",
