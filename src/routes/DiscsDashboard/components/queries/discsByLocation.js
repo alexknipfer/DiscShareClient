@@ -1,4 +1,4 @@
-import { gql } from 'react-apollo'
+import gql from 'graphql-tag'
 
 export default gql`
   query discsByLocation($longitude: String, $latitude: String, $radius: Int) {
