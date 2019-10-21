@@ -25,7 +25,7 @@
     "react": "^16.2.0",
     "react-apollo": "^2.0.4",
     "react-app-rewire-mobx": "^1.0.6",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.2.1",
     "react-dropzone": "^4.2.0",
     "react-geolocated": "^2.0.0",
     "react-geosuggest": "^2.3.6",
