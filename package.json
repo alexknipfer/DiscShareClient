@@ -7,7 +7,7 @@
     "apollo-client": "^2.2.7",
     "apollo-link": "^1.2.1",
     "apollo-link-http": "^1.5.3",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "formik": "^0.11.11",
     "google-maps-react": "^1.1.0",
     "graphql": "^0.13.1",
