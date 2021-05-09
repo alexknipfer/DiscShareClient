@@ -13,7 +13,7 @@
     "graphql": "^0.13.1",
     "graphql-tag": "^2.8.0",
     "js-cookie": "^2.1.4",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mobx": "^4.0.1",
     "mobx-react": "^5.0.0",
     "moment": "^2.19.1",
